@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx --yes http-server -p 8080 -o)",
+      "Bash(netstat -ano)",
+      "Bash(findstr :8080)",
+      "Bash(npx *)"
+    ]
+  }
+}
