@@ -1,6 +1,17 @@
 # Rishikesh Sonawane - Portfolio
 
+> Last Updated: Nov 2025
+
 A modern, attention-grabbing portfolio website for a Platform Engineer, built to help land your next opportunity.
+
+## Live URLs
+
+| Platform | URL |
+|----------|-----|
+| **Vercel** | https://portfolio-eight-mu-vs56nz0jvn.vercel.app/ |
+| **GitHub Pages** | https://rishikesh-sonawane.github.io/portfolio/ |
+
+---
 
 ## Quick Deploy to GitHub Pages
 
@@ -35,13 +46,7 @@ A modern, attention-grabbing portfolio website for a Platform Engineer, built to
 
 4. Click Save
 
-### Access Your Portfolio
-Your site will be live at:
-```
-https://YOUR_USERNAME.github.io/REPO_NAME/
-```
-
-For example: `https://rishikesh-sonawane.github.io/portfolio/`
+---
 
 ## Customization
 
@@ -54,6 +59,8 @@ The portfolio uses initials (RS) as logo. To add a photo:
 1. Add your photo as `profile.jpg` in the project
 2. Update the `.logo-icon` section in HTML
 
+---
+
 ## Features
 
 - **Responsive** - Works on mobile, tablet, and desktop
@@ -61,7 +68,9 @@ The portfolio uses initials (RS) as logo. To add a photo:
 - **Animated** - Typewriter effect, counters, smooth transitions
 - **Fast** - No frameworks, pure HTML/CSS/JS
 - **SEO friendly** - Meta tags included
-- **GitHub Pages ready** - Built-in CI/CD workflow
+- **Deployed on Vercel & GitHub Pages** - Both live
+
+---
 
 ## Credits
 
