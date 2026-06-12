@@ -154,6 +154,12 @@ window.addEventListener('scroll', () => {
 //     section.classList.add('fade-in');
 // });
 
+// Observe achievements section
+document.querySelectorAll('.achievement-card').forEach(el => {
+    el.classList.add('fade-in');
+    fadeInObserver.observe(el);
+});
+
 // Initial observer for first section
 setTimeout(() => {
     fadeInObserver.observe(document.querySelector('.hero'));
