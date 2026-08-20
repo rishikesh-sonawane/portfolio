@@ -239,16 +239,30 @@
   border-radius: 50%;
   background: rgba(28, 28, 30, 0.06);
   border: 1px solid rgba(28, 28, 30, 0.08);
-  color: #6E6E73;
+  color: #1C1C1E;
   transition: all 0.3s ease;
 }
 
+.social-link svg {
+  width: 18px;
+  height: 18px;
+  stroke: #1C1C1E;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .social-link:hover {
-  background: rgba(160, 130, 109, 0.1);
-  border-color: rgba(160, 130, 109, 0.25);
+  background: rgba(160, 130, 109, 0.15);
+  border-color: rgba(160, 130, 109, 0.3);
   color: #1C1C1E;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.social-link:hover svg {
+  stroke: #A0826D;
 }
 
 /* --- Dock --- */
