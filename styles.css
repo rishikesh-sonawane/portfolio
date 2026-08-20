@@ -106,6 +106,35 @@
   transform: translateY(-1px);
 }
 
+/* --- Award Cards --- */
+.award-card {
+  padding: 24px 28px;
+  background: #fff;
+  border: 1px solid rgba(28, 28, 30, 0.06);
+  border-radius: 20px;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.award-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(0, 0, 0, 0.06);
+  border-color: rgba(160, 130, 109, 0.12);
+}
+
+.award-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(160, 130, 109, 0.08);
+  color: #A0826D;
+  flex-shrink: 0;
+}
+
 /* --- Project Cards --- */
 .project-card {
   background: #fff;

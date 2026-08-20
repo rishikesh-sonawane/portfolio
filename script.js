@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     name: 'Rishikesh',
     fullName: 'Rishikesh Sonawane',
     role: 'Platform Engineer',
+    profilePhoto: 'profile.png',
     hero: {
       greeting: "Hi, I'm",
       name: 'Rishikesh',
@@ -46,6 +47,25 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: 'CI/CD Observability Stack', description: 'Datadog dashboards, APM tracing, and alerting for pipeline performance across multi-region infrastructure.', tags: ['Datadog', 'APM', 'Monitoring'], icon: 'bar-chart-3' }
       ]
     },
+    awards: {
+      heading: 'Awards & Recognition',
+      items: [
+        { title: 'Top Talent Award', org: 'Zendesk', year: 'FY2024', icon: 'trophy', description: 'Recognized for outstanding contributions to CI/CD platform infrastructure and developer productivity engineering.' },
+        { title: 'Top Talent Award', org: 'Zendesk', year: 'FY2025', icon: 'trophy', description: 'Awarded for leading the ECR Pull-through Cache RFC and delivering $163K+ in annual cost savings.' },
+        { title: 'Multiple Excellence Awards', org: 'Persistent Systems', year: '2022-2025', icon: 'award', description: 'Consistent recognition for automation tooling, onboarding improvements, and infrastructure reliability.' },
+        { title: 'RFC Author - Approved', org: 'Zendesk CI Platform', year: 'Sep 2025', icon: 'file-check', description: 'Authored and got approval for ECR Pull-through Cache architecture RFC across 8 AWS regions.' }
+      ]
+    },
+    personal: {
+      heading: 'Personal Projects',
+      description: 'Side projects and experiments I work on outside of my day job.',
+      items: [
+        { title: 'Home Lab Infrastructure', description: 'Self-hosted Kubernetes cluster with automated deployments using ArgoCD, monitoring with Prometheus, and local CI/CD pipelines.', tags: ['Kubernetes', 'ArgoCD', 'Prometheus'], icon: 'server', link: '#' },
+        { title: 'Bash Toolkit Collection', description: 'Open-source collection of Bash scripts for AWS automation, log analysis, and developer workflow improvements.', tags: ['Bash', 'AWS CLI', 'Open Source'], icon: 'terminal', link: '#' },
+        { title: 'Infrastructure as Code Templates', description: 'Reusable Terraform modules for common AWS setups - VPC, EKS, RDS, and multi-region deployments.', tags: ['Terraform', 'AWS', 'IaC'], icon: 'layers', link: '#' },
+        { title: 'Developer Productivity Dashboard', description: 'Custom Datadog-inspired dashboard tracking CI/CD pipeline health, build times, and team velocity metrics.', tags: ['Python', 'Datadog', 'Dashboard'], icon: 'bar-chart-3', link: '#' }
+      ]
+    },
     contact: {
       heading: "Let's Talk",
       description: "I'm always interested in hearing about new opportunities, exciting projects, or just chatting about platform engineering.",
@@ -66,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
       { label: 'Home', section: 'home', icon: 'home' },
       { label: 'About', section: 'about', icon: 'user' },
       { label: 'Projects', section: 'projects', icon: 'briefcase' },
+      { label: 'Awards', section: 'awards', icon: 'trophy' },
       { label: 'Contact', section: 'contact', icon: 'mail' }
     ]
   };
@@ -125,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('projects-grid');
     if (grid && c.projects.items) {
       grid.innerHTML = c.projects.items.map((p, i) => `
-        <div class="project-card scroll-reveal ${i % 2 === 1 ? 'md:mt-16' : ''}" style="transition-delay: ${i * 0.08}s">
+        <div class="project-card ${i % 2 === 1 ? 'md:mt-16' : ''}" style="transition-delay: ${i * 0.08}s">
           <div class="project-img">
             <span class="project-number">0${i + 1}</span>
             <i data-lucide="${p.icon || 'box'}" class="w-14 h-14 text-silver/50"></i>
@@ -139,6 +160,58 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </div>
       `).join('');
+    }
+
+    // Awards & Recognition
+    if (c.awards) {
+      setText('awards-heading', c.awards.heading, true);
+      const awardsGrid = document.getElementById('awards-grid');
+      if (awardsGrid && c.awards.items) {
+      awardsGrid.innerHTML = c.awards.items.map((a, i) => `
+        <div class="award-card" style="transition-delay: ${i * 0.08}s">
+          <div class="flex items-start gap-5">
+            <div class="award-icon flex-shrink-0">
+              <i data-lucide="${a.icon || 'trophy'}" class="w-5 h-5"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-3 flex-wrap mb-1">
+                <h3 class="text-base font-semibold tracking-tight">${a.title}</h3>
+                <span class="text-[10px] font-mono text-terra bg-terra/8 px-2 py-0.5 rounded-full">${a.year}</span>
+              </div>
+              <p class="text-xs text-terra font-medium mb-1.5">${a.org}</p>
+              <p class="text-sm text-slate leading-relaxed">${a.description}</p>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      }
+    }
+
+    // Personal Projects
+    if (c.personal) {
+      setText('personal-heading', c.personal.heading, true);
+      setText('personal-desc', c.personal.description);
+      const personalGrid = document.getElementById('personal-grid');
+      if (personalGrid && c.personal.items) {
+      personalGrid.innerHTML = c.personal.items.map((p, i) => `
+        <div class="project-card ${i % 2 === 1 ? 'md:mt-16' : ''}" style="transition-delay: ${i * 0.08}s">
+          <div class="project-img">
+            <span class="project-number">0${i + 1}</span>
+            <i data-lucide="${p.icon || 'box'}" class="w-14 h-14 text-silver/50"></i>
+          </div>
+          <div class="p-6 pb-7">
+            <div class="flex items-center justify-between mb-1.5">
+              <h3 class="text-lg font-semibold tracking-tight">${p.title}</h3>
+              ${p.link ? `<a href="${p.link}" target="_blank" class="text-terra hover:text-terraDark transition-colors"><i data-lucide="external-link" class="w-4 h-4"></i></a>` : ''}
+            </div>
+            <p class="text-sm text-slate leading-relaxed mb-4">${p.description}</p>
+            <div class="flex gap-2 flex-wrap">
+              ${(p.tags || []).map(t => `<span class="px-2.5 py-1 bg-warm/40 rounded-md text-[11px] font-medium text-slate">${t}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('');
+      }
     }
 
     // Contact
@@ -190,14 +263,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Re-init icons after dynamic content
     lucide.createIcons();
 
-    // Re-observe scroll-reveal elements
-    document.querySelectorAll('.scroll-reveal').forEach((el) => scrollObserver.observe(el));
-
-    // Re-observe project cards
-    document.querySelectorAll('.project-card').forEach((el) => scrollObserver.observe(el));
+    // Re-observe any new scroll-reveal elements
+    document.querySelectorAll('.scroll-reveal:not(.visible)').forEach((el) => scrollObserver.observe(el));
 
     // Re-init dock
     initDock();
+
+    // Load default photo from config if no photo uploaded/saved yet
+    if (!localStorage.getItem(STORAGE_KEY) && c.profilePhoto) {
+      photoPreview.src = c.profilePhoto;
+      photoPreview.classList.remove('hidden');
+      photoPlaceholder.classList.add('hidden');
+      photoRemove.style.display = 'flex';
+    }
   }
 
   function setText(id, text, isHtml) {
@@ -252,14 +330,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const photoDragOverlay = document.getElementById('photo-drag-overlay');
   const STORAGE_KEY = 'portfolio_photo';
 
-  // Load saved photo on page load
+  // Load saved photo on page load (localStorage takes priority, then config default)
   const savedPhoto = localStorage.getItem(STORAGE_KEY);
   if (savedPhoto) {
     photoPreview.src = savedPhoto;
     photoPreview.classList.remove('hidden');
     photoPlaceholder.classList.add('hidden');
     photoRemove.style.display = 'flex';
+  } else {
+    // Try default photo from project folder
+    const defaultPhoto = defaultConfig.profilePhoto || 'profile.png';
+    photoPreview.src = defaultPhoto;
+    photoPreview.classList.remove('hidden');
+    photoPlaceholder.classList.add('hidden');
+    photoRemove.style.display = 'flex';
   }
+  // applyConfig may override this if config.json has a different photo
 
   photoSlot.addEventListener('click', (e) => {
     if (e.target === photoRemove || photoRemove.contains(e.target)) return;

@@ -2,6 +2,7 @@
   "name": "Rishikesh",
   "fullName": "Rishikesh Sonawane",
   "role": "Platform Engineer",
+  "profilePhoto": "profile.png",
   "hero": {
     "greeting": "Hi, I'm",
     "name": "Rishikesh",
@@ -28,7 +29,32 @@
   },
   "projects": {
     "heading": "Selected Work",
-    "description": "A selection of projects that showcase my work in platform engineering, infrastructure automation, and developer productivity."
+    "description": "A selection of projects that showcase my work in platform engineering, infrastructure automation, and developer productivity.",
+    "items": [
+      { "title": "ECR Pull-through Cache", "description": "Hybrid image distribution strategy across 8 AWS regions, cutting costs by $163K annually while reducing pull times by 3x.", "tags": ["AWS", "Terraform", "Kubernetes"], "icon": "server" },
+      { "title": "Internal Automation CLI", "description": "Bash-based developer CLI adopted by 2,000+ engineers, slashing onboarding from 1 week to 20 minutes.", "tags": ["Bash", "GitHub API", "Automation"], "icon": "terminal" },
+      { "title": "Self-Hosted Runner Platform", "description": "EC2-based GitHub Actions runner infrastructure with custom AMIs, auto-scaling, and Launch Templates.", "tags": ["GitHub Actions", "Packer", "EC2"], "icon": "git-branch" },
+      { "title": "CI/CD Observability Stack", "description": "Datadog dashboards, APM tracing, and alerting for pipeline performance across multi-region infrastructure.", "tags": ["Datadog", "APM", "Monitoring"], "icon": "bar-chart-3" }
+    ]
+  },
+  "awards": {
+    "heading": "Awards & Recognition",
+    "items": [
+      { "title": "Top Talent Award", "org": "Zendesk", "year": "FY2024", "icon": "trophy", "description": "Recognized for outstanding contributions to CI/CD platform infrastructure and developer productivity engineering." },
+      { "title": "Top Talent Award", "org": "Zendesk", "year": "FY2025", "icon": "trophy", "description": "Awarded for leading the ECR Pull-through Cache RFC and delivering $163K+ in annual cost savings." },
+      { "title": "Multiple Excellence Awards", "org": "Persistent Systems", "year": "2022–2025", "icon": "award", "description": "Consistent recognition for automation tooling, onboarding improvements, and infrastructure reliability." },
+      { "title": "RFC Author — Approved", "org": "Zendesk CI Platform", "year": "Sep 2025", "icon": "file-check", "description": "Authored and got approval for ECR Pull-through Cache architecture RFC across 8 AWS regions." }
+    ]
+  },
+  "personal": {
+    "heading": "Personal Projects",
+    "description": "Side projects and experiments I work on outside of my day job.",
+    "items": [
+      { "title": "Home Lab Infrastructure", "description": "Self-hosted Kubernetes cluster with automated deployments using ArgoCD, monitoring with Prometheus, and local CI/CD pipelines.", "tags": ["Kubernetes", "ArgoCD", "Prometheus"], "icon": "server", "link": "#" },
+      { "title": "Bash Toolkit Collection", "description": "Open-source collection of Bash scripts for AWS automation, log analysis, and developer workflow improvements.", "tags": ["Bash", "AWS CLI", "Open Source"], "icon": "terminal", "link": "#" },
+      { "title": "Infrastructure as Code Templates", "description": "Reusable Terraform modules for common AWS setups — VPC, EKS, RDS, and multi-region deployments.", "tags": ["Terraform", "AWS", "IaC"], "icon": "layers", "link": "#" },
+      { "title": "Developer Productivity Dashboard", "description": "Custom Datadog-inspired dashboard tracking CI/CD pipeline health, build times, and team velocity metrics.", "tags": ["Python", "Datadog", "Dashboard"], "icon": "bar-chart-3", "link": "#" }
+    ]
   },
   "contact": {
     "heading": "Let's Talk",
@@ -57,6 +83,7 @@
     { "label": "Home", "section": "home", "icon": "home" },
     { "label": "About", "section": "about", "icon": "user" },
     { "label": "Projects", "section": "projects", "icon": "briefcase" },
+    { "label": "Awards", "section": "awards", "icon": "trophy" },
     { "label": "Contact", "section": "contact", "icon": "mail" }
   ]
 }
