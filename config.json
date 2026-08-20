@@ -1,12 +1,12 @@
 {
   "name": "Rishikesh",
-  "fullName": "Rishikesh Sonawane",
-  "role": "Platform Engineer",
+  "fullName": "Rishikesh Vijay Sonawane",
+  "role": "AWS DevOps / Platform Engineer",
   "profilePhoto": "profile.png",
   "hero": {
     "greeting": "Hi, I'm",
     "name": "Rishikesh",
-    "tagline": "I design and build digital experiences that scale — enterprise CI/CD infrastructure powering 2,000+ engineers across global teams.",
+    "tagline": "I build and automate enterprise cloud infrastructure, CI/CD platforms, and developer tooling that powers 2,000+ engineers across global teams.",
     "cta1": "Get in touch",
     "cta1Link": "#contact",
     "cta2": "View work",
@@ -14,51 +14,52 @@
   },
   "stats": [
     { "value": "4+", "label": "Years Experience" },
-    { "value": "$160K+", "label": "Annual Savings" },
-    { "value": "2K+", "label": "Engineers" }
+    { "value": "$163K+", "label": "Annual Savings" },
+    { "value": "2K+", "label": "Engineers Supported" }
   ],
   "about": {
     "heading": "About Me",
     "paragraphs": [
-      "Platform Engineer with <strong>4+ years of experience</strong> designing, scaling, and operating enterprise CI/CD infrastructure on AWS.",
-      "Specialized in GitHub Actions, Terraform-driven infrastructure automation, Bash/Python scripting, self-hosted runner platforms, cloud cost optimization, and developer productivity engineering.",
-      "Authored an approved RFC that rearchitected ECR image distribution across 8 AWS regions, delivering over $160K in annual cost savings. Passionate about building reliable engineering platforms at scale."
+      "AWS DevOps / Platform Engineer with <strong>4+ years of experience</strong> building and automating enterprise cloud infrastructure, CI/CD platforms, Infrastructure as Code, and developer tooling.",
+      "Hands-on expertise in AWS, Terraform, GitHub Actions, GitHub Enterprise, Docker, Kubernetes, Linux, Bash, Python, and Datadog. Proven track record of automating cloud infrastructure and CI/CD processes, improving developer productivity, optimizing cloud costs, and supporting enterprise engineering platforms.",
+      "Architected a hybrid ECR distribution strategy combining Cross-Region Replication and Pull-Through Cache across 7 global AWS regions, reducing multi-region storage and data transfer costs by 90%+ and generating $163,884 in annualized infrastructure savings."
     ],
-    "tags": ["AWS", "Terraform", "GitHub Actions", "Docker", "Python", "Bash", "Linux", "Datadog", "Kubernetes", "ECR"],
+    "tags": ["AWS", "Terraform", "GitHub Actions", "GitHub Enterprise", "Docker", "Kubernetes", "Python", "Bash", "Linux", "Datadog", "ECR", "EKS", "Packer", "Spinnaker", "Atlantis"],
     "quote": "Building reliable engineering platforms that empower developers to ship faster."
   },
   "projects": {
     "heading": "Selected Work",
     "description": "A selection of projects that showcase my work in platform engineering, infrastructure automation, and developer productivity.",
     "items": [
-      { "title": "ECR Pull-through Cache", "description": "Hybrid image distribution strategy across 8 AWS regions, cutting costs by $163K annually while reducing pull times by 3x.", "tags": ["AWS", "Terraform", "Kubernetes"], "icon": "server" },
-      { "title": "Internal Automation CLI", "description": "Bash-based developer CLI adopted by 2,000+ engineers, slashing onboarding from 1 week to 20 minutes.", "tags": ["Bash", "GitHub API", "Automation"], "icon": "terminal" },
-      { "title": "Self-Hosted Runner Platform", "description": "EC2-based GitHub Actions runner infrastructure with custom AMIs, auto-scaling, and Launch Templates.", "tags": ["GitHub Actions", "Packer", "EC2"], "icon": "git-branch" },
-      { "title": "CI/CD Observability Stack", "description": "Datadog dashboards, APM tracing, and alerting for pipeline performance across multi-region infrastructure.", "tags": ["Datadog", "APM", "Monitoring"], "icon": "bar-chart-3" }
+      { "title": "ECR Pull-Through Cache", "description": "Hybrid Amazon ECR distribution strategy combining Cross-Region Replication and Pull-Through Cache across 7 global AWS regions, reducing costs by 90%+ and generating $163K in annual savings.", "tags": ["AWS", "Terraform", "ECR", "Kubernetes"], "icon": "server" },
+      { "title": "Internal Automation CLI", "description": "Bash-based developer CLI adopted by 2,000+ engineers across 50+ teams, slashing onboarding from 1 week to under 20 minutes — a 98% reduction.", "tags": ["Bash", "GitHub API", "Automation"], "icon": "terminal" },
+      { "title": "Self-Hosted Runner Platform", "description": "EC2-based GitHub Actions runner infrastructure with Auto Scaling Groups, Launch Templates, Packer-built AMIs, and Terraform — supporting 500+ concurrent runners and 10K+ pipeline executions per month.", "tags": ["GitHub Actions", "Packer", "EC2", "Terraform"], "icon": "git-branch" },
+      { "title": "CI/CD Observability Stack", "description": "Datadog dashboards, monitors, SLOs, and alerting for CI/CD and AWS infrastructure health — reducing MTTR by 40% and achieving 99.9% platform uptime.", "tags": ["Datadog", "APM", "Monitoring"], "icon": "bar-chart-3" }
     ]
   },
   "awards": {
     "heading": "Awards & Recognition",
     "items": [
-      { "title": "Top Talent Award", "org": "Zendesk", "year": "FY2024", "icon": "trophy", "description": "Recognized for outstanding contributions to CI/CD platform infrastructure and developer productivity engineering." },
-      { "title": "Top Talent Award", "org": "Zendesk", "year": "FY2025", "icon": "trophy", "description": "Awarded for leading the ECR Pull-through Cache RFC and delivering $163K+ in annual cost savings." },
-      { "title": "Multiple Excellence Awards", "org": "Persistent Systems", "year": "2022–2025", "icon": "award", "description": "Consistent recognition for automation tooling, onboarding improvements, and infrastructure reliability." },
-      { "title": "RFC Author — Approved", "org": "Zendesk CI Platform", "year": "Sep 2025", "icon": "file-check", "description": "Authored and got approval for ECR Pull-through Cache architecture RFC across 8 AWS regions." }
+      { "title": "Top Talent Award", "org": "Persistent Systems", "year": "FY2024", "icon": "trophy", "description": "Top 1% performer across the organization — recognized for outstanding contributions to CI/CD platform infrastructure and developer productivity engineering." },
+      { "title": "Top Talent Award", "org": "Persistent Systems", "year": "FY2025", "icon": "trophy", "description": "Consecutive year recognition — awarded for leading the ECR Pull-through Cache initiative and delivering $163K+ in annual cost savings." },
+      { "title": "Multiple Excellence Awards", "org": "Persistent Systems", "year": "2022–2025", "icon": "award", "description": "Consistent recognition for automation tooling, onboarding improvements, and infrastructure reliability contributions." },
+      { "title": "AWS Certified Cloud Practitioner", "org": "Amazon Web Services", "year": "2024", "icon": "cloud", "description": "Foundational understanding of AWS Cloud services, security, architecture, pricing, and support." }
     ]
   },
   "personal": {
     "heading": "Personal Projects",
     "description": "Side projects and experiments I work on outside of my day job.",
     "items": [
-      { "title": "Home Lab Infrastructure", "description": "Self-hosted Kubernetes cluster with automated deployments using ArgoCD, monitoring with Prometheus, and local CI/CD pipelines.", "tags": ["Kubernetes", "ArgoCD", "Prometheus"], "icon": "server", "link": "#" },
-      { "title": "Bash Toolkit Collection", "description": "Open-source collection of Bash scripts for AWS automation, log analysis, and developer workflow improvements.", "tags": ["Bash", "AWS CLI", "Open Source"], "icon": "terminal", "link": "#" },
-      { "title": "Infrastructure as Code Templates", "description": "Reusable Terraform modules for common AWS setups — VPC, EKS, RDS, and multi-region deployments.", "tags": ["Terraform", "AWS", "IaC"], "icon": "layers", "link": "#" },
-      { "title": "Developer Productivity Dashboard", "description": "Custom Datadog-inspired dashboard tracking CI/CD pipeline health, build times, and team velocity metrics.", "tags": ["Python", "Datadog", "Dashboard"], "icon": "bar-chart-3", "link": "#" }
+      { "title": "Matcha", "description": "AI-powered multi-source job aggregator that searches LinkedIn, Indeed, Naukri, and RemoteOK in parallel, then ranks listings against your profile using heuristic + LLM scoring.", "tags": ["Python", "AI/LLM", "Scraping"], "icon": "search", "link": "https://github.com/rishikesh-sonawane/matcha" },
+      { "title": "ImageFlow", "description": "Production-inspired DevOps OS — event-driven image pipeline with Terraform IaC, real k3s + Helm, dual-loop CI/CD, observability, and security hardening. Built end-to-end on Floci for $0.", "tags": ["Terraform", "Kubernetes", "AWS", "CI/CD"], "icon": "rocket", "link": "https://github.com/rishikesh-sonawane/e2e-devops-project" },
+      { "title": "Articulate", "description": "Chrome extension that converts voice into polished, professional text using AI — removes filler words, fixes grammar, and inserts directly into any text field. In progress.", "tags": ["TypeScript", "Chrome API", "AI", "WebSocket"], "icon": "mic", "link": "https://github.com/rishikesh-sonawane/articulate" },
+      { "title": "Casper", "description": "9-layer local AI agent for macOS with wake-word detection, LangGraph routing, specialist agents, ChromaDB memory, and Kokoro TTS — all running on-device. In progress.", "tags": ["Python", "LangGraph", "Ollama", "AI Agent"], "icon": "bot", "link": "https://github.com/rishikesh-sonawane/Casper" },
+      { "title": "Portfolio Website", "description": "Premium Scandinavian-minimal portfolio built with Tailwind CSS, dynamic photo upload, floating dock nav, and Formspree contact form. This site.", "tags": ["Tailwind CSS", "JavaScript", "Design"], "icon": "globe", "link": "https://github.com/rishikesh-sonawane/portfolio" }
     ]
   },
   "contact": {
     "heading": "Let's Talk",
-    "description": "I'm always interested in hearing about new opportunities, exciting projects, or just chatting about platform engineering.",
+    "description": "I'm always interested in hearing about new opportunities, exciting projects, or just chatting about platform engineering. Open to relocation.",
     "namePlaceholder": "Your name",
     "emailPlaceholder": "you@example.com",
     "messagePlaceholder": "Write something...",
@@ -76,7 +77,7 @@
     "artist": "M83"
   },
   "footer": {
-    "copyright": "© 2025 Rishikesh Sonawane",
+    "copyright": "© 2026 Rishikesh Vijay Sonawane",
     "tagline": "Built with ✦ for platform engineering"
   },
   "dock": [
