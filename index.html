@@ -6,7 +6,6 @@
   <title>Rishikesh Sonawane — Platform Engineer</title>
   <meta name="description" content="Platform Engineer with 4+ years building enterprise CI/CD infrastructure on AWS." />
 
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -17,7 +16,10 @@
             charcoal: '#1C1C1E',
             slate: '#6E6E73',
             silver: '#C7C7CC',
-            'soft-border': '#E5E5EA',
+            warm: '#E8E6E3',
+            sand: '#D6D0C8',
+            terra: '#A0826D',
+            terraDark: '#8B6E58',
           },
           fontFamily: {
             sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -29,209 +31,307 @@
     }
   </script>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
 </head>
-<body class="bg-cream text-charcoal font-sans antialiased selection:bg-charcoal selection:text-cream">
+<body class="bg-cream text-charcoal font-sans antialiased">
 
-  <!-- ===== TIME & AVAILABILITY WIDGET (top-right) ===== -->
-  <div id="time-widget" class="fixed top-6 right-6 z-50 flex items-center gap-3 bg-white/80 backdrop-blur-xl border border-soft-border rounded-full px-4 py-2 shadow-sm">
+  <!-- ===== GRADIENT MESH BACKGROUND ===== -->
+  <div class="mesh-bg" aria-hidden="true"></div>
+
+  <!-- ===== TIME & AVAILABILITY WIDGET ===== -->
+  <div id="time-widget" class="glass-surface fixed top-6 right-6 z-50 flex items-center gap-3 rounded-full px-4 py-2">
     <span id="availability-dot" class="relative flex h-2.5 w-2.5">
       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
       <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
     </span>
     <span id="availability-text" class="text-xs font-medium text-slate hidden sm:inline">Available for new projects</span>
-    <span class="w-px h-3 bg-soft-border hidden sm:block"></span>
+    <span class="w-px h-3 bg-sand hidden sm:block"></span>
     <span id="clock" class="text-xs font-mono font-medium text-charcoal tabular-nums">00:00</span>
   </div>
 
-  <!-- ===== HERO SECTION ===== -->
-  <section id="home" class="min-h-screen flex items-center justify-center px-6 pt-24 pb-32">
-    <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-      <!-- Left: Text -->
-      <div class="order-2 lg:order-1">
-        <p class="text-slate text-sm font-medium tracking-wide uppercase mb-4">Platform Engineer</p>
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold leading-tight tracking-tight mb-6">
-          Hi, I'm <span class="italic">Rishikesh</span>.<br />
-          I design and build<br />
-          digital experiences.
+  <!-- ===== HERO ===== -->
+  <section id="home" class="relative min-h-screen flex items-center overflow-hidden">
+    <!-- Decorative elements -->
+    <div class="hero-deco hero-deco-1" aria-hidden="true"></div>
+    <div class="hero-deco hero-deco-2" aria-hidden="true"></div>
+    <div class="hero-deco hero-deco-3" aria-hidden="true"></div>
+
+    <div class="relative w-full max-w-7xl mx-auto px-6 pt-24 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <!-- Left: Text — takes 7 cols -->
+      <div class="lg:col-span-7 order-2 lg:order-1">
+        <div class="hero-reveal">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="inline-block w-12 h-px bg-terra"></span>
+            <span class="text-xs font-mono font-medium text-terra uppercase tracking-[0.2em]">Platform Engineer</span>
+          </div>
+        </div>
+
+        <h1 class="hero-reveal" style="transition-delay: 0.1s">
+          <span class="block text-[clamp(2.8rem,6vw,5.5rem)] font-display font-semibold leading-[0.95] tracking-tight mb-2">
+            Hi, I'm
+          </span>
+          <span class="block text-[clamp(3.2rem,7vw,6.5rem)] font-display font-bold leading-[0.9] tracking-tight italic text-terra">
+            Rishikesh<span class="text-charcoal">.</span>
+          </span>
         </h1>
-        <p class="text-slate text-lg leading-relaxed max-w-md mb-8">
-          Building enterprise CI/CD infrastructure that scales to 2,000+ engineers. Specialized in AWS, Terraform, and GitHub Actions.
+
+        <p class="hero-reveal text-[clamp(1.1rem,2vw,1.35rem)] text-slate leading-relaxed max-w-lg mt-8 mb-10" style="transition-delay: 0.2s">
+          I design and build digital experiences that scale — enterprise CI/CD infrastructure powering 2,000+ engineers across global teams.
         </p>
-        <div class="flex items-center gap-4">
-          <a href="#contact" class="inline-flex items-center gap-2 bg-charcoal text-cream px-6 py-3 rounded-full text-sm font-medium hover:bg-charcoal/90 transition-all duration-300 hover:shadow-lg hover:shadow-charcoal/10">
+
+        <div class="hero-reveal flex items-center gap-4 flex-wrap" style="transition-delay: 0.3s">
+          <a href="#contact" class="glass-btn inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-semibold transition-all duration-300">
             Get in touch
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </a>
-          <a href="#projects" class="inline-flex items-center gap-2 text-sm font-medium text-slate hover:text-charcoal transition-colors duration-300">
+          <a href="#projects" class="glass-btn inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-semibold transition-all duration-300">
             View work
-            <i data-lucide="chevron-down" class="w-4 h-4"></i>
+            <i data-lucide="arrow-down" class="w-4 h-4"></i>
           </a>
+        </div>
+
+        <!-- Stats row -->
+        <div class="hero-reveal flex items-center gap-10 mt-14 pt-8 border-t border-sand/60" style="transition-delay: 0.4s">
+          <div>
+            <span class="block text-3xl font-display font-bold text-charcoal">4<span class="text-terra">+</span></span>
+            <span class="text-xs text-slate mt-1 block">Years Experience</span>
+          </div>
+          <div class="w-px h-10 bg-sand/60"></div>
+          <div>
+            <span class="block text-3xl font-display font-bold text-charcoal">$160<span class="text-terra">K+</span></span>
+            <span class="text-xs text-slate mt-1 block">Annual Savings</span>
+          </div>
+          <div class="w-px h-10 bg-sand/60"></div>
+          <div>
+            <span class="block text-3xl font-display font-bold text-charcoal">2K<span class="text-terra">+</span></span>
+            <span class="text-xs text-slate mt-1 block">Engineers</span>
+          </div>
         </div>
       </div>
 
-      <!-- Right: Profile Photo Uploader -->
-      <div class="order-1 lg:order-2 flex justify-center">
-        <div id="photo-slot" class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full border-2 border-dashed border-silver/50 flex flex-col items-center justify-center cursor-pointer group hover:border-charcoal/30 transition-all duration-500 overflow-hidden bg-white" tabindex="0" role="button" aria-label="Upload profile photo">
-          <input type="file" id="photo-input" accept="image/*" class="hidden" />
-          <!-- Placeholder state -->
-          <div id="photo-placeholder" class="flex flex-col items-center gap-3 text-silver group-hover:text-slate transition-colors">
-            <i data-lucide="camera" class="w-10 h-10 opacity-50 group-hover:opacity-80 transition-opacity"></i>
-            <span class="text-xs font-medium">Add your photo</span>
+      <!-- Right: Photo — takes 5 cols -->
+      <div class="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end">
+        <div class="hero-reveal relative" style="transition-delay: 0.15s">
+          <!-- Decorative ring -->
+          <div class="absolute -inset-4 rounded-full border border-terra/15 animate-[spin_30s_linear_infinite]" aria-hidden="true"></div>
+          <div class="absolute -inset-8 rounded-full border border-dashed border-sand/40 animate-[spin_50s_linear_infinite_reverse]" aria-hidden="true"></div>
+
+          <div id="photo-slot" class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden cursor-pointer group transition-all duration-500" tabindex="0" role="button" aria-label="Upload profile photo">
+            <input type="file" id="photo-input" accept="image/*" class="hidden" />
+            <!-- Glass frame -->
+            <div class="absolute inset-0 rounded-full glass-surface"></div>
+            <!-- Placeholder -->
+            <div id="photo-placeholder" class="absolute inset-0 flex flex-col items-center justify-center gap-3 text-slate/60 group-hover:text-slate transition-colors z-10">
+              <div class="w-16 h-16 rounded-full bg-warm/60 flex items-center justify-center">
+                <i data-lucide="camera" class="w-7 h-7"></i>
+              </div>
+              <span class="text-xs font-medium">Add your photo</span>
+            </div>
+            <!-- Preview -->
+            <img id="photo-preview" src="" alt="Profile photo" class="absolute inset-0 w-full h-full object-cover rounded-full hidden z-20" />
+            <!-- Remove -->
+            <button id="photo-remove" class="absolute top-3 right-3 w-8 h-8 bg-charcoal/70 backdrop-blur-sm text-cream rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30" aria-label="Remove photo" style="display:none;">
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+            <div id="photo-drag-overlay" class="absolute inset-0 bg-terra/5 rounded-full hidden z-10"></div>
           </div>
-          <!-- Preview (hidden by default) -->
-          <img id="photo-preview" src="" alt="Profile photo" class="absolute inset-0 w-full h-full object-cover rounded-full hidden" />
-          <!-- Remove button (hidden by default) -->
-          <button id="photo-remove" class="absolute top-2 right-2 w-8 h-8 bg-charcoal/80 backdrop-blur-sm text-cream rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" aria-label="Remove photo" style="display:none;">
-            <i data-lucide="x" class="w-4 h-4"></i>
-          </button>
-          <!-- Drag highlight overlay -->
-          <div id="photo-drag-overlay" class="absolute inset-0 bg-charcoal/5 rounded-full hidden"></div>
         </div>
       </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 hero-reveal" style="transition-delay: 0.6s">
+      <span class="text-[10px] font-mono text-silver uppercase tracking-[0.15em]">Scroll</span>
+      <div class="w-px h-8 bg-gradient-to-b from-silver to-transparent"></div>
     </div>
   </section>
 
-  <!-- ===== AUDIO VIBE WIDGET (floating, bottom-left) ===== -->
-  <div id="audio-widget" class="fixed bottom-28 left-6 z-50 bg-white/80 backdrop-blur-xl border border-soft-border rounded-2xl px-4 py-3 shadow-sm flex items-center gap-3 max-w-[220px]">
+  <!-- ===== AUDIO VIBE WIDGET ===== -->
+  <div id="audio-widget" class="glass-surface fixed bottom-28 left-6 z-50 rounded-2xl px-4 py-3 flex items-center gap-3 max-w-[220px]">
     <div class="flex items-end gap-[3px] h-5">
-      <span class="audio-bar w-[3px] bg-charcoal/60 rounded-full" style="animation-delay: 0s;"></span>
-      <span class="audio-bar w-[3px] bg-charcoal/60 rounded-full" style="animation-delay: 0.2s;"></span>
-      <span class="audio-bar w-[3px] bg-charcoal/60 rounded-full" style="animation-delay: 0.4s;"></span>
-      <span class="audio-bar w-[3px] bg-charcoal/60 rounded-full" style="animation-delay: 0.1s;"></span>
+      <span class="audio-bar w-[3px] bg-terra/70 rounded-full" style="animation-delay: 0s;"></span>
+      <span class="audio-bar w-[3px] bg-terra/50 rounded-full" style="animation-delay: 0.2s;"></span>
+      <span class="audio-bar w-[3px] bg-terra/70 rounded-full" style="animation-delay: 0.4s;"></span>
+      <span class="audio-bar w-[3px] bg-terra/50 rounded-full" style="animation-delay: 0.1s;"></span>
     </div>
     <div class="min-w-0">
-      <p class="text-[10px] text-silver uppercase tracking-wider font-medium mb-0.5">What I'm Listening To</p>
-      <p class="text-xs font-medium text-charcoal truncate">Midnight City</p>
+      <p class="text-[9px] text-silver uppercase tracking-[0.12em] font-medium mb-0.5">Listening to</p>
+      <p class="text-xs font-semibold text-charcoal truncate">Midnight City</p>
       <p class="text-[10px] text-slate truncate">M83</p>
     </div>
   </div>
 
-  <!-- ===== ABOUT SECTION ===== -->
-  <section id="about" class="py-24 px-6">
-    <div class="max-w-4xl mx-auto">
-      <p class="text-xs font-mono font-medium text-silver uppercase tracking-widest mb-3">01 — About</p>
-      <h2 class="text-3xl sm:text-4xl font-display font-semibold mb-10 tracking-tight">A bit about me</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="md:col-span-2 space-y-5 text-slate leading-relaxed">
-          <p class="text-lg">
-            Platform Engineer with <strong class="text-charcoal font-semibold">4+ years of experience</strong> designing, scaling, and operating enterprise CI/CD infrastructure on AWS.
-          </p>
-          <p>
-            Specialized in GitHub Actions, Terraform-driven infrastructure automation, Bash/Python scripting, self-hosted runner platforms, cloud cost optimization, and developer productivity engineering.
-          </p>
-          <p>
-            Authored an approved RFC that rearchitected ECR image distribution across 8 AWS regions, delivering over $160K in annual cost savings. Passionate about building reliable engineering platforms at scale.
-          </p>
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="relative py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <!-- Label -->
+        <div class="lg:col-span-4">
+          <div class="scroll-reveal">
+            <span class="text-xs font-mono font-medium text-terra uppercase tracking-[0.2em]">01</span>
+            <h2 class="text-[clamp(2rem,4vw,3.5rem)] font-display font-semibold mt-3 tracking-tight">About<br/><span class="italic text-terra">Me</span></h2>
+            <div class="w-16 h-px bg-terra/40 mt-6"></div>
+          </div>
         </div>
-        <div class="flex flex-wrap gap-2 content-start">
-          <span class="px-3 py-1.5 bg-charcoal/5 rounded-full text-xs font-medium text-charcoal">AWS</span>
-          <span class="px-3 py-1.5 bg-charcoal/5 rounded-full text-xs font-medium text-charcoal">Terraform</span>
-          <span class="px-3 py-1.5 bg-charcoal/5 rounded-full text-xs font-medium text-charcoal">GitHub Actions</span>
-          <span class="px-3 py-1.5 bg-charcoal/5 rounded-full text-xs font-medium text-charcoal">Docker</span>
-          <span class="px-3 py-1.5 bg-charcoal/5 rounded-full text-xs font-medium text-charcoal">Python</span>
-          <span class="px-3 py-1.5 bg-charcoal/5 rounded-full text-xs font-medium text-charcoal">Bash</span>
-          <span class="px-3 py-1.5 bg-charcoal/5 rounded-full text-xs font-medium text-charcoal">Linux</span>
-          <span class="px-3 py-1.5 bg-charcoal/5 rounded-full text-xs font-medium text-charcoal">Datadog</span>
-          <span class="px-3 py-1.5 bg-charcoal/5 rounded-full text-xs font-medium text-charcoal">Kubernetes</span>
+        <!-- Content -->
+        <div class="lg:col-span-8">
+          <div class="scroll-reveal space-y-6">
+            <p class="text-[clamp(1.1rem,2vw,1.3rem)] text-slate leading-relaxed">
+              Platform Engineer with <strong class="text-charcoal font-semibold">4+ years of experience</strong> designing, scaling, and operating enterprise CI/CD infrastructure on AWS.
+            </p>
+            <p class="text-base text-slate/80 leading-relaxed">
+              Specialized in GitHub Actions, Terraform-driven infrastructure automation, Bash/Python scripting, self-hosted runner platforms, cloud cost optimization, and developer productivity engineering.
+            </p>
+            <p class="text-base text-slate/80 leading-relaxed">
+              Authored an approved RFC that rearchitected ECR image distribution across 8 AWS regions, delivering over $160K in annual cost savings. Passionate about building reliable engineering platforms at scale.
+            </p>
+          </div>
+
+          <!-- Tech tags -->
+          <div class="scroll-reveal flex flex-wrap gap-2.5 mt-10">
+            <span class="tech-tag">AWS</span>
+            <span class="tech-tag">Terraform</span>
+            <span class="tech-tag">GitHub Actions</span>
+            <span class="tech-tag">Docker</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Bash</span>
+            <span class="tech-tag">Linux</span>
+            <span class="tech-tag">Datadog</span>
+            <span class="tech-tag">Kubernetes</span>
+            <span class="tech-tag">ECR</span>
+          </div>
+
+          <!-- Quote -->
+          <div class="scroll-reveal mt-12 pl-6 border-l-2 border-terra/30">
+            <p class="text-base italic text-slate/70 font-display">
+              "Building reliable engineering platforms that empower developers to ship faster."
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== PROJECTS SECTION ===== -->
-  <section id="projects" class="py-24 px-6">
-    <div class="max-w-5xl mx-auto">
-      <p class="text-xs font-mono font-medium text-silver uppercase tracking-widest mb-3">02 — Projects</p>
-      <h2 class="text-3xl sm:text-4xl font-display font-semibold mb-12 tracking-tight">Selected work</h2>
+  <!-- ===== PROJECTS ===== -->
+  <section id="projects" class="relative py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-16">
+        <div class="lg:col-span-4">
+          <div class="scroll-reveal">
+            <span class="text-xs font-mono font-medium text-terra uppercase tracking-[0.2em]">02</span>
+            <h2 class="text-[clamp(2rem,4vw,3.5rem)] font-display font-semibold mt-3 tracking-tight">Selected<br/><span class="italic text-terra">Work</span></h2>
+            <div class="w-16 h-px bg-terra/40 mt-6"></div>
+          </div>
+        </div>
+        <div class="lg:col-span-8 flex items-end">
+          <p class="scroll-reveal text-slate text-base leading-relaxed max-w-md">
+            A selection of projects that showcase my work in platform engineering, infrastructure automation, and developer productivity.
+          </p>
+        </div>
+      </div>
 
+      <!-- Projects grid -->
       <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Projects load dynamically from projects.json -->
+        <!-- Loaded from projects.json -->
       </div>
     </div>
   </section>
 
-  <!-- ===== CONTACT SECTION ===== -->
-  <section id="contact" class="py-24 px-6">
-    <div class="max-w-xl mx-auto">
-      <p class="text-xs font-mono font-medium text-silver uppercase tracking-widest mb-3">03 — Contact</p>
-      <h2 class="text-3xl sm:text-4xl font-display font-semibold mb-4 tracking-tight">Let's talk</h2>
-      <p class="text-slate mb-10 leading-relaxed">
-        I'm always interested in hearing about new opportunities, exciting projects, or just chatting about platform engineering.
-      </p>
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="relative py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <div class="lg:col-span-5">
+          <div class="scroll-reveal">
+            <span class="text-xs font-mono font-medium text-terra uppercase tracking-[0.2em]">03</span>
+            <h2 class="text-[clamp(2rem,4vw,3.5rem)] font-display font-semibold mt-3 tracking-tight">Let's<br/><span class="italic text-terra">Talk</span></h2>
+            <div class="w-16 h-px bg-terra/40 mt-6"></div>
+          </div>
+          <p class="scroll-reveal text-slate mt-6 leading-relaxed">
+            I'm always interested in hearing about new opportunities, exciting projects, or just chatting about platform engineering.
+          </p>
+          <!-- Social links -->
+          <div class="scroll-reveal flex items-center gap-4 mt-8">
+            <a href="https://github.com/rishikesh-sonawane" target="_blank" class="glass-surface w-10 h-10 rounded-full flex items-center justify-center text-slate hover:text-charcoal transition-colors" aria-label="GitHub">
+              <i data-lucide="github" class="w-4 h-4"></i>
+            </a>
+            <a href="https://linkedin.com/in/rishikeshsonawane1465" target="_blank" class="glass-surface w-10 h-10 rounded-full flex items-center justify-center text-slate hover:text-charcoal transition-colors" aria-label="LinkedIn">
+              <i data-lucide="linkedin" class="w-4 h-4"></i>
+            </a>
+            <a href="mailto:rishikesh.s7711@gmail.com" class="glass-surface w-10 h-10 rounded-full flex items-center justify-center text-slate hover:text-charcoal transition-colors" aria-label="Email">
+              <i data-lucide="mail" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
 
-      <form id="contact-form" class="space-y-5" novalidate>
-        <div>
-          <label for="name" class="block text-xs font-medium text-silver uppercase tracking-wider mb-1.5">Name</label>
-          <input type="text" id="name" name="name" required autocomplete="name"
-            class="w-full px-4 py-3 bg-transparent border border-soft-border rounded-xl text-sm text-charcoal placeholder:text-silver focus:outline-none focus:border-charcoal transition-colors duration-300" placeholder="Your name" />
+        <div class="lg:col-span-7">
+          <form id="contact-form" class="scroll-reveal space-y-5" novalidate>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label for="name" class="block text-[10px] font-mono font-medium text-terra uppercase tracking-[0.15em] mb-2">Name</label>
+                <input type="text" id="name" name="name" required autocomplete="name"
+                  class="w-full px-4 py-3.5 bg-warm/30 border border-sand/50 rounded-xl text-sm text-charcoal placeholder:text-silver/70 focus:outline-none focus:border-terra/40 focus:bg-warm/50 transition-all duration-300" placeholder="Your name" />
+              </div>
+              <div>
+                <label for="email" class="block text-[10px] font-mono font-medium text-terra uppercase tracking-[0.15em] mb-2">Email</label>
+                <input type="email" id="email" name="email" required autocomplete="email"
+                  class="w-full px-4 py-3.5 bg-warm/30 border border-sand/50 rounded-xl text-sm text-charcoal placeholder:text-silver/70 focus:outline-none focus:border-terra/40 focus:bg-warm/50 transition-all duration-300" placeholder="you@example.com" />
+              </div>
+            </div>
+            <div>
+              <label for="message" class="block text-[10px] font-mono font-medium text-terra uppercase tracking-[0.15em] mb-2">Message</label>
+              <textarea id="message" name="message" rows="5" required
+                class="w-full px-4 py-3.5 bg-warm/30 border border-sand/50 rounded-xl text-sm text-charcoal placeholder:text-silver/70 focus:outline-none focus:border-terra/40 focus:bg-warm/50 transition-all duration-300 resize-none" placeholder="Write something..."></textarea>
+            </div>
+            <button type="submit" id="send-btn"
+              class="glass-btn w-full py-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2.5 transition-all duration-300 active:scale-[0.98]">
+              <span id="send-btn-text">Send Message</span>
+              <i data-lucide="send" class="w-4 h-4" id="send-btn-icon"></i>
+              <span id="send-success" class="hidden items-center gap-2">
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                Sent!
+              </span>
+            </button>
+          </form>
         </div>
-        <div>
-          <label for="email" class="block text-xs font-medium text-silver uppercase tracking-wider mb-1.5">Email</label>
-          <input type="email" id="email" name="email" required autocomplete="email"
-            class="w-full px-4 py-3 bg-transparent border border-soft-border rounded-xl text-sm text-charcoal placeholder:text-silver focus:outline-none focus:border-charcoal transition-colors duration-300" placeholder="you@example.com" />
-        </div>
-        <div>
-          <label for="message" class="block text-xs font-medium text-silver uppercase tracking-wider mb-1.5">Message</label>
-          <textarea id="message" name="message" rows="5" required
-            class="w-full px-4 py-3 bg-transparent border border-soft-border rounded-xl text-sm text-charcoal placeholder:text-silver focus:outline-none focus:border-charcoal transition-colors duration-300 resize-none" placeholder="Write something..."></textarea>
-        </div>
-        <button type="submit" id="send-btn"
-          class="w-full bg-charcoal text-cream py-3.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2 hover:bg-charcoal/90 transition-all duration-300 hover:shadow-lg hover:shadow-charcoal/10 active:scale-[0.98]">
-          <span id="send-btn-text">Send Message</span>
-          <i data-lucide="send" class="w-4 h-4" id="send-btn-icon"></i>
-          <!-- Success state (hidden by default) -->
-          <span id="send-success" class="hidden items-center gap-2">
-            <i data-lucide="check-circle" class="w-4 h-4"></i>
-            Sent!
-          </span>
-        </button>
-      </form>
+      </div>
     </div>
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="py-10 px-6 border-t border-soft-border">
-    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p class="text-xs text-silver">© 2025 Rishikesh Sonawane. All rights reserved.</p>
-      <div class="flex items-center gap-5">
-        <a href="https://github.com/rishikesh-sonawane" target="_blank" rel="noopener" class="text-silver hover:text-charcoal transition-colors" aria-label="GitHub">
-          <i data-lucide="github" class="w-4 h-4"></i>
-        </a>
-        <a href="https://linkedin.com/in/rishikeshsonawane1465" target="_blank" rel="noopener" class="text-silver hover:text-charcoal transition-colors" aria-label="LinkedIn">
-          <i data-lucide="linkedin" class="w-4 h-4"></i>
-        </a>
-        <a href="mailto:rishikesh.s7711@gmail.com" class="text-silver hover:text-charcoal transition-colors" aria-label="Email">
-          <i data-lucide="mail" class="w-4 h-4"></i>
-        </a>
+  <footer class="py-12 px-6 border-t border-sand/40">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-silver font-mono">© 2025 Rishikesh Sonawane</p>
+      <div class="flex items-center gap-1 text-[10px] text-silver/60 font-mono">
+        <span>Built with</span>
+        <span class="text-terra">✦</span>
+        <span>for platform engineering</span>
       </div>
     </div>
   </footer>
 
-  <!-- ===== FLOATING DOCK NAV ===== -->
-  <nav id="dock" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-white/70 backdrop-blur-2xl border border-soft-border/60 rounded-full px-2 py-2 shadow-lg shadow-charcoal/5 flex items-center gap-1 transition-all duration-500" aria-label="Main navigation">
-    <a href="#home" data-section="home" class="dock-link active flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium transition-all duration-300 text-charcoal bg-charcoal/5">
+  <!-- ===== FLOATING DOCK ===== -->
+  <nav id="dock" class="glass-surface fixed bottom-6 left-1/2 -translate-x-1/2 z-50 rounded-full px-2.5 py-2.5 flex items-center gap-1 transition-all duration-500" aria-label="Main navigation">
+    <a href="#home" data-section="home" class="dock-link active flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium transition-all duration-300 text-charcoal">
       <i data-lucide="home" class="w-4 h-4"></i>
       <span class="dock-label">Home</span>
     </a>
-    <a href="#about" data-section="about" class="dock-link flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium transition-all duration-300 text-slate hover:text-charcoal">
+    <a href="#about" data-section="about" class="dock-link flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium transition-all duration-300 text-slate">
       <i data-lucide="user" class="w-4 h-4"></i>
       <span class="dock-label">About</span>
     </a>
-    <a href="#projects" data-section="projects" class="dock-link flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium transition-all duration-300 text-slate hover:text-charcoal">
+    <a href="#projects" data-section="projects" class="dock-link flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium transition-all duration-300 text-slate">
       <i data-lucide="briefcase" class="w-4 h-4"></i>
       <span class="dock-label">Projects</span>
     </a>
-    <a href="#contact" data-section="contact" class="dock-link flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium transition-all duration-300 text-slate hover:text-charcoal">
+    <a href="#contact" data-section="contact" class="dock-link flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium transition-all duration-300 text-slate">
       <i data-lucide="mail" class="w-4 h-4"></i>
       <span class="dock-label">Contact</span>
     </a>

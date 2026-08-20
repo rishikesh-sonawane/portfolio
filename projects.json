@@ -1,7 +1,7 @@
 [
   {
     "title": "ECR Pull-through Cache",
-    "description": "Hybrid image distribution strategy across 8 AWS regions, cutting costs by $163K annually.",
+    "description": "Hybrid image distribution strategy across 8 AWS regions, cutting costs by $163K annually while reducing pull times by 3x.",
     "tags": ["AWS", "Terraform", "Kubernetes"],
     "icon": "server"
   },

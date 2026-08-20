@@ -1,13 +1,38 @@
 /* ============================================================
-   PORTFOLIO SCRIPTS — Scandinavian Minimal Light Theme
+   PORTFOLIO SCRIPTS — Premium Editorial
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Lucide icons
   lucide.createIcons();
 
   // -------------------------------------------
-  // 0. LOAD PROJECTS FROM JSON
+  // 0. HERO ENTRANCE ANIMATION
+  // -------------------------------------------
+  setTimeout(() => {
+    document.querySelectorAll('.hero-reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 120);
+    });
+  }, 200);
+
+  // -------------------------------------------
+  // 1. SCROLL REVEAL (Intersection Observer)
+  // -------------------------------------------
+  const scrollObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          scrollObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  document.querySelectorAll('.scroll-reveal').forEach((el) => scrollObserver.observe(el));
+
+  // -------------------------------------------
+  // 2. LOAD PROJECTS FROM JSON
   // -------------------------------------------
   const defaultProjects = [
     {
@@ -45,41 +70,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const grid = document.getElementById('projects-grid');
 
-      projects.forEach((p, i) => {
-        const card = document.createElement('div');
-        const offset = i % 2 === 1 ? 'md:mt-12' : '';
-        card.className = `project-card group relative bg-white rounded-3xl border border-soft-border overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-charcoal/5 hover:-translate-y-1 hover:border-charcoal/15 ${offset}`;
-        card.innerHTML = `
-          <div class="aspect-[4/3] bg-gradient-to-br from-charcoal/[0.03] to-silver/10 flex items-center justify-center">
-            <i data-lucide="${p.icon || 'box'}" class="w-16 h-16 text-silver/60 group-hover:text-charcoal/40 transition-colors duration-500"></i>
+    projects.forEach((p, i) => {
+      const card = document.createElement('div');
+      const offset = i % 2 === 1 ? 'md:mt-16' : '';
+      card.className = `project-card scroll-reveal ${offset}`;
+      card.style.transitionDelay = `${i * 0.08}s`;
+      card.innerHTML = `
+        <div class="project-img">
+          <span class="project-number">0${i + 1}</span>
+          <i data-lucide="${p.icon || 'box'}" class="w-14 h-14 text-silver/50"></i>
+        </div>
+        <div class="p-6 pb-7">
+          <h3 class="text-lg font-semibold mb-1.5 tracking-tight">${p.title}</h3>
+          <p class="text-sm text-slate leading-relaxed mb-4">${p.description}</p>
+          <div class="flex gap-2 flex-wrap">
+            ${(p.tags || []).map(t => `<span class="px-2.5 py-1 bg-warm/40 rounded-md text-[11px] font-medium text-slate">${t}</span>`).join('')}
           </div>
-          <div class="p-6 pb-7">
-            <h3 class="text-lg font-semibold mb-1.5 tracking-tight">${p.title}</h3>
-            <p class="text-sm text-slate leading-relaxed mb-4">${p.description}</p>
-            <div class="flex gap-2 flex-wrap">
-              ${(p.tags || []).map(t => `<span class="px-2.5 py-1 bg-charcoal/[0.04] rounded-md text-[11px] font-medium text-slate">${t}</span>`).join('')}
-            </div>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
+        </div>
+      `;
+      grid.appendChild(card);
+    });
 
-      // Re-init Lucide icons for dynamically added elements
-      lucide.createIcons();
+    lucide.createIcons();
 
-      // Re-apply fade-up to new cards
-      document.querySelectorAll('.project-card').forEach((el, i) => {
-        el.classList.add('fade-up');
-        el.style.transitionDelay = `${i * 0.05}s`;
-        fadeObserver.observe(el);
-      });
-    }
+    // Observe new cards
+    document.querySelectorAll('.project-card.scroll-reveal').forEach((el) => {
+      scrollObserver.observe(el);
+    });
   }
 
   loadProjects();
 
   // -------------------------------------------
-  // 1. PROFILE PHOTO UPLOADER
+  // 3. PROFILE PHOTO UPLOADER
   // -------------------------------------------
   const photoSlot = document.getElementById('photo-slot');
   const photoInput = document.getElementById('photo-input');
@@ -88,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const photoRemove = document.getElementById('photo-remove');
   const photoDragOverlay = document.getElementById('photo-drag-overlay');
 
-  // Click to upload
   photoSlot.addEventListener('click', (e) => {
     if (e.target === photoRemove || photoRemove.contains(e.target)) return;
     photoInput.click();
@@ -101,13 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // File selected
   photoInput.addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (file) showPhoto(file);
   });
 
-  // Drag and drop
   photoSlot.addEventListener('dragover', (e) => {
     e.preventDefault();
     photoSlot.classList.add('dragging');
@@ -134,13 +154,10 @@ document.addEventListener('DOMContentLoaded', () => {
       photoPreview.classList.remove('hidden');
       photoPlaceholder.classList.add('hidden');
       photoRemove.style.display = 'flex';
-      photoSlot.classList.remove('border-dashed');
-      photoSlot.style.borderStyle = 'solid';
     };
     reader.readAsDataURL(file);
   }
 
-  // Remove photo
   photoRemove.addEventListener('click', (e) => {
     e.stopPropagation();
     photoPreview.src = '';
@@ -148,12 +165,10 @@ document.addEventListener('DOMContentLoaded', () => {
     photoPlaceholder.classList.remove('hidden');
     photoRemove.style.display = 'none';
     photoInput.value = '';
-    photoSlot.classList.add('border-dashed');
-    photoSlot.style.borderStyle = 'dashed';
   });
 
   // -------------------------------------------
-  // 2. LIVE CLOCK & AVAILABILITY
+  // 4. LIVE CLOCK & AVAILABILITY
   // -------------------------------------------
   const clockEl = document.getElementById('clock');
   const availDot = document.getElementById('availability-dot');
@@ -163,14 +178,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const now = new Date();
     const hours = now.getHours();
     const mins = String(now.getMinutes()).padStart(2, '0');
-    const secs = String(now.getSeconds()).padStart(2, '0');
-
-    // 12-hour format
     const h12 = hours % 12 || 12;
     const ampm = hours >= 12 ? 'PM' : 'AM';
     clockEl.textContent = `${h12}:${mins} ${ampm}`;
 
-    // Availability: 9 AM to 6 PM
     if (hours >= 9 && hours < 18) {
       availDot.innerHTML = `
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -189,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(updateClock, 1000);
 
   // -------------------------------------------
-  // 3. FLOATING DOCK — ACTIVE SECTION TRACKING
+  // 5. FLOATING DOCK — ACTIVE SECTION
   // -------------------------------------------
   const dockLinks = document.querySelectorAll('.dock-link');
   const sections = document.querySelectorAll('section[id]');
@@ -207,10 +218,10 @@ document.addEventListener('DOMContentLoaded', () => {
     dockLinks.forEach((link) => {
       const isActive = link.dataset.section === currentSection;
       if (isActive) {
-        link.classList.add('active', 'text-charcoal', 'bg-charcoal/5');
+        link.classList.add('active', 'text-charcoal');
         link.classList.remove('text-slate');
       } else {
-        link.classList.remove('active', 'bg-charcoal/5');
+        link.classList.remove('active');
         link.classList.add('text-slate');
       }
     });
@@ -220,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateDock();
 
   // -------------------------------------------
-  // 4. SMOOTH SCROLL FOR DOCK LINKS
+  // 6. SMOOTH SCROLL
   // -------------------------------------------
   dockLinks.forEach((link) => {
     link.addEventListener('click', (e) => {
@@ -233,32 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // -------------------------------------------
-  // 5. FADE-UP ON SCROLL (Intersection Observer)
-  // -------------------------------------------
-  const fadeEls = document.querySelectorAll('.fade-up');
-  const fadeObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          fadeObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
-  );
-
-  fadeEls.forEach((el) => fadeObserver.observe(el));
-
-  // Apply fade-up to key sections for entrance animation
-  document.querySelectorAll('.max-w-xl form, #about .grid, #about h2, #projects h2, #contact h2').forEach((el, i) => {
-    el.classList.add('fade-up');
-    el.style.transitionDelay = `${i * 0.05}s`;
-    fadeObserver.observe(el);
-  });
-
-  // -------------------------------------------
-  // 6. CONTACT FORM HANDLING
+  // 7. CONTACT FORM
   // -------------------------------------------
   const form = document.getElementById('contact-form');
   const sendBtn = document.getElementById('send-btn');
@@ -269,21 +255,18 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    // Simple validation
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const message = document.getElementById('message').value.trim();
 
     if (!name || !email || !message) return;
 
-    // Show success state
     sendBtnText.classList.add('hidden');
     sendBtnIcon.classList.add('hidden');
     sendSuccess.classList.add('show');
     sendBtn.disabled = true;
     sendBtn.style.opacity = '0.7';
 
-    // Reset after 3 seconds
     setTimeout(() => {
       form.reset();
       sendBtnText.classList.remove('hidden');
