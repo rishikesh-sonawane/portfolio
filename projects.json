@@ -1,0 +1,26 @@
+[
+  {
+    "title": "ECR Pull-through Cache",
+    "description": "Hybrid image distribution strategy across 8 AWS regions, cutting costs by $163K annually.",
+    "tags": ["AWS", "Terraform", "Kubernetes"],
+    "icon": "server"
+  },
+  {
+    "title": "Internal Automation CLI",
+    "description": "Bash-based developer CLI adopted by 2,000+ engineers, slashing onboarding from 1 week to 20 minutes.",
+    "tags": ["Bash", "GitHub API", "Automation"],
+    "icon": "terminal"
+  },
+  {
+    "title": "Self-Hosted Runner Platform",
+    "description": "EC2-based GitHub Actions runner infrastructure with custom AMIs, auto-scaling, and Launch Templates.",
+    "tags": ["GitHub Actions", "Packer", "EC2"],
+    "icon": "git-branch"
+  },
+  {
+    "title": "CI/CD Observability Stack",
+    "description": "Datadog dashboards, APM tracing, and alerting for pipeline performance across multi-region infrastructure.",
+    "tags": ["Datadog", "APM", "Monitoring"],
+    "icon": "bar-chart-3"
+  }
+]

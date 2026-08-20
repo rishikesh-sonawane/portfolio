@@ -1,8 +1,6 @@
-# Rishikesh Sonawane - Portfolio
+# Rishikesh Sonawane — Portfolio
 
-> Last Updated: Nov 2025
-
-A modern, attention-grabbing portfolio website for a Platform Engineer, built to help land your next opportunity.
+> A premium, Scandinavian-minimal personal portfolio built with Tailwind CSS and Lucide Icons.
 
 ## Live URLs
 
@@ -13,65 +11,52 @@ A modern, attention-grabbing portfolio website for a Platform Engineer, built to
 
 ---
 
-## Quick Deploy to GitHub Pages
+## Features
 
-### Option 1: New Repository
-1. Create a new repository on GitHub (e.g., `rishikesh-sonawane`)
-2. Push this code:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial portfolio"
-   git branch -M main
-   git remote add origin https://github.com/YOUR_USERNAME/rishikesh-sonawane.git
-   git push -u origin main
-   ```
+- **Light Scandinavian design** — soft cream background, charcoal typography, spacious layout
+- **Dynamic profile photo upload** — click or drag-and-drop to preview your photo instantly
+- **Floating dock navigation** — macOS-style glass dock at bottom-center with smooth scroll
+- **Live time & availability widget** — real-time clock with green/amber pulse indicator
+- **Audio vibe player** — animated CSS wave visualizer with mock song info
+- **Editorial projects grid** — asymmetric 2-column layout with hover effects
+- **Contact form** — minimal inputs with focus states and success animation
+- **Fully responsive** — mobile-first, works on all screen sizes
+- **No build step** — pure HTML/CSS/JS with Tailwind CDN
 
-### Option 2: Existing Repository
-1. Copy these files to your existing repository:
-   - `index.html`
-   - `styles.css`
-   - `script.js`
-   - `.github/workflows/deploy.yml`
+---
 
-2. Push to main branch
+## Tech Stack
 
-### Enable GitHub Pages
-1. Go to your repository on GitHub
-2. Navigate to **Settings** → **Pages**
-3. Under "Build and deployment", select:
-   - Source: **Deploy from a branch**
-   - Branch: **gh-pages** (will appear after first push)
-   - Folder: **/(root)**
+- **Tailwind CSS** (CDN) — utility-first styling
+- **Lucide Icons** — minimal, consistent icon set
+- **Inter** — body font
+- **Playfair Display** — display/heading font
+- **JetBrains Mono** — monospace accents
 
-4. Click Save
+---
+
+## Quick Deploy
+
+### GitHub Pages
+1. Push to `main` branch
+2. Go to **Settings → Pages**
+3. Set source to **Deploy from branch → main → /(root)**
+
+### Vercel
+1. Connect your repo at [vercel.com](https://vercel.com)
+2. Framework preset: **Other**
+3. Deploy automatically
 
 ---
 
 ## Customization
 
-### Update Your Information
-- Edit `index.html` to update contact details, experience, or projects
-- Update LinkedIn, GitHub, and email links in the Contact section
-
-### Update Your Photo (Optional)
-The portfolio uses initials (RS) as logo. To add a photo:
-1. Add your photo as `profile.jpg` in the project
-2. Update the `.logo-icon` section in HTML
-
----
-
-## Features
-
-- **Responsive** - Works on mobile, tablet, and desktop
-- **Dark tech aesthetic** - Perfect for DevOps/Platform engineering roles
-- **Animated** - Typewriter effect, counters, smooth transitions
-- **Fast** - No frameworks, pure HTML/CSS/JS
-- **SEO friendly** - Meta tags included
-- **Deployed on Vercel & GitHub Pages** - Both live
+- Edit `index.html` to update content, links, and contact info
+- Update the audio vibe widget song/artist in the HTML
+- Tweak colors in `tailwind.config` within `index.html`
 
 ---
 
 ## Credits
 
-Built with passion for platform engineering ⚡
+Built with passion for platform engineering ✦
