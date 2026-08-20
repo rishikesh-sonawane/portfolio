@@ -500,8 +500,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sendBtnIcon = document.getElementById('send-btn-icon');
   const sendSuccess = document.getElementById('send-success');
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  form.addEventListener('submit', async (e) => {
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const message = document.getElementById('message').value.trim();
@@ -509,18 +508,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sendBtnText.classList.add('hidden');
     sendBtnIcon.classList.add('hidden');
-    sendSuccess.classList.add('show');
     sendBtn.disabled = true;
     sendBtn.style.opacity = '0.7';
 
-    setTimeout(() => {
-      form.reset();
-      sendBtnText.classList.remove('hidden');
-      sendBtnIcon.classList.remove('hidden');
-      sendSuccess.classList.remove('show');
-      sendSuccess.classList.add('hidden');
-      sendBtn.disabled = false;
-      sendBtn.style.opacity = '1';
-    }, 3000);
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message })
+      });
+
+      if (res.ok) {
+        e.preventDefault();
+        sendSuccess.classList.remove('hidden');
+        sendSuccess.classList.add('show');
+        form.reset();
+        setTimeout(() => {
+          sendSuccess.classList.remove('show');
+          sendSuccess.classList.add('hidden');
+          sendBtnText.classList.remove('hidden');
+          sendBtnIcon.classList.remove('hidden');
+          sendBtn.disabled = false;
+          sendBtn.style.opacity = '1';
+        }, 3000);
+      } else {
+        throw new Error('Failed');
+      }
+    } catch (_) {
+      // fetch failed (likely file:// protocol) — let native form submit handle it
+      form.target = '_self';
+    }
   });
 });
