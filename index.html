@@ -58,85 +58,66 @@
 
   <!-- ===== HERO ===== -->
   <section id="home" class="relative min-h-screen flex items-center overflow-hidden">
-    <!-- Decorative elements -->
     <div class="hero-deco hero-deco-1" aria-hidden="true"></div>
     <div class="hero-deco hero-deco-2" aria-hidden="true"></div>
     <div class="hero-deco hero-deco-3" aria-hidden="true"></div>
 
     <div class="relative w-full max-w-7xl mx-auto px-6 pt-24 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-      <!-- Left: Text — takes 7 cols -->
+      <!-- Left: Text -->
       <div class="lg:col-span-7 order-2 lg:order-1">
         <div class="hero-reveal">
           <div class="flex items-center gap-3 mb-6">
             <span class="inline-block w-12 h-px bg-terra"></span>
-            <span class="text-xs font-mono font-medium text-terra uppercase tracking-[0.2em]">Platform Engineer</span>
+            <span id="hero-role" class="text-xs font-mono font-medium text-terra uppercase tracking-[0.2em]">Platform Engineer</span>
           </div>
         </div>
 
         <h1 class="hero-reveal" style="transition-delay: 0.1s">
-          <span class="block text-[clamp(2.8rem,6vw,5.5rem)] font-display font-semibold leading-[0.95] tracking-tight mb-2">
+          <span id="hero-greeting" class="block text-[clamp(2.8rem,6vw,5.5rem)] font-display font-semibold leading-[0.95] tracking-tight mb-2">
             Hi, I'm
           </span>
           <span class="block text-[clamp(3.2rem,7vw,6.5rem)] font-display font-bold leading-[0.9] tracking-tight italic text-terra">
-            Rishikesh<span class="text-charcoal">.</span>
+            <span id="hero-name">Rishikesh</span><span class="text-charcoal">.</span>
           </span>
         </h1>
 
-        <p class="hero-reveal text-[clamp(1.1rem,2vw,1.35rem)] text-slate leading-relaxed max-w-lg mt-8 mb-10" style="transition-delay: 0.2s">
+        <p id="hero-tagline" class="hero-reveal text-[clamp(1.1rem,2vw,1.35rem)] text-slate leading-relaxed max-w-lg mt-8 mb-10" style="transition-delay: 0.2s">
           I design and build digital experiences that scale — enterprise CI/CD infrastructure powering 2,000+ engineers across global teams.
         </p>
 
         <div class="hero-reveal flex items-center gap-4 flex-wrap" style="transition-delay: 0.3s">
-          <a href="#contact" class="glass-btn inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-semibold transition-all duration-300">
-            Get in touch
+          <a href="#contact" class="smooth-link glass-btn inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-semibold transition-all duration-300">
+            <span id="hero-cta1">Get in touch</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </a>
-          <a href="#projects" class="glass-btn inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-semibold transition-all duration-300">
-            View work
+          <a href="#projects" class="smooth-link glass-btn inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-semibold transition-all duration-300">
+            <span id="hero-cta2">View work</span>
             <i data-lucide="arrow-down" class="w-4 h-4"></i>
           </a>
         </div>
 
         <!-- Stats row -->
-        <div class="hero-reveal flex items-center gap-10 mt-14 pt-8 border-t border-sand/60" style="transition-delay: 0.4s">
-          <div>
-            <span class="block text-3xl font-display font-bold text-charcoal">4<span class="text-terra">+</span></span>
-            <span class="text-xs text-slate mt-1 block">Years Experience</span>
-          </div>
-          <div class="w-px h-10 bg-sand/60"></div>
-          <div>
-            <span class="block text-3xl font-display font-bold text-charcoal">$160<span class="text-terra">K+</span></span>
-            <span class="text-xs text-slate mt-1 block">Annual Savings</span>
-          </div>
-          <div class="w-px h-10 bg-sand/60"></div>
-          <div>
-            <span class="block text-3xl font-display font-bold text-charcoal">2K<span class="text-terra">+</span></span>
-            <span class="text-xs text-slate mt-1 block">Engineers</span>
-          </div>
+        <div id="hero-stats" class="hero-reveal flex items-center gap-10 mt-14 pt-8 border-t border-sand/60 flex-wrap" style="transition-delay: 0.4s">
+          <!-- Populated by JS -->
         </div>
       </div>
 
-      <!-- Right: Photo — takes 5 cols -->
+      <!-- Right: Photo -->
       <div class="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end">
         <div class="hero-reveal relative" style="transition-delay: 0.15s">
-          <!-- Decorative ring -->
           <div class="absolute -inset-4 rounded-full border border-terra/15 animate-[spin_30s_linear_infinite]" aria-hidden="true"></div>
           <div class="absolute -inset-8 rounded-full border border-dashed border-sand/40 animate-[spin_50s_linear_infinite_reverse]" aria-hidden="true"></div>
 
           <div id="photo-slot" class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden cursor-pointer group transition-all duration-500" tabindex="0" role="button" aria-label="Upload profile photo">
             <input type="file" id="photo-input" accept="image/*" class="hidden" />
-            <!-- Glass frame -->
             <div class="absolute inset-0 rounded-full glass-surface"></div>
-            <!-- Placeholder -->
             <div id="photo-placeholder" class="absolute inset-0 flex flex-col items-center justify-center gap-3 text-slate/60 group-hover:text-slate transition-colors z-10">
               <div class="w-16 h-16 rounded-full bg-warm/60 flex items-center justify-center">
                 <i data-lucide="camera" class="w-7 h-7"></i>
               </div>
               <span class="text-xs font-medium">Add your photo</span>
             </div>
-            <!-- Preview -->
             <img id="photo-preview" src="" alt="Profile photo" class="absolute inset-0 w-full h-full object-cover rounded-full hidden z-20" />
-            <!-- Remove -->
             <button id="photo-remove" class="absolute top-3 right-3 w-8 h-8 bg-charcoal/70 backdrop-blur-sm text-cream rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30" aria-label="Remove photo" style="display:none;">
               <i data-lucide="x" class="w-4 h-4"></i>
             </button>
@@ -162,9 +143,9 @@
       <span class="audio-bar w-[3px] bg-terra/50 rounded-full" style="animation-delay: 0.1s;"></span>
     </div>
     <div class="min-w-0">
-      <p class="text-[9px] text-silver uppercase tracking-[0.12em] font-medium mb-0.5">Listening to</p>
-      <p class="text-xs font-semibold text-charcoal truncate">Midnight City</p>
-      <p class="text-[10px] text-slate truncate">M83</p>
+      <p id="audio-label" class="text-[9px] text-silver uppercase tracking-[0.12em] font-medium mb-0.5">Listening to</p>
+      <p id="audio-song" class="text-xs font-semibold text-charcoal truncate">Midnight City</p>
+      <p id="audio-artist" class="text-[10px] text-slate truncate">M83</p>
     </div>
   </div>
 
@@ -172,47 +153,22 @@
   <section id="about" class="relative py-32 px-6">
     <div class="max-w-6xl mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
-        <!-- Label -->
         <div class="lg:col-span-4">
           <div class="scroll-reveal">
             <span class="text-xs font-mono font-medium text-terra uppercase tracking-[0.2em]">01</span>
-            <h2 class="text-[clamp(2rem,4vw,3.5rem)] font-display font-semibold mt-3 tracking-tight">About<br/><span class="italic text-terra">Me</span></h2>
+            <h2 id="about-heading" class="text-[clamp(2rem,4vw,3.5rem)] font-display font-semibold mt-3 tracking-tight">About<br/><span class="italic text-terra">Me</span></h2>
             <div class="w-16 h-px bg-terra/40 mt-6"></div>
           </div>
         </div>
-        <!-- Content -->
         <div class="lg:col-span-8">
-          <div class="scroll-reveal space-y-6">
-            <p class="text-[clamp(1.1rem,2vw,1.3rem)] text-slate leading-relaxed">
-              Platform Engineer with <strong class="text-charcoal font-semibold">4+ years of experience</strong> designing, scaling, and operating enterprise CI/CD infrastructure on AWS.
-            </p>
-            <p class="text-base text-slate/80 leading-relaxed">
-              Specialized in GitHub Actions, Terraform-driven infrastructure automation, Bash/Python scripting, self-hosted runner platforms, cloud cost optimization, and developer productivity engineering.
-            </p>
-            <p class="text-base text-slate/80 leading-relaxed">
-              Authored an approved RFC that rearchitected ECR image distribution across 8 AWS regions, delivering over $160K in annual cost savings. Passionate about building reliable engineering platforms at scale.
-            </p>
+          <div id="about-content" class="scroll-reveal space-y-6">
+            <!-- Populated by JS -->
           </div>
-
-          <!-- Tech tags -->
-          <div class="scroll-reveal flex flex-wrap gap-2.5 mt-10">
-            <span class="tech-tag">AWS</span>
-            <span class="tech-tag">Terraform</span>
-            <span class="tech-tag">GitHub Actions</span>
-            <span class="tech-tag">Docker</span>
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">Bash</span>
-            <span class="tech-tag">Linux</span>
-            <span class="tech-tag">Datadog</span>
-            <span class="tech-tag">Kubernetes</span>
-            <span class="tech-tag">ECR</span>
+          <div id="about-tags" class="scroll-reveal flex flex-wrap gap-2.5 mt-10">
+            <!-- Populated by JS -->
           </div>
-
-          <!-- Quote -->
-          <div class="scroll-reveal mt-12 pl-6 border-l-2 border-terra/30">
-            <p class="text-base italic text-slate/70 font-display">
-              "Building reliable engineering platforms that empower developers to ship faster."
-            </p>
+          <div id="about-quote" class="scroll-reveal mt-12 pl-6 border-l-2 border-terra/30">
+            <p class="text-base italic text-slate/70 font-display"></p>
           </div>
         </div>
       </div>
@@ -226,20 +182,18 @@
         <div class="lg:col-span-4">
           <div class="scroll-reveal">
             <span class="text-xs font-mono font-medium text-terra uppercase tracking-[0.2em]">02</span>
-            <h2 class="text-[clamp(2rem,4vw,3.5rem)] font-display font-semibold mt-3 tracking-tight">Selected<br/><span class="italic text-terra">Work</span></h2>
+            <h2 id="projects-heading" class="text-[clamp(2rem,4vw,3.5rem)] font-display font-semibold mt-3 tracking-tight">Selected<br/><span class="italic text-terra">Work</span></h2>
             <div class="w-16 h-px bg-terra/40 mt-6"></div>
           </div>
         </div>
         <div class="lg:col-span-8 flex items-end">
-          <p class="scroll-reveal text-slate text-base leading-relaxed max-w-md">
+          <p id="projects-desc" class="scroll-reveal text-slate text-base leading-relaxed max-w-md">
             A selection of projects that showcase my work in platform engineering, infrastructure automation, and developer productivity.
           </p>
         </div>
       </div>
-
-      <!-- Projects grid -->
       <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Loaded from projects.json -->
+        <!-- Loaded from config.json projects -->
       </div>
     </div>
   </section>
@@ -251,26 +205,16 @@
         <div class="lg:col-span-5">
           <div class="scroll-reveal">
             <span class="text-xs font-mono font-medium text-terra uppercase tracking-[0.2em]">03</span>
-            <h2 class="text-[clamp(2rem,4vw,3.5rem)] font-display font-semibold mt-3 tracking-tight">Let's<br/><span class="italic text-terra">Talk</span></h2>
+            <h2 id="contact-heading" class="text-[clamp(2rem,4vw,3.5rem)] font-display font-semibold mt-3 tracking-tight">Let's<br/><span class="italic text-terra">Talk</span></h2>
             <div class="w-16 h-px bg-terra/40 mt-6"></div>
           </div>
-          <p class="scroll-reveal text-slate mt-6 leading-relaxed">
+          <p id="contact-desc" class="scroll-reveal text-slate mt-6 leading-relaxed">
             I'm always interested in hearing about new opportunities, exciting projects, or just chatting about platform engineering.
           </p>
-          <!-- Social links -->
-          <div class="scroll-reveal flex items-center gap-4 mt-8">
-            <a href="https://github.com/rishikesh-sonawane" target="_blank" class="glass-surface w-10 h-10 rounded-full flex items-center justify-center text-slate hover:text-charcoal transition-colors" aria-label="GitHub">
-              <i data-lucide="github" class="w-4 h-4"></i>
-            </a>
-            <a href="https://linkedin.com/in/rishikeshsonawane1465" target="_blank" class="glass-surface w-10 h-10 rounded-full flex items-center justify-center text-slate hover:text-charcoal transition-colors" aria-label="LinkedIn">
-              <i data-lucide="linkedin" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:rishikesh.s7711@gmail.com" class="glass-surface w-10 h-10 rounded-full flex items-center justify-center text-slate hover:text-charcoal transition-colors" aria-label="Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+          <div id="social-links" class="scroll-reveal flex items-center gap-4 mt-8">
+            <!-- Populated by JS -->
           </div>
         </div>
-
         <div class="lg:col-span-7">
           <form id="contact-form" class="scroll-reveal space-y-5" novalidate>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -296,7 +240,7 @@
               <i data-lucide="send" class="w-4 h-4" id="send-btn-icon"></i>
               <span id="send-success" class="hidden items-center gap-2">
                 <i data-lucide="check-circle" class="w-4 h-4"></i>
-                Sent!
+                <span id="send-success-text">Sent!</span>
               </span>
             </button>
           </form>
@@ -308,8 +252,8 @@
   <!-- ===== FOOTER ===== -->
   <footer class="py-12 px-6 border-t border-sand/40">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p class="text-xs text-silver font-mono">© 2025 Rishikesh Sonawane</p>
-      <div class="flex items-center gap-1 text-[10px] text-silver/60 font-mono">
+      <p id="footer-copyright" class="text-xs text-silver font-mono">© 2025 Rishikesh Sonawane</p>
+      <div id="footer-tagline" class="flex items-center gap-1 text-[10px] text-silver/60 font-mono">
         <span>Built with</span>
         <span class="text-terra">✦</span>
         <span>for platform engineering</span>
@@ -319,22 +263,7 @@
 
   <!-- ===== FLOATING DOCK ===== -->
   <nav id="dock" class="glass-surface fixed bottom-6 left-1/2 -translate-x-1/2 z-50 rounded-full px-2.5 py-2.5 flex items-center gap-1 transition-all duration-500" aria-label="Main navigation">
-    <a href="#home" data-section="home" class="dock-link active flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium transition-all duration-300 text-charcoal">
-      <i data-lucide="home" class="w-4 h-4"></i>
-      <span class="dock-label">Home</span>
-    </a>
-    <a href="#about" data-section="about" class="dock-link flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium transition-all duration-300 text-slate">
-      <i data-lucide="user" class="w-4 h-4"></i>
-      <span class="dock-label">About</span>
-    </a>
-    <a href="#projects" data-section="projects" class="dock-link flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium transition-all duration-300 text-slate">
-      <i data-lucide="briefcase" class="w-4 h-4"></i>
-      <span class="dock-label">Projects</span>
-    </a>
-    <a href="#contact" data-section="contact" class="dock-link flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium transition-all duration-300 text-slate">
-      <i data-lucide="mail" class="w-4 h-4"></i>
-      <span class="dock-label">Contact</span>
-    </a>
+    <!-- Populated by JS -->
   </nav>
 
   <script src="script.js"></script>

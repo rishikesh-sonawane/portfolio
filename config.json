@@ -1,0 +1,62 @@
+{
+  "name": "Rishikesh",
+  "fullName": "Rishikesh Sonawane",
+  "role": "Platform Engineer",
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Rishikesh",
+    "tagline": "I design and build digital experiences that scale — enterprise CI/CD infrastructure powering 2,000+ engineers across global teams.",
+    "cta1": "Get in touch",
+    "cta1Link": "#contact",
+    "cta2": "View work",
+    "cta2Link": "#projects"
+  },
+  "stats": [
+    { "value": "4+", "label": "Years Experience" },
+    { "value": "$160K+", "label": "Annual Savings" },
+    { "value": "2K+", "label": "Engineers" }
+  ],
+  "about": {
+    "heading": "About Me",
+    "paragraphs": [
+      "Platform Engineer with <strong>4+ years of experience</strong> designing, scaling, and operating enterprise CI/CD infrastructure on AWS.",
+      "Specialized in GitHub Actions, Terraform-driven infrastructure automation, Bash/Python scripting, self-hosted runner platforms, cloud cost optimization, and developer productivity engineering.",
+      "Authored an approved RFC that rearchitected ECR image distribution across 8 AWS regions, delivering over $160K in annual cost savings. Passionate about building reliable engineering platforms at scale."
+    ],
+    "tags": ["AWS", "Terraform", "GitHub Actions", "Docker", "Python", "Bash", "Linux", "Datadog", "Kubernetes", "ECR"],
+    "quote": "Building reliable engineering platforms that empower developers to ship faster."
+  },
+  "projects": {
+    "heading": "Selected Work",
+    "description": "A selection of projects that showcase my work in platform engineering, infrastructure automation, and developer productivity."
+  },
+  "contact": {
+    "heading": "Let's Talk",
+    "description": "I'm always interested in hearing about new opportunities, exciting projects, or just chatting about platform engineering.",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "you@example.com",
+    "messagePlaceholder": "Write something...",
+    "buttonText": "Send Message",
+    "successText": "Sent!"
+  },
+  "social": [
+    { "icon": "github", "url": "https://github.com/rishikesh-sonawane", "label": "GitHub" },
+    { "icon": "linkedin", "url": "https://linkedin.com/in/rishikeshsonawane1465", "label": "LinkedIn" },
+    { "icon": "mail", "url": "mailto:rishikesh.s7711@gmail.com", "label": "Email" }
+  ],
+  "audio": {
+    "label": "Listening to",
+    "song": "Midnight City",
+    "artist": "M83"
+  },
+  "footer": {
+    "copyright": "© 2025 Rishikesh Sonawane",
+    "tagline": "Built with ✦ for platform engineering"
+  },
+  "dock": [
+    { "label": "Home", "section": "home", "icon": "home" },
+    { "label": "About", "section": "about", "icon": "user" },
+    { "label": "Projects", "section": "projects", "icon": "briefcase" },
+    { "label": "Contact", "section": "contact", "icon": "mail" }
+  ]
+}
