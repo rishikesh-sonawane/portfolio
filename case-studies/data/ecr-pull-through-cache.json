@@ -1,0 +1,74 @@
+{
+  "title": "ECR Hybrid Image Distribution",
+  "coverImage": "covers/ecr-cover.svg",
+  "subtitle": "Architecting a hybrid ECR distribution strategy combining Cross-Region Replication and Pull-Through Cache across 7 global AWS regions — reducing 5GB image pull times from ~7m49s to ~2m57s and generating $163K in annualized savings.",
+  "category": "Platform Engineering · AWS · Cost Optimization",
+  "tags": ["AWS ECR", "Terraform", "Kubernetes", "Python", "Pull-Through Cache", "Cross-Region Replication", "Docker", "Atlantis"],
+  "overview": [
+    "As part of the CI Platform team at a Fortune 500 company, I architected and implemented a hybrid ECR image distribution strategy that solved a critical performance and cost problem: images in non-primary regions took up to 7 minutes 49 seconds to pull (for 5GB images), and cross-region data transfer costs were spiraling.",
+    "The solution combined <strong>Cross-Region Replication</strong> (for disaster recovery between the primary and failover regions) with <strong>Pull-Through Cache</strong> (for on-demand regional caching in all other regions). This hybrid approach maintained strict DR guarantees while achieving 2–3× faster image pulls and 90%+ cost reduction in non-DR regions.",
+    "The project involved the full stack: a Python control plane (FastAPI) for declarative ECR repository management, Terraform/Atlantis for Pull-Through Cache rules and IAM, a kube-admission mutating webhook for transparent URI rewriting, and Datadog dashboards for cache hit/miss monitoring."
+  ],
+  "metrics": [
+    { "value": "$163K+", "label": "Annual Cost Savings" },
+    { "value": "90%+", "label": "Storage Cost Reduction" },
+    { "value": "2–3×", "label": "Faster Image Pulls" },
+    { "value": "7", "label": "AWS Regions Covered" }
+  ],
+  "challenge": [
+    "<strong>The Problem:</strong> The ECR architecture used Cross-Region Replication to proactively copy container images from the primary region to secondary regions. While this ensured immediate availability, it came with severe downsides: 5GB images took up to 7m49s to pull in distant APAC regions, cross-region data transfer costs exceeded $1,400/month per region for non-primary regions, and specialized images were replicated to every region even where unused.",
+    "Monitoring confirmed the bottleneck: CI/CD workflows in non-primary regions were 3 minutes slower per run due to image pull latency. During peak hours, cross-region bandwidth saturation caused inconsistent pull times across regions while the primary region remained fast.",
+    "The cost picture was stark: the container registry account was spending ~$68,468/month on storage + data transfer. In one APAC region alone, 18,005 replicated images consumed 5,400 GB of storage and generated $1,960/month in combined storage and egress costs — most of it wasted on images never actually used in that region."
+  ],
+  "solution": [
+    "I designed a <strong>hybrid distribution strategy</strong>: Cross-Region Replication stays for DR (primary to failover for all image types, plus Lambda images to all required regions since Lambda doesn't support Pull-Through Cache). Pull-Through Cache handles everything else — BASE, DEV, PROD, and SAGEMAKER images cached on-demand in all non-DR regions.",
+    "The Pull-Through Cache approach means images are only stored in a region after the first pull. Subsequent pulls hit the local cache — no cross-region transfer. This eliminates the waste of replicating images to regions where they're never used while providing faster pulls for images that are used.",
+    "For the runtime flow: CI pushes images to the primary region → K8s pods pull using their cluster's regional ECR URI → if the image is cached locally, it's served immediately; if not, it's fetched from the primary region (upstream) and cached for future pulls. The registry controller handles repository creation in all regions including PTC regions, and the Terraform repo manages Pull-Through Cache rules via Atlantis.",
+    "A kube-admission mutating webhook transparently rewrites image URIs from the primary region to the cluster's region, achieving adoption with zero effort from engineering teams. The webhook also handles failover: if a regional ECR cache is unavailable, it falls back to the upstream region."
+  ],
+  "architecture": [
+    {
+      "heading": "Hybrid Distribution Decision Matrix",
+      "content": [
+        "<strong>Image types using Pull-Through Cache:</strong> BASE (all 8 regions), DEV (all 8 regions), PROD (all 8 regions), SAGEMAKER (7 regions — only where actually used).",
+        "<strong>Image types using Cross-Region Replication only:</strong> LAMBDA (AWS limitation — doesn't support PTC), ASTRONOMER (primary + DR only).",
+        "The upstream for all PTC regions points to the primary region's ECR endpoint. DR failover uses the designated failover region."
+      ]
+    },
+    {
+      "heading": "Lifecycle Policy Design",
+      "content": [
+        "I designed differentiated lifecycle policies for PTC regions vs primary/DR regions, balancing cost control with rollback safety. For PTC regions: DEV gets 200-image count limit + 10-day max age (high deployment velocity), PROD gets 50 + 30 days (rollback coverage), BASE gets 10 + 30 days (stable images), SAGEMAKER gets 100 + 30 days (active models only).",
+        "A critical insight: ECR's count-based lifecycle uses imagePushedAt, which for PTC images is set to when the image was first cached in that region, NOT the original push date. This means count-based policies alone would evaluate images inconsistently across regions. The combined count + age approach mitigates this."
+      ]
+    },
+    {
+      "heading": "Registry Controller & Automation",
+      "content": [
+        "The registry controller (Python, FastAPI) manages ECR repository creation for all regions — including PTC regions. It reads declarative build configuration from service repos, validates against JSON schema, and provisions repositories with correct policies and tags. The controller uses asyncio.gather for concurrent multi-region operations.",
+        "The Terraform repo manages Pull-Through Cache rules, IAM roles for CI publishing, registry controller service accounts, and KMS encryption — all via Atlantis PR plan/apply."
+      ]
+    },
+    {
+      "heading": "Rollout via Mutating Webhook",
+      "content": [
+        "The kube-admission mutating webhook was the key to adoption: it automatically rewrites image URIs from the primary region to the cluster's regional ECR endpoint. This means all pods pull from their local cache without any code changes from product teams.",
+        "The rollout followed a phased approach: (1) Internal pilot with the platform team's own service, (2) Limited production rollout with 3–5 representative services, (3) Full rollout via webhook with canary validation per cluster, (4) Manifest updates to match deployed state, (5) Reduced webhook dependency as manifests adopt regional URIs."
+      ]
+    }
+  ],
+  "techStack": ["AWS ECR", "Terraform", "Atlantis", "Python", "FastAPI", "boto3", "Kubernetes", "Docker", "GitHub Actions", "Datadog", "PyYAML", "Kube-Admission Webhook"],
+  "timeline": [
+    { "phase": "Phase 1", "title": "POC & RFC", "description": "Conducted POCs comparing Cross-Region Replication vs Pull-Through Cache performance. Documented findings: cache hits 2–3× faster, storage reduced 90%+. Authored RFC with cost analysis showing $163K annual savings across 7 regions." },
+    { "phase": "Phase 2", "title": "Terraform & Controller", "description": "Implemented Pull-Through Cache rules in Terraform. Updated Python registry controller to manage repositories in PTC regions. Defined differentiated lifecycle policies per image type." },
+    { "phase": "Phase 3", "title": "Internal Pilot", "description": "Deployed the platform team's own service using PTC. Validated image pulls, cache hit rates, lifecycle policies. Confirmed no degradation in deployment times." },
+    { "phase": "Phase 4", "title": "Webhook Rollout", "description": "Deployed kube-admission mutating webhook for transparent URI rewriting. Phased rollout: staging → canary clusters → production. Monitored cache hit rates, pull latency, failure rates." },
+    { "phase": "Phase 5", "title": "Full Adoption", "description": "Achieved full adoption across all clusters. Reduced webhook dependency as manifests adopted regional URIs. Webhook retained for failover scenarios. Documented runbooks and operational procedures." }
+  ],
+  "learnings": [
+    "<strong>The $163K savings came from understanding actual usage, not theoretical capacity.</strong> Cross-Region Replication stores everything everywhere. Pull-Through Cache stores only what's actually used. The analysis showed 18,005 replicated images reduced to 22 actually-used images — a 99.9% reduction in waste. This insight drove the entire business case.",
+    "<strong>Lifecycle policy design for PTC requires understanding ECR internals.</strong> The imagePushedAt timestamp behavior for cached images means count-based policies evaluate differently per region. A naive 'keep last 100' would delete different images in different regions. The combined count + age approach ensures consistency.",
+    "<strong>Transparent adoption via webhook was the key to zero-effort migration.</strong> If we'd asked thousands of engineers to update their image URIs, adoption would have taken months. The mutating webhook rewrote URIs at deployment time, giving everyone PTC benefits with zero code changes.",
+    "<strong>The hybrid approach was a compromise that covered all constraints.</strong> Lambda can't use PTC (AWS limitation). DR requires replication. The hybrid model — replication for DR + Lambda, PTC for everything else — handled every constraint without forcing teams to think about which distribution method their images used."
+  ]
+}

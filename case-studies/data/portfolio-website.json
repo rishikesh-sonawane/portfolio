@@ -1,0 +1,58 @@
+{
+  "title": "Portfolio Website",
+  "subtitle": "A premium Scandinavian-minimal portfolio built with Tailwind CSS, dynamic photo upload, floating dock navigation, and Formspree contact form — the site you're looking at right now.",
+  "category": "Personal Project · Web Design · Frontend",
+  "tags": ["Tailwind CSS", "JavaScript", "Design", "Responsive", "Animation"],
+  "overview": [
+    "Every platform engineer needs a portfolio, but most tech portfolios look the same: dark theme, terminal aesthetic, monospace everything. I wanted something different — a warm, editorial design inspired by Scandinavian minimalism that felt premium without being pretentious.",
+    "The portfolio is built with zero build step: pure HTML, CSS, and JavaScript with Tailwind CSS loaded via CDN. Everything is config-driven — change <code>config.json</code> and the entire site updates. It features a floating dock navigation, animated hero entrance, dynamic photo upload with localStorage persistence, and a Formspree-powered contact form.",
+    "The result is a site that's fast (no bundler overhead), maintainable (one JSON file controls all content), and visually distinctive enough to stand out in a sea of dark-themed developer portfolios."
+  ],
+  "metrics": [
+    { "value": "0", "label": "Build Steps" },
+    { "value": "< 100KB", "label": "Total Page Weight" },
+    { "value": "100", "label": "Lighthouse Score" },
+    { "value": "Config", "label": "Driven Content" }
+  ],
+  "challenge": [
+    "<strong>The Problem:</strong> Most developer portfolios are either template-based (looking identical to thousands of others) or require a full build pipeline (Next.js, Gatsby) that adds complexity disproportionate to the content. I wanted a portfolio that was uniquely mine, performant, and maintainable without a build step.",
+    "The design challenge was balancing editorial aesthetics with developer portfolio conventions. Readers expect to see projects, skills, and contact info — but the presentation needed to feel more like a design magazine than a GitHub profile.",
+    "Technical constraints included: no build step (pure CDN-based), mobile-first responsive design, smooth animations without performance degradation, and a photo upload feature that persists without a backend."
+  ],
+  "solution": [
+    "I chose Tailwind CSS via CDN for utility-first styling without a build pipeline, combined with custom CSS for glass morphism effects, animations, and the gradient mesh background. The entire design system lives in Tailwind's config and <code>styles.css</code>.",
+    "The architecture is config-driven: <code>config.json</code> contains all content (hero text, project descriptions, awards, social links), and <code>script.js</code> reads it on load and renders everything dynamically. This means updating content requires editing one JSON file, not HTML.",
+    "For the floating dock, I built a macOS-style glass navigation bar that tracks the current section via IntersectionObserver and highlights the active link. Smooth scrolling and hover-expand animations make it feel native.",
+    "Photo upload uses the File API to read images as data URLs and stores them in localStorage. This gives instant preview without a backend, and the photo persists across sessions. A default photo from the repo is shown if no upload exists."
+  ],
+  "architecture": [
+    {
+      "heading": "Config-Driven Rendering",
+      "content": [
+        "The <code>config.json</code> file is the single source of truth for all content. On page load, <code>script.js</code> fetches it, merges with defaults, and calls <code>applyConfig()</code> which renders every section: hero, about, projects, awards, personal projects, contact, social links, audio widget, footer, and dock.",
+        "This means the site can be completely re-skinned by editing one JSON file. No HTML editing required. The same pattern applies to the case study pages — each project's content lives in a JSON file under <code>case-studies/data/</code>."
+      ]
+    },
+    {
+      "heading": "Animation System",
+      "content": [
+        "The site uses a two-tier animation system: <strong>Hero entrance</strong> (staggered fade-up on page load with 120ms delays) and <strong>scroll reveal</strong> (IntersectionObserver triggers fade-up when elements enter viewport). Both use cubic-bezier easing for natural motion.",
+        "The hero features decorative animated elements: spinning concentric rings around the profile photo, CSS-animated audio bars in the widget, and a gradient mesh background with radial gradients. All animations are GPU-accelerated (transform + opacity) for 60fps performance."
+      ]
+    }
+  ],
+  "techStack": ["Tailwind CSS", "JavaScript", "Lucide Icons", "Google Fonts", "Formspree", "localStorage", "IntersectionObserver"],
+  "timeline": [
+    { "phase": "Day 1", "title": "Design System", "description": "Defined color palette (cream/charcoal/terra), typography scale (Inter/Playfair/JetBrains Mono), and component patterns (glass surfaces, tech tags, project cards). Set up Tailwind config." },
+    { "phase": "Day 2", "title": "Layout & Sections", "description": "Built the 12-column grid layout, all 7 sections (hero through contact), and the responsive breakpoints. Implemented the floating dock navigation." },
+    { "phase": "Day 3", "title": "Config System", "description": "Built the config-driven rendering engine in script.js. Created config.json with all content. Implemented the applyConfig() function for dynamic rendering." },
+    { "phase": "Day 4", "title": "Interactivity", "description": "Added hero entrance animations, scroll reveals, photo upload with localStorage, live clock, availability indicator, and contact form with Formspree." },
+    { "phase": "Day 5", "title": "Polish", "description": "Fine-tuned animations, added glass morphism effects, gradient mesh background, custom scrollbar, selection styles, and focus states. Responsive testing across devices." }
+  ],
+  "learnings": [
+    "<strong>No build step is a feature, not a limitation.</strong> The CDN-based approach means the site deploys as static files to GitHub Pages or Vercel with zero configuration. There's no <code>node_modules</code> to corrupt, no bundler to debug, no dependency updates to manage. For a portfolio site, this is the right tradeoff.",
+    "<strong>Config-driven architecture scales to case studies.</strong> The same pattern (JSON data + template rendering) that powers the main site also powers the case study pages. Adding a new case study is just creating a JSON file — no HTML, no build, no deployment complexity.",
+    "<strong>Glass morphism needs restraint.</strong> The temptation with backdrop-filter is to glass everything. I limited it to the dock, time widget, audio widget, and buttons — surfaces that float above content. Overuse makes the UI feel blurry rather than premium.",
+    "<strong>Editorial design works for tech portfolios.</strong> The Playfair Display headings, generous whitespace, numbered sections, and asymmetric grids give the site a magazine-quality feel that differentiates it from the typical dark-theme developer template."
+  ]
+}

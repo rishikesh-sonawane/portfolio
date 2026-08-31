@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FBFBFA"/>
+      <stop offset="100%" style="stop-color:#E8E6E3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg3)"/>
+
+  <!-- Mesh -->
+  <circle cx="300" cy="150" r="400" fill="#A0826D" opacity="0.025"/>
+  <circle cx="900" cy="480" r="300" fill="#D6D0C8" opacity="0.05"/>
+
+  <!-- Title -->
+  <text x="80" y="70" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#A0826D" letter-spacing="0.15em">OBSERVABILITY STACK</text>
+
+  <!-- Dashboard panels -->
+  <!-- Panel 1: Gauge -->
+  <g transform="translate(80, 100)">
+    <rect x="0" y="0" width="340" height="200" rx="14" fill="white" opacity="0.7" stroke="#E8E6E3"/>
+    <text x="24" y="32" font-family="system-ui" font-size="10" font-weight="600" fill="#6E6E73" letter-spacing="0.1em">RUNNER AVAILABILITY</text>
+
+    <!-- Gauge arc -->
+    <g transform="translate(170, 120)">
+      <circle r="65" fill="none" stroke="#E8E6E3" stroke-width="8"/>
+      <circle r="65" fill="none" stroke="#A0826D" stroke-width="8" stroke-dasharray="408 408" stroke-dashoffset="4" transform="rotate(-90)" opacity="0.8"/>
+      <text y="8" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="28" font-weight="700" fill="#A0826D">99.9%</text>
+      <text y="26" text-anchor="middle" font-family="system-ui" font-size="9" fill="#6E6E73">SLA TARGET</text>
+    </g>
+  </g>
+
+  <!-- Panel 2: Time series -->
+  <g transform="translate(440, 100)">
+    <rect x="0" y="0" width="360" height="200" rx="14" fill="white" opacity="0.7" stroke="#E8E6E3"/>
+    <text x="24" y="32" font-family="system-ui" font-size="10" font-weight="600" fill="#6E6E73" letter-spacing="0.1em">QUEUE WAIT TIME (P95)</text>
+
+    <!-- Line chart -->
+    <g transform="translate(24, 50)">
+      <!-- Grid lines -->
+      <line x1="0" y1="0" x2="312" y2="0" stroke="#E8E6E3" stroke-width="0.5"/>
+      <line x1="0" y1="35" x2="312" y2="35" stroke="#E8E6E3" stroke-width="0.5"/>
+      <line x1="0" y1="70" x2="312" y2="70" stroke="#E8E6E3" stroke-width="0.5"/>
+      <line x1="0" y1="105" x2="312" y2="105" stroke="#E8E6E3" stroke-width="0.5"/>
+
+      <!-- SLO threshold line -->
+      <line x1="0" y1="35" x2="312" y2="35" stroke="#A0826D" stroke-width="0.8" stroke-dasharray="4,3" opacity="0.5"/>
+      <text x="316" y="38" font-family="system-ui" font-size="7" fill="#A0826D" opacity="0.7">SLO</text>
+
+      <!-- Data line -->
+      <polyline points="0,90 26,85 52,70 78,80 104,65 130,55 156,60 182,45 208,50 234,40 260,35 286,30 312,28" fill="none" stroke="#A0826D" stroke-width="2" opacity="0.8"/>
+
+      <!-- Area fill -->
+      <polyline points="0,90 26,85 52,70 78,80 104,65 130,55 156,60 182,45 208,50 234,40 260,35 286,30 312,28 312,105 0,105" fill="#A0826D" opacity="0.06"/>
+
+      <!-- Y-axis labels -->
+      <text x="-8" y="4" font-family="system-ui" font-size="7" fill="#C7C7CC" text-anchor="end">60s</text>
+      <text x="-8" y="39" font-family="system-ui" font-size="7" fill="#C7C7CC" text-anchor="end">45s</text>
+      <text x="-8" y="74" font-family="system-ui" font-size="7" fill="#C7C7CC" text-anchor="end">30s</text>
+      <text x="-8" y="109" font-family="system-ui" font-size="7" fill="#C7C7CC" text-anchor="end">0s</text>
+    </g>
+  </g>
+
+  <!-- Panel 3: Alert tiers -->
+  <g transform="translate(820, 100)">
+    <rect x="0" y="0" width="300" height="200" rx="14" fill="white" opacity="0.7" stroke="#E8E6E3"/>
+    <text x="24" y="32" font-family="system-ui" font-size="10" font-weight="600" fill="#6E6E73" letter-spacing="0.1em">ALERTING TIERS</text>
+
+    <!-- P1 -->
+    <g transform="translate(24, 52)">
+      <rect x="0" y="0" width="8" height="8" rx="2" fill="#A0826D"/>
+      <text x="16" y="8" font-family="system-ui" font-size="10" fill="#1C1C1E" font-weight="600">P1 — Critical</text>
+      <text x="16" y="22" font-family="system-ui" font-size="9" fill="#6E6E73">PagerDuty escalation</text>
+    </g>
+
+    <!-- P2 -->
+    <g transform="translate(24, 92)">
+      <rect x="0" y="0" width="8" height="8" rx="2" fill="#D6D0C8"/>
+      <text x="16" y="8" font-family="system-ui" font-size="10" fill="#1C1C1E" font-weight="600">P2 — Warning</text>
+      <text x="16" y="22" font-family="system-ui" font-size="9" fill="#6E6E73">Slack notification</text>
+    </g>
+
+    <!-- P3 -->
+    <g transform="translate(24, 132)">
+      <rect x="0" y="0" width="8" height="8" rx="2" fill="#C7C7CC"/>
+      <text x="16" y="8" font-family="system-ui" font-size="10" fill="#1C1C1E" font-weight="600">P3 — Info</text>
+      <text x="16" y="22" font-family="system-ui" font-size="9" fill="#6E6E73">Weekly digest email</text>
+    </g>
+  </g>
+
+  <!-- Bottom: Metric cards -->
+  <g transform="translate(80, 340)">
+    <rect x="0" y="0" width="260" height="80" rx="12" fill="white" opacity="0.7" stroke="#E8E6E3"/>
+    <text x="20" y="26" font-family="system-ui" font-size="10" fill="#6E6E73" font-weight="500">MTTR REDUCTION</text>
+    <text x="20" y="58" font-family="'Playfair Display', Georgia, serif" font-size="34" font-weight="700" fill="#A0826D">40%</text>
+
+    <rect x="280" y="0" width="260" height="80" rx="12" fill="white" opacity="0.7" stroke="#E8E6E3"/>
+    <text x="300" y="26" font-family="system-ui" font-size="10" fill="#6E6E73" font-weight="500">PLATFORM UPTIME</text>
+    <text x="300" y="58" font-family="'Playfair Display', Georgia, serif" font-size="34" font-weight="700" fill="#A0826D">99.9%</text>
+
+    <rect x="560" y="0" width="260" height="80" rx="12" fill="white" opacity="0.7" stroke="#E8E6E3"/>
+    <text x="580" y="26" font-family="system-ui" font-size="10" fill="#6E6E73" font-weight="500">CUSTOM DASHBOARDS</text>
+    <text x="580" y="58" font-family="'Playfair Display', Georgia, serif" font-size="34" font-weight="700" fill="#A0826D">15+</text>
+
+    <rect x="840" y="0" width="260" height="80" rx="12" fill="white" opacity="0.7" stroke="#E8E6E3"/>
+    <text x="860" y="26" font-family="system-ui" font-size="10" fill="#6E6E73" font-weight="500">MONITORS &amp; SLOS</text>
+    <text x="860" y="58" font-family="'Playfair Display', Georgia, serif" font-size="34" font-weight="700" fill="#A0826D">50+</text>
+  </g>
+
+  <!-- Decorative: data flow dots -->
+  <g opacity="0.2">
+    <circle cx="80" cy="500" r="2" fill="#A0826D"/>
+    <circle cx="120" cy="510" r="1.5" fill="#D6D0C8"/>
+    <circle cx="160" cy="505" r="2" fill="#A0826D"/>
+    <circle cx="200" cy="515" r="1" fill="#D6D0C8"/>
+    <circle cx="240" cy="508" r="2.5" fill="#A0826D"/>
+    <circle cx="280" cy="512" r="1.5" fill="#D6D0C8"/>
+  </g>
+</svg>

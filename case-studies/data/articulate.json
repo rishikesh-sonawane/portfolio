@@ -1,0 +1,58 @@
+{
+  "title": "Articulate — Voice-to-Text Chrome Extension",
+  "subtitle": "A Chrome extension that converts voice into polished, professional text using AI — removing filler words, fixing grammar, and inserting directly into any text field.",
+  "category": "Personal Project · Chrome Extension · AI",
+  "tags": ["TypeScript", "Chrome API", "AI", "WebSocket", "Voice Recognition"],
+  "overview": [
+    "Every day, thousands of people type the same messages they could speak in half the time. Voice-to-text exists, but it produces raw, unpolished output full of filler words, run-on sentences, and conversational artifacts that aren't appropriate for professional communication.",
+    "Articulate bridges that gap: you speak naturally, and it outputs polished, professional text. It removes 'um,' 'uh,' 'like,' and 'you know.' It fixes grammar and punctuation. It restructures conversational rambling into clear, concise prose. And it inserts the result directly into whatever text field you're focused on.",
+    "Built as a Chrome extension, it works in Gmail, Slack, LinkedIn, Notion, Google Docs — any text field in the browser. Press the shortcut, speak, and your polished text appears."
+  ],
+  "metrics": [
+    { "value": "3x", "label": "Faster Than Typing" },
+    { "value": "Real-time", "label": "Processing" },
+    { "value": "Any", "label": "Browser Text Field" },
+    { "value": "Privacy", "label": "First Design" }
+  ],
+  "challenge": [
+    "<strong>The Problem:</strong> Existing voice-to-text tools (Google Dictation, Apple Dictation, Otter.ai) produce raw transcriptions. They don't understand that 'So, um, I was like, you know, thinking about maybe deploying the thing to like, staging first' should become 'I recommend deploying to staging first.'",
+    "Building this as a Chrome extension adds complexity: it needs to work across every website, inject text into arbitrary DOM elements, handle Content Security Policy restrictions, and do all of this without compromising user privacy — voice data shouldn't leave the browser unless the user explicitly opts in.",
+    "Real-time processing is essential. Users expect near-instant output, not a 5-second delay between speaking and seeing text. This means the AI processing pipeline must be fast enough to keep up with natural speech (~150 words per minute)."
+  ],
+  "solution": [
+    "I built Articulate with a three-stage pipeline: <strong>Capture</strong> (Web Speech API), <strong>Process</strong> (AI cleaning), and <strong>Insert</strong> (content script injection).",
+    "For capture, I used the Web Speech API for browser-native speech recognition, with a WebSocket fallback to a local Whisper server for better accuracy. The capture layer produces raw transcript with timing data.",
+    "For processing, I built a local-first cleaning pipeline. First-pass: regex-based filler word removal ('um', 'uh', 'like', 'you know', etc.). Second-pass: grammar and punctuation fixing via a lightweight local model. Third-pass (optional, for premium users): LLM-based rewriting for professional tone and clarity.",
+    "For insertion, the content script identifies the currently focused text element (input, textarea, contenteditable div) and inserts the processed text using <code>document.execCommand</code> or the newer Clipboard API, depending on the target element type. It handles React-controlled inputs by dispatching proper input events."
+  ],
+  "architecture": [
+    {
+      "heading": "Chrome Extension Architecture",
+      "content": [
+        "<strong>Service Worker (background.js):</strong> Manages WebSocket connections, coordinates between popup and content scripts, handles AI processing pipeline, and manages user preferences and API keys.",
+        "<strong>Popup UI:</strong> Minimal interface with record button, live transcript preview, and settings (filler word intensity, professional vs. casual tone, language selection).",
+        "<strong>Content Script:</strong> Injected into every page. Listens for the keyboard shortcut, identifies the focused text field, and handles text insertion with proper event simulation for framework compatibility."
+      ]
+    },
+    {
+      "heading": "Privacy-First Design",
+      "content": [
+        "By default, all processing happens locally: speech recognition uses the browser's built-in Web Speech API, filler word removal is regex-based, and grammar fixing uses a quantized local model. No voice data leaves the device.",
+        "Optional cloud processing (for advanced rewriting) requires explicit opt-in and uses end-to-end encrypted WebSocket connections. Audio is processed and discarded — no recordings are stored."
+      ]
+    }
+  ],
+  "techStack": ["TypeScript", "Chrome Extension API", "Web Speech API", "WebSocket", "Webpack", "Content Scripts", "Service Workers"],
+  "timeline": [
+    { "phase": "Week 1", "title": "Core Pipeline", "description": "Built the three-stage pipeline: Web Speech API capture, regex filler removal, and clipboard insertion. Created basic Chrome extension scaffold with manifest v3." },
+    { "phase": "Week 2", "title": "Smart Insertion", "description": "Implemented content script for text field detection and insertion. Added support for React-controlled inputs, contenteditable divs, and iframe contexts. Tested across 20+ websites." },
+    { "phase": "Week 3", "title": "AI Processing", "description": "Added grammar and punctuation fixing with local model. Built WebSocket fallback to local Whisper server for improved accuracy. Implemented tone settings (professional, casual, neutral)." },
+    { "phase": "Week 4", "title": "UI & Polish", "description": "Built the popup UI with live transcript preview. Added keyboard shortcut customization. Implemented settings sync across Chrome instances. Created onboarding flow." }
+  ],
+  "learnings": [
+    "<strong>Content script injection is harder than it looks.</strong> Every website handles text input differently. React apps use synthetic events, Angular uses ng-model, some sites use shadow DOM. Getting text insertion to work reliably across 20+ popular sites required understanding each framework's input handling quirks.",
+    "<strong>Manifest V3 is a significant constraint.</strong> Moving from background pages to service workers meant rethinking long-running connections, WebSocket management, and state persistence. The Chrome extension ecosystem is still adapting to these changes.",
+    "<strong>Local-first is a feature, not a compromise.</strong> Users are increasingly privacy-conscious. Building processing locally (regex + quantized models) made the extension trustworthy by default. The optional cloud layer adds capability without sacrificing the privacy baseline.",
+    "<strong>Voice-to-text needs to be 3x faster to be worth it.</strong> If users spend 10 seconds speaking and 5 seconds editing, they could have just typed it. The goal is speak → process → insert in under 2 seconds total. That required optimizing every stage of the pipeline."
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "title": "CI/CD Observability Stack",
+  "coverImage": "covers/observability-cover.svg",
+  "subtitle": "Building a Python webhook ingestion service that turns GitHub Actions events into Datadog metrics, plus a full Terraform-managed observability layer with monitors, dashboards, and SLOs for platform health.",
+  "category": "Observability · Python · Datadog · GitHub Actions",
+  "tags": ["Python", "FastAPI", "Datadog", "GitHub Webhooks", "Terraform", "Atlantis", "SLO", "Redis"],
+  "overview": [
+    "When the CI/CD platform grew to support 2,000+ engineers, we lost visibility into what was actually happening. Pipeline failures were reported via Slack complaints. Infrastructure issues were discovered reactively. There was no proactive monitoring, no SLOs, and no way to answer: 'Is the platform healthy right now?'",
+    "I worked on building the observability layer: a Python webhook ingestion service (FastAPI) that processes GitHub workflow_job events and emits Datadog metrics (queue wait time, run time, queue size), plus a Terraform-managed observability stack with monitors, dashboards, and SLOs for every platform component.",
+    "The result: MTTR dropped by 40%, the team went from reactive firefighting to proactive capacity planning, and we achieved 99.9% platform uptime with data-driven SLO reviews."
+  ],
+  "metrics": [
+    { "value": "40%", "label": "MTTR Reduction" },
+    { "value": "99.9%", "label": "Platform Uptime" },
+    { "value": "15+", "label": "Custom Dashboards" },
+    { "value": "50+", "label": "Monitors & SLOs" }
+  ],
+  "challenge": [
+    "<strong>The Problem:</strong> The CI/CD platform had no observability. When a pipeline failed, the only way to know was a developer posting in Slack. When runners were overloaded, queue times silently climbed. When AWS infrastructure degraded, we found out only when builds started timing out.",
+    "The team spent 30% of sprint capacity on reactive incident response — investigating failures after they happened, often taking hours to diagnose issues that proper monitoring would have caught in minutes.",
+    "Leadership had no visibility into platform health. There were no SLIs, no SLOs, no error budgets. 'Is the platform working?' was answered with gut feelings, not data. Each platform component (runners, container registry, secrets, action policies) had its own blind spots."
+  ],
+  "solution": [
+    "<strong>The webhook ingestion service</strong> is a Python application (FastAPI) that ingests GitHub organization webhooks for workflow_job events and turns them into Prometheus-style metrics exposed via Datadog DogStatsD. It tracks queue wait time, run time, and queue size, with optional service catalog integration to enrich events with team/product/project metadata.",
+    "The service uses a layered architecture: webhook (FastAPI route handler) → domain (dataclass-based state machine with Queued/Started/Completed transitions) → store (in-memory intermediate storage keyed by job lifecycle) → metrics (histograms and gauges via the datadog library). Cost-aware telemetry uses randomized sampling of step details when configured.",
+    "For the broader observability stack, Terraform-managed Datadog resources define monitors for each platform component, dashboards (JSON exports checked into Git for reviewable visual changes), and SLOs for key capabilities. The Terraform repo manages all of this via Atlantis.",
+    "The Terraform modules follow a service-oriented pattern: each monitored service folder is an independent blast-radius boundary. Shared variables (tags, naming, environment metadata) are symlinked via a common module."
+  ],
+  "architecture": [
+    {
+      "heading": "Webhook Ingestion — Event Pipeline",
+      "content": [
+        "The service runs as a FastAPI application receiving GitHub webhooks. On each workflow_job event, it: validates the payload via HMAC verification → builds or loads WorkflowJob from the in-memory store → applies domain transitions based on action (queued/in_progress/completed) → emits metrics (queue wait histograms, run time histograms, queue depth gauges) → optionally calls the service catalog for team/product enrichment on the completion path.",
+        "Domain logic uses Python dataclasses with transition methods (queue increment/decrement, histogram timing), keeping route handlers thin and testable. The store is intentionally in-memory (not safe for multiple instances) — a documented tradeoff for simplicity."
+      ]
+    },
+    {
+      "heading": "Datadog Observability Layer",
+      "content": [
+        "Terraform modules define monitors, dashboards, and SLOs for every platform component. Monitors cover runner availability, queue time thresholds, registry pull failures, and pipeline success rates. Dashboards are exported as JSON and checked into Git, allowing visual changes to be reviewed alongside code.",
+        "The SLO framework tracks key capabilities: 99.9% runner availability, P95 queue time under 60 seconds, P95 pipeline success rate above 95%. Error budgets are reviewed in weekly platform health meetings, shifting conversations from opinions to data."
+      ]
+    },
+    {
+      "heading": "Secrets & Supply Chain Controls",
+      "content": [
+        "The secrets catalog is a configuration-as-code system for org-level secrets. Each secret is a JSON file with name, assigned_repos, visibility, and validation rules. The validation workflow enforces naming constraints, duplicate detection, and auto-sorts assigned repos for diff-friendly PRs.",
+        "The action allowlist is the supply chain security control plane. A policy file defines which third-party Actions and reusable workflows are permitted. On merge to main, the policy syncs to GitHub org settings via API. Dual-team approval (CI Platform + Security) ensures proper review."
+      ]
+    }
+  ],
+  "techStack": ["Python", "FastAPI", "pydantic", "GitHub Webhooks", "DogStatsD", "Datadog", "Terraform", "Atlantis", "Redis", "redis-py", "PyYAML", "hmac", "Bash"],
+  "timeline": [
+    { "phase": "Phase 1", "title": "Webhook Monitor", "description": "Built the Python webhook ingestion service with FastAPI, dataclass-based domain model, in-memory store, and DogStatsD metrics emission. Set up local dev with tunneling and GitHub App." },
+    { "phase": "Phase 2", "title": "Datadog Dashboards", "description": "Terraform modules for platform dashboards. JSON export workflow for visual review. Monitors for runner health, queue times, and pipeline success rates." },
+    { "phase": "Phase 3", "title": "SLO Framework", "description": "Defined SLOs for key platform capabilities. Error budget tracking. Weekly review process. Alerting tiers: P1 (PagerDuty), P2 (Slack), P3 (digest)." },
+    { "phase": "Phase 4", "title": "Secrets & Allowlist", "description": "Built secrets catalog with validation pipeline. Built action allowlist with license compliance and overlap detection. Atlantis-managed policy sync." },
+    { "phase": "Phase 5", "title": "Integration & Training", "description": "Cross-linked all repos to documentation. Team workshops on dashboard usage and alert response. Internal runbooks for common failure modes." }
+  ],
+  "learnings": [
+    "<strong>Observability is a product, not a tool.</strong> Deploying Datadog is not the same as having observability. The value comes from dashboards people actually look at, alerts that matter, and runbooks that help. I spent more time on UX (what to show, when to alert) than on data collection.",
+    "<strong>In-memory stores are fine for 'best effort' metrics.</strong> The webhook monitor explicitly documents it's not safe for multiple instances. This honesty is valuable — operators know the failure mode (metric gaps during restarts) and can accept it rather than discover it at 3am.",
+    "<strong>JSON dashboards in Git are reviewable infrastructure.</strong> Checking Datadog dashboard JSON into Terraform means visual changes get PR-reviewed alongside code. A dashboard layout change is as auditable as a Terraform variable update.",
+    "<strong>Configuration-as-code for secrets and allowlists prevents drift.</strong> Making org-level policies reviewable, versioned, and reversible means a bad policy change is a git revert, not a manual console cleanup with uncertain blast radius."
+  ]
+}

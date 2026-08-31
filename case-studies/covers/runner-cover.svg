@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FBFBFA"/>
+      <stop offset="100%" style="stop-color:#E8E6E3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg2)"/>
+
+  <!-- Mesh gradient -->
+  <circle cx="200" cy="100" r="350" fill="#A0826D" opacity="0.03"/>
+  <circle cx="1000" cy="500" r="300" fill="#D6D0C8" opacity="0.06"/>
+
+  <!-- Title area -->
+  <text x="80" y="80" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#A0826D" letter-spacing="0.15em" text-transform="uppercase">RUNNER FLEET</text>
+
+  <!-- ASG bars (horizontal scaling visualization) -->
+  <g transform="translate(80, 120)">
+    <!-- Bar 1 -->
+    <rect x="0" y="0" width="320" height="36" rx="6" fill="#E8E6E3" opacity="0.6"/>
+    <rect x="0" y="0" width="320" height="36" rx="6" fill="#A0826D" opacity="0.15"/>
+    <rect x="0" y="0" width="240" height="36" rx="6" fill="#A0826D" opacity="0.3"/>
+    <text x="15" y="23" font-family="system-ui" font-size="10" fill="#1C1C1E" font-weight="500">stable-22</text>
+    <text x="305" y="23" font-family="system-ui" font-size="10" fill="#6E6E73" text-anchor="end">75%</text>
+
+    <!-- Bar 2 -->
+    <rect x="0" y="48" width="320" height="36" rx="6" fill="#E8E6E3" opacity="0.6"/>
+    <rect x="0" y="48" width="200" height="36" rx="6" fill="#A0826D" opacity="0.15"/>
+    <rect x="0" y="48" width="140" height="36" rx="6" fill="#D6D0C8" opacity="0.5"/>
+    <text x="15" y="71" font-family="system-ui" font-size="10" fill="#1C1C1E" font-weight="500">docker</text>
+    <text x="305" y="71" font-family="system-ui" font-size="10" fill="#6E6E73" text-anchor="end">44%</text>
+
+    <!-- Bar 3 -->
+    <rect x="0" y="96" width="320" height="36" rx="6" fill="#E8E6E3" opacity="0.6"/>
+    <rect x="0" y="96" width="260" height="36" rx="6" fill="#A0826D" opacity="0.15"/>
+    <rect x="0" y="96" width="180" height="36" rx="6" fill="#D6D0C8" opacity="0.5"/>
+    <text x="15" y="119" font-family="system-ui" font-size="10" fill="#1C1C1E" font-weight="500">docker-arm</text>
+    <text x="305" y="119" font-family="system-ui" font-size="10" fill="#6E6E73" text-anchor="end">56%</text>
+
+    <!-- Bar 4 -->
+    <rect x="0" y="144" width="320" height="36" rx="6" fill="#E8E6E3" opacity="0.6"/>
+    <rect x="0" y="144" width="160" height="36" rx="6" fill="#A0826D" opacity="0.15"/>
+    <rect x="0" y="144" width="100" height="36" rx="6" fill="#D6D0C8" opacity="0.5"/>
+    <text x="15" y="167" font-family="system-ui" font-size="10" fill="#1C1C1E" font-weight="500">slim-arm</text>
+    <text x="305" y="167" font-family="system-ui" font-size="10" fill="#6E6E73" text-anchor="end">31%</text>
+  </g>
+
+  <!-- Right side: Scaling waveform -->
+  <g transform="translate(520, 120)">
+    <text x="0" y="0" font-family="system-ui" font-size="11" font-weight="600" fill="#A0826D" letter-spacing="0.15em">QUEUE DEPTH</text>
+
+    <!-- Waveform bars -->
+    <g transform="translate(0, 20)">
+      <rect x="0" y="60" width="8" height="40" rx="2" fill="#D6D0C8" opacity="0.4"/>
+      <rect x="16" y="40" width="8" height="60" rx="2" fill="#D6D0C8" opacity="0.5"/>
+      <rect x="32" y="20" width="8" height="80" rx="2" fill="#A0826D" opacity="0.3"/>
+      <rect x="48" y="5" width="8" height="95" rx="2" fill="#A0826D" opacity="0.5"/>
+      <rect x="64" y="0" width="8" height="100" rx="2" fill="#A0826D" opacity="0.7"/>
+      <rect x="80" y="10" width="8" height="90" rx="2" fill="#A0826D" opacity="0.5"/>
+      <rect x="96" y="30" width="8" height="70" rx="2" fill="#D6D0C8" opacity="0.5"/>
+      <rect x="112" y="50" width="8" height="50" rx="2" fill="#D6D0C8" opacity="0.4"/>
+      <rect x="128" y="65" width="8" height="35" rx="2" fill="#D6D0C8" opacity="0.3"/>
+      <rect x="144" y="75" width="8" height="25" rx="2" fill="#D6D0C8" opacity="0.25"/>
+      <rect x="160" y="80" width="8" height="20" rx="2" fill="#D6D0C8" opacity="0.2"/>
+      <rect x="176" y="70" width="8" height="30" rx="2" fill="#D6D0C8" opacity="0.3"/>
+      <rect x="192" y="55" width="8" height="45" rx="2" fill="#A0826D" opacity="0.3"/>
+      <rect x="208" y="35" width="8" height="65" rx="2" fill="#A0826D" opacity="0.45"/>
+      <rect x="224" y="15" width="8" height="85" rx="2" fill="#A0826D" opacity="0.6"/>
+      <rect x="240" y="5" width="8" height="95" rx="2" fill="#A0826D" opacity="0.7"/>
+      <rect x="256" y="0" width="8" height="100" rx="2" fill="#A0826D" opacity="0.8"/>
+      <rect x="272" y="10" width="8" height="90" rx="2" fill="#A0826D" opacity="0.6"/>
+      <rect x="288" y="30" width="8" height="70" rx="2" fill="#D6D0C8" opacity="0.5"/>
+      <rect x="304" y="50" width="8" height="50" rx="2" fill="#D6D0C8" opacity="0.4"/>
+      <rect x="320" y="65" width="8" height="35" rx="2" fill="#D6D0C8" opacity="0.3"/>
+      <rect x="336" y="80" width="8" height="20" rx="2" fill="#D6D0C8" opacity="0.2"/>
+      <rect x="352" y="85" width="8" height="15" rx="2" fill="#D6D0C8" opacity="0.15"/>
+      <rect x="368" y="75" width="8" height="25" rx="2" fill="#D6D0C8" opacity="0.2"/>
+      <rect x="384" y="60" width="8" height="40" rx="2" fill="#D6D0C8" opacity="0.35"/>
+      <rect x="400" y="40" width="8" height="60" rx="2" fill="#A0826D" opacity="0.35"/>
+      <rect x="416" y="20" width="8" height="80" rx="2" fill="#A0826D" opacity="0.5"/>
+      <rect x="432" y="5" width="8" height="95" rx="2" fill="#A0826D" opacity="0.65"/>
+      <rect x="448" y="0" width="8" height="100" rx="2" fill="#A0826D" opacity="0.75"/>
+      <rect x="464" y="15" width="8" height="85" rx="2" fill="#A0826D" opacity="0.55"/>
+      <rect x="480" y="35" width="8" height="65" rx="2" fill="#D6D0C8" opacity="0.45"/>
+      <rect x="496" y="55" width="8" height="45" rx="2" fill="#D6D0C8" opacity="0.35"/>
+      <rect x="512" y="70" width="8" height="30" rx="2" fill="#D6D0C8" opacity="0.25"/>
+      <rect x="528" y="82" width="8" height="18" rx="2" fill="#D6D0C8" opacity="0.2"/>
+    </g>
+
+    <!-- Labels -->
+    <text x="0" y="140" font-family="system-ui" font-size="9" fill="#C7C7CC">LOW</text>
+    <text x="500" y="140" font-family="system-ui" font-size="9" fill="#C7C7CC" text-anchor="end">HIGH</text>
+  </g>
+
+  <!-- Bottom metrics -->
+  <g transform="translate(80, 380)">
+    <rect x="0" y="0" width="220" height="90" rx="12" fill="white" opacity="0.7" stroke="#E8E6E3"/>
+    <text x="20" y="28" font-family="system-ui" font-size="10" fill="#6E6E73" font-weight="500">CONCURRENT RUNNERS</text>
+    <text x="20" y="62" font-family="'Playfair Display', Georgia, serif" font-size="36" font-weight="700" fill="#A0826D">500+</text>
+
+    <rect x="240" y="0" width="220" height="90" rx="12" fill="white" opacity="0.7" stroke="#E8E6E3"/>
+    <text x="260" y="28" font-family="system-ui" font-size="10" fill="#6E6E73" font-weight="500">MONTHLY PIPELINES</text>
+    <text x="260" y="62" font-family="'Playfair Display', Georgia, serif" font-size="36" font-weight="700" fill="#A0826D">10K+</text>
+
+    <rect x="480" y="0" width="220" height="90" rx="12" fill="white" opacity="0.7" stroke="#E8E6E3"/>
+    <text x="500" y="28" font-family="system-ui" font-size="10" fill="#6E6E73" font-weight="500">COST REDUCTION</text>
+    <text x="500" y="62" font-family="'Playfair Display', Georgia, serif" font-size="36" font-weight="700" fill="#A0826D">60%</text>
+
+    <rect x="720" y="0" width="220" height="90" rx="12" fill="white" opacity="0.7" stroke="#E8E6E3"/>
+    <text x="740" y="28" font-family="system-ui" font-size="10" fill="#6E6E73" font-weight="500">P95 QUEUE TIME</text>
+    <text x="740" y="62" font-family="'Playfair Display', Georgia, serif" font-size="36" font-weight="700" fill="#A0826D">&lt; 60s</text>
+  </g>
+
+  <!-- Decorative: ephemeral lifecycle arc -->
+  <g transform="translate(80, 340)" opacity="0.25">
+    <path d="M0,0 Q200,-30 400,0" fill="none" stroke="#A0826D" stroke-width="1" stroke-dasharray="3,3"/>
+    <path d="M400,0 Q600,-30 800,0" fill="none" stroke="#A0826D" stroke-width="1" stroke-dasharray="3,3"/>
+    <path d="M800,0 Q1000,-30 1040,0" fill="none" stroke="#A0826D" stroke-width="1" stroke-dasharray="3,3"/>
+  </g>
+
+  <!-- Decorative dots -->
+  <circle cx="1100" cy="80" r="2" fill="#A0826D" opacity="0.3"/>
+  <circle cx="1150" cy="550" r="2" fill="#D6D0C8" opacity="0.5"/>
+</svg>

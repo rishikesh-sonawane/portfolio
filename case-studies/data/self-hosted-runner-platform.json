@@ -1,0 +1,73 @@
+{
+  "title": "Self-Hosted GitHub Actions Runner Platform",
+  "coverImage": "covers/runner-cover.svg",
+  "subtitle": "Building an autoscaled, ephemeral runner fleet on AWS — a Python autoscaler consuming GitHub webhooks, instance orchestrators managing runner lifecycle, resource monitors, Packer-built AMIs, and Terraform infrastructure supporting 500+ concurrent runners.",
+  "category": "Platform Engineering · CI/CD · GitHub Actions",
+  "tags": ["Python", "GitHub Actions", "EC2", "Auto Scaling", "Packer", "Redis", "Docker", "FastAPI", "boto3"],
+  "overview": [
+    "GitHub-hosted runners served us initially, but as CI/CD workloads grew to 10,000+ pipeline executions per month, we needed custom compute: specific AMIs with pre-installed tooling, Docker-in-Docker with privileged access, and control over scaling behavior. I worked on building a self-hosted runner platform that gave us full ownership of the compute layer.",
+    "The platform consists of three interconnected systems: a <strong>Python autoscaler</strong> consuming GitHub webhooks and driving ASG capacity via Redis state, <strong>instance orchestrators</strong> running on each machine managing runner lifecycle with ephemeral detach-and-terminate patterns, and <strong>resource monitors</strong> collecting CPU/memory/disk/network telemetry for Datadog.",
+    "The result: 500+ concurrent runners, 10K+ monthly pipelines, 60% cost reduction vs GitHub-hosted, and sub-60-second queue times. The entire fleet runs in a dedicated AWS account with isolated networking, Packer-built AMIs, and Atlantis-managed Terraform."
+  ],
+  "metrics": [
+    { "value": "500+", "label": "Concurrent Runners" },
+    { "value": "10K+", "label": "Monthly Pipelines" },
+    { "value": "60%", "label": "Cost Reduction" },
+    { "value": "< 60s", "label": "P95 Queue Time" }
+  ],
+  "challenge": [
+    "<strong>The Problem:</strong> GitHub-hosted runners cost $0.008/minute (Linux) and $0.016/minute (macOS). At 10K+ executions/month averaging 8 minutes each, we were spending over $6,400/month — growing 15% month-over-month. Beyond cost, specific builds needed Docker-in-Docker with privileged access, 32GB+ RAM for monorepo compilations, and custom kernel configurations for security scanning tools.",
+    "Queue times during peak hours exceeded 5 minutes. GitHub's shared fleet couldn't prioritize our workloads or guarantee capacity. We needed elastic compute that matched our demand patterns without the overhead of managing individual runner processes.",
+    "The challenge wasn't just deploying EC2 instances — it was building an intelligent autoscaler that could react to GitHub's webhook events in real-time, scale ASGs up and down based on actual queue depth, and ensure instances were ephemeral (no state left behind between jobs)."
+  ],
+  "solution": [
+    "<strong>The autoscaler</strong> is a Python service (FastAPI) that consumes GitHub workflow_job webhook events and drives ASG desired capacity. It maintains queue and rate signals in Redis, using a reactive-plus-predictive sizing model: queue depth, job arrival rate, estimated runner startup time, and a configurable multiplier. The controller runs on an APScheduler loop that reconciles ASG capacity against Redis state, with throttling-aware intervals to avoid AWS API limits.",
+    "<strong>The instance orchestrator</strong> runs on each machine. On startup, it loads AWS config via boto3, constructs the host abstraction (with atexit Terminate() for failure cleanup), initializes a Docker client and systemd-backed runner service. It pulls CI credentials from Secrets Manager, randomly selects from multiple service accounts for rate-limit distribution, authenticates with container registries, then starts the runner. When a job begins, the orchestrator detaches the instance from the ASG (preventing new job assignments) and when the job completes, it terminates the instance — true ephemeral runners.",
+    "<strong>The resource monitor</strong> is a sidecar Python process using psutil that collects CPU, memory, disk, and network metrics, submitting them to Datadog via the datadog library. It provides fleet-wide visibility into resource utilization and abuse patterns.",
+    "The AMI layer uses Packer templates with a centralized version file as the single source of truth for runner binaries. AMI build commits are recorded in version-tracking files, and Terraform references these SHAs for immutable, rollback-friendly deployments. The CI pipeline bakes AMIs, commits version bumps, and Atlantis autoplan triggers for staging/production rollout."
+  ],
+  "architecture": [
+    {
+      "heading": "Autoscaler — Event-Driven Capacity Management",
+      "content": [
+        "The autoscaler's architecture: Webhook handler (validates GitHub payloads via hmac verification) → Queue monitor (Redis-backed state using redis-py) → Controller (APScheduler loop that reconciles desired capacity). The controller lists tagged ASGs via boto3, computes desired capacity using documented formulas (startup time, predictive multiplier, arrival rate window), and calls set_desired_capacity. Orphan cleanup runs via EC2 describe_instances.",
+        "Separation of concerns: webhook transport (FastAPI routes) vs scaling domain (controller module) vs AWS client (boto3 wrappers) vs metrics emission (datadog library). Interface-driven AWS boundaries with dependency injection for isolated unit tests using moto."
+      ]
+    },
+    {
+      "heading": "Instance Orchestrator — Ephemeral Runner Lifecycle",
+      "content": [
+        "The orchestrator's lifecycle: Init (boto3 config, Docker client, Secrets Manager pull) → Authenticate (random service account selection for rate-limit distribution) → Run (systemd runner service) → Detach (remove from ASG on job start) → Terminate (instance shutdown on job completion or failure).",
+        "The random service account selection is deliberate: it distributes token usage across multiple accounts, avoiding rate limits on any single one. The host abstraction uses a protocol class to abstract cloud-specific operations (IMDS, ASG, Secrets Manager) for testability."
+      ]
+    },
+    {
+      "heading": "AMI Pipeline & Version Pinning",
+      "content": [
+        "Packer templates with centralized version file. When AMIs rebuild (via CI with corporate build controls), the pipeline commits updated SHAs to version-tracking files. Terraform references these SHAs, so 'rollback' = 'restore previous SHA and atlantis apply'.",
+        "Deployment guardrails include labels for tested configurations and concurrency notes across runner flavors (stable, docker, docker-arm, slim-arm)."
+      ]
+    },
+    {
+      "heading": "Terraform Infrastructure",
+      "content": [
+        "Terraform projects per runner flavor/environment: stable, stable-staging, docker, docker-arm, slim-arm, plus VPC and IAM modules, plus shared module code. All managed via Atlantis with per-directory plan/apply.",
+        "The dedicated AWS account has isolated networking, and runners can only communicate with public-facing assets — no access to the internal production network."
+      ]
+    }
+  ],
+  "techStack": ["Python", "FastAPI", "boto3", "Redis", "redis-py", "EC2 Auto Scaling", "Packer", "Terraform", "Atlantis", "Docker", "systemd", "psutil", "datadog", "APScheduler", "GitHub App Auth", "moto"],
+  "timeline": [
+    { "phase": "Phase 1", "title": "Foundation", "description": "Built the autoscaler (Python/FastAPI) with webhook handling, Redis queue monitor, and ASG controller via boto3. Established the reactive-plus-predictive sizing model." },
+    { "phase": "Phase 2", "title": "Instance Orchestrator", "description": "Built the instance orchestrator with Docker client, systemd runner control, Secrets Manager integration via boto3, and ephemeral detach/terminate patterns." },
+    { "phase": "Phase 3", "title": "AMI Pipeline", "description": "Packer templates with centralized version file. CI for AMI baking. SHA-based version tracking. Atlantis integration for staged rollout." },
+    { "phase": "Phase 4", "title": "Fleet Expansion", "description": "Added runner flavors (stable, docker, docker-arm, slim-arm). Terraform per flavor. Resource monitor with psutil for fleet telemetry. Datadog dashboards." },
+    { "phase": "Phase 5", "title": "Optimization", "description": "Spot instances for 70% of fleet. Scaling policy tuning. Integration tests with moto. Achieved 60% cost reduction with better performance." }
+  ],
+  "learnings": [
+    "<strong>Ephemeral runners are the key to reliability.</strong> The detach-on-start, terminate-on-complete pattern means no stuck jobs, no stale state, and no memory leaks across runs. Every job gets a fresh instance. The cost is slightly higher startup time, but the reliability gain is massive.",
+    "<strong>Webhook + Redis + schedulers requires careful failure mode analysis.</strong> Redis partitions, duplicate webhook deliveries, and clock skew are real risks. The autoscaler assumes a single active writer per environment — appropriate for one logical autoscaler but would need leader election for HA.",
+    "<strong>Random service account selection is load balancing at the auth layer.</strong> Picking randomly from multiple accounts distributes token usage and avoids hitting rate limits on any single one. Simple pattern with outsized impact on fleet reliability.",
+    "<strong>SHA-based AMI pinning makes rollback trivial.</strong> When an AMI build introduces a regression, 'rollback' is literally restoring a previous SHA file and running atlantis apply. No binary hunting, no manual AMI selection — just git revert and apply."
+  ]
+}

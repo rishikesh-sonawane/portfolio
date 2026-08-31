@@ -1,0 +1,58 @@
+{
+  "title": "ImageFlow — End-to-End DevOps Project",
+  "subtitle": "A production-inspired DevOps OS with event-driven image pipeline, Terraform IaC, real k3s + Helm, dual-loop CI/CD, observability, and security hardening — built end-to-end on Floci for $0.",
+  "category": "Personal Project · DevOps · Full Stack",
+  "tags": ["Terraform", "Kubernetes", "AWS", "CI/CD", "Helm", "k3s", "Observability", "Security"],
+  "overview": [
+    "Most DevOps tutorials teach isolated skills — 'here's how to write a Terraform module' or 'here's how to deploy to Kubernetes.' But production DevOps is about how all these pieces connect into a cohesive system. I wanted to build that system end-to-end.",
+    "ImageFlow is a production-grade DevOps platform built from scratch: an event-driven image processing pipeline with Terraform infrastructure, a real k3s Kubernetes cluster with Helm charts, dual-loop CI/CD (build + deploy), full observability with Prometheus and Grafana, and security hardening with network policies and secrets management.",
+    "The entire project runs on Floci (a free DevOps sandbox) for $0, proving that production-grade infrastructure patterns are accessible without enterprise budgets."
+  ],
+  "metrics": [
+    { "value": "$0", "label": "Total Cost (Floci)" },
+    { "value": "6", "label": "Core Components" },
+    { "value": "Full", "label": "CI/CD Pipeline" },
+    { "value": "Production", "label": "Architecture Patterns" }
+  ],
+  "challenge": [
+    "<strong>The Problem:</strong> The gap between DevOps tutorials and production reality is enormous. Tutorials teach tools in isolation; production requires understanding how Terraform, Kubernetes, Helm, CI/CD, observability, and security interconnect as a system.",
+    "I wanted to build a project that demonstrated end-to-end DevOps competency — not just 'I can write a Dockerfile,' but 'I can design, build, secure, observe, and operate a production-grade platform.' This meant covering infrastructure provisioning, container orchestration, deployment automation, monitoring, and security in one cohesive project.",
+    "The constraint was cost: I wanted to prove this could be done on a free tier, making it accessible as a learning resource."
+  ],
+  "solution": [
+    "I designed ImageFlow as an event-driven image processing pipeline: users upload images via an API, which triggers a processing queue, which fans out to worker pods on Kubernetes for resizing, watermarking, and format conversion. Results are stored in S3 and served via CDN.",
+    "The infrastructure layer uses Terraform to provision all AWS resources: VPC, EKS-compatible networking (simulated on k3s), S3 buckets, IAM roles, and security groups. Every resource is tagged, parameterized, and follows least-privilege principles.",
+    "The Kubernetes layer runs on k3s (lightweight Kubernetes) with Helm charts for each microservice: API gateway, processing workers, monitoring stack, and secrets management. Network policies enforce pod-to-pod communication rules.",
+    "The CI/CD layer has two loops: the <strong>build loop</strong> (GitHub Actions builds Docker images, runs tests, pushes to registry) and the <strong>deploy loop</strong> (ArgoCD watches the Helm chart repo and syncs to the cluster). Both loops are fully automated with rollback capabilities."
+  ],
+  "architecture": [
+    {
+      "heading": "Event-Driven Pipeline",
+      "content": [
+        "Image upload → API Gateway (nginx) → Processing Queue (Redis) → Worker Pods (k3s) → S3 Storage → CDN Distribution. Each stage is independently scalable and observable.",
+        "Workers are deployed as a Kubernetes Deployment with Horizontal Pod Autoscaler, scaling based on queue depth. A failed image job is retried 3 times before being moved to a dead letter queue for manual inspection."
+      ]
+    },
+    {
+      "heading": "Dual-Loop CI/CD",
+      "content": [
+        "<strong>Build Loop:</strong> Push to main → GitHub Actions triggers → Docker build → Unit tests → Integration tests → Push to registry → Tag with commit SHA. Quality gates prevent broken images from reaching the registry.",
+        "<strong>Deploy Loop:</strong> ArgoCD detects new image tag in registry → Updates Helm values → Diff displayed in PR → Auto-merge after approval → Kubernetes rolling update → Health check → Promotion or rollback."
+      ]
+    }
+  ],
+  "techStack": ["Terraform", "k3s", "Helm", "Docker", "GitHub Actions", "ArgoCD", "Prometheus", "Grafana", "Redis", "Nginx", "AWS S3", "Python"],
+  "timeline": [
+    { "phase": "Week 1", "title": "Infrastructure Foundation", "description": "Set up Floci environment. Built Terraform modules for VPC, networking, and IAM. Provisioned k3s cluster with initial configuration." },
+    { "phase": "Week 2", "title": "Application Layer", "description": "Built the image processing API and worker services in Python. Created Docker images. Set up Redis queue and S3 storage integration." },
+    { "phase": "Week 3", "title": "Kubernetes & Helm", "description": "Created Helm charts for all services. Configured deployments, services, ingress, and HPA. Implemented network policies for security." },
+    { "phase": "Week 4", "title": "CI/CD & Observability", "description": "Built GitHub Actions pipelines for build loop. Deployed ArgoCD for deploy loop. Set up Prometheus + Grafana monitoring stack." },
+    { "phase": "Week 5", "title": "Security Hardening", "description": "Implemented secrets management with Sealed Secrets. Added Pod Security Policies. Configured RBAC and network policies. Ran security audit." }
+  ],
+  "learnings": [
+    "<strong>Simulated production is still production.</strong> Running k3s instead of EKS didn't diminish the learning — the architectural patterns, Helm charts, network policies, and CI/CD loops are identical. The constraint of Floci's free tier forced creative problem-solving that enterprise budgets would have obscured.",
+    "<strong>Dual-loop CI/CD is the future.</strong> Separating build automation from deployment automation with ArgoCD watching a Helm chart repo gave us independent control over each loop. Builds could be fast and frequent; deploys could be deliberate and gated.",
+    "<strong>Observability from day one, not day 30.</strong> Adding Prometheus and Grafana in week 4 (not week 8) meant I could debug infrastructure issues during development, not just in production. This habit alone saved days of troubleshooting.",
+    "<strong>Security is not a layer, it's a dimension.</strong> Network policies, RBAC, secrets management, and Pod Security Policies aren't separate tasks — they're cross-cutting concerns that should be woven into every Terraform module and Helm chart from the start."
+  ]
+}

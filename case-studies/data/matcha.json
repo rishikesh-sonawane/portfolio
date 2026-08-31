@@ -1,0 +1,57 @@
+{
+  "title": "Matcha — AI-Powered Job Aggregator",
+  "subtitle": "Building a multi-source job search engine that scrapes LinkedIn, Indeed, Naukri, and RemoteOK in parallel, then ranks listings against your profile using heuristic + LLM scoring.",
+  "category": "Personal Project · Python · AI/LLM",
+  "tags": ["Python", "AI/LLM", "Scraping", "Job Search", "CLI"],
+  "overview": [
+    "Job searching is broken. You end up with 15 browser tabs open, applying the same filters across 4 different sites, manually comparing roles that don't even use the same terminology. I wanted to build a tool that searches everywhere at once and actually ranks results by how well they match <em>your</em> specific profile.",
+    "Matcha is a Python CLI tool that parallel-scrapes multiple job boards (LinkedIn, Indeed, Naukri, RemoteOK), normalizes the results into a unified format, and then scores each listing against your saved profile using a combination of heuristic matching and optional LLM-based semantic analysis.",
+    "The result is a ranked, deduplicated list of jobs sorted by relevance — not recency. You save hours of manual searching and get better matches than any single platform's algorithm would show you."
+  ],
+  "metrics": [
+    { "value": "4", "label": "Job Sources Searched" },
+    { "value": "~5s", "label": "Full Search Time" },
+    { "value": "2-Stage", "label": "Scoring Pipeline" },
+    { "value": "0", "label": "Manual Tab Switching" }
+  ],
+  "challenge": [
+    "<strong>The Problem:</strong> Each job board has different search semantics, different result formats, and different anti-scraping measures. LinkedIn uses internal job IDs, Indeed uses company slugs, Naukri has its own taxonomy, and RemoteOK is API-friendly but limited in scope. Unifying these into a single ranked list requires normalizing wildly different data formats.",
+    "Ranking is equally hard. A keyword match isn't enough — 'Platform Engineer' at one company might be 'DevOps Engineer' at another. You need semantic understanding of job descriptions, not just keyword matching.",
+    "The tool also needed to work headlessly — no browser automation, no Selenium — to stay lightweight and fast. This meant working with raw HTTP requests and parsing HTML/API responses directly."
+  ],
+  "solution": [
+    "I built a modular scraper architecture where each job source is a plugin implementing a standard interface: <code>search(query, filters) → List[JobListing]</code>. Each scraper handles its own authentication, rate limiting, and response parsing, but outputs a normalized <code>JobListing</code> dataclass.",
+    "The scoring pipeline runs in two stages. <strong>Stage 1 (Heuristic):</strong> Fast keyword and tag matching against the user's saved profile — skills match percentage, location compatibility, salary range overlap, experience level fit. This filters the 1000+ raw results down to ~50 candidates in milliseconds.",
+    "<strong>Stage 2 (LLM Semantic):</strong> Optional AI-powered deep matching using a local LLM (via Ollama) or API-based model. This reads the full job description and compares it against the user's experience narrative, understanding context like '3 years of Terraform' matching a requirement for 'IaC experience with HashiCorp tools.'",
+    "Results are deduplicated using fuzzy title + company matching (Levenshtein distance), ranked by composite score, and output as structured JSON or a formatted CLI table."
+  ],
+  "architecture": [
+    {
+      "heading": "Plugin Scraper System",
+      "content": [
+        "Each source (LinkedIn, Indeed, Naukri, RemoteOK) is a Python class inheriting from <code>BaseScraper</code>. The base class provides rate limiting, retry logic, user-agent rotation, and output normalization. Source-specific scrapers only implement the parsing logic.",
+        "Parallel execution uses <code>asyncio</code> with <code>aiohttp</code> for concurrent HTTP requests. All 4 sources are queried simultaneously, with a total timeout of 10 seconds. Results are merged as they arrive."
+      ]
+    },
+    {
+      "heading": "Scoring Pipeline",
+      "content": [
+        "The heuristic scorer computes a weighted score across 5 dimensions: skills match (40%), location fit (20%), salary alignment (20%), experience level (15%), and recency (5%). Weights are configurable per user.",
+        "The LLM scorer sends the job description and user profile to a language model with a structured prompt that returns a compatibility score (0–100) with reasoning. This runs on the ~50 heuristic-filtered candidates to keep costs and latency manageable."
+      ]
+    }
+  ],
+  "techStack": ["Python", "asyncio", "aiohttp", "BeautifulSoup", "Ollama", "Rich CLI", "YAML Config"],
+  "timeline": [
+    { "phase": "Week 1", "title": "Scraper Foundation", "description": "Built the BaseScraper class and normalized data model. Implemented RemoteOK scraper first (API-based, easiest). Set up async HTTP infrastructure." },
+    { "phase": "Week 2", "title": "Multi-Source Scrapers", "description": "Implemented Indeed and Naukri scrapers. Started LinkedIn scraper (most complex due to anti-scraping). Added parallel execution with asyncio." },
+    { "phase": "Week 3", "title": "Scoring Engine", "description": "Built the heuristic scoring pipeline with configurable weights. Added LLM integration via Ollama for semantic matching. Implemented deduplication." },
+    { "phase": "Week 4", "title": "CLI & Polish", "description": "Built the CLI interface with Rich for formatted output. Added profile management, saved searches, and export to JSON/CSV. Tested across all 4 sources." }
+  ],
+  "learnings": [
+    "<strong>Normalize early, score late.</strong> The biggest engineering challenge was normalizing wildly different data formats from 4 sources. Investing in a clean, unified data model early made the scoring pipeline trivial to build.",
+    "<strong>Heuristics before LLMs.</strong> Running cheap keyword matching first to filter from 1000+ to ~50 candidates made the LLM step both faster and cheaper. The heuristic stage catches 80% of irrelevant results with zero API cost.",
+    "<strong>Anti-scraping is an arms race.</strong> LinkedIn in particular actively blocks scrapers. I used rotating user agents, request throttling, and residential proxy support — but the real lesson is that no scraper is permanent. Design for graceful degradation.",
+    "<strong>CLI-first is underrated.</strong> Building a CLI tool that outputs to terminal, JSON, or CSV means it integrates with everything — pipes, scripts, CI/CD pipelines, other tools. A web UI would have been flashier but less useful."
+  ]
+}

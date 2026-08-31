@@ -1,0 +1,57 @@
+{
+  "title": "Casper — 9-Layer Local AI Agent",
+  "subtitle": "A local AI agent for macOS with wake-word detection, LangGraph routing, specialist agents, ChromaDB memory, and Kokoro TTS — all running on-device with zero cloud dependency.",
+  "category": "Personal Project · AI Agent · Local AI",
+  "tags": ["Python", "LangGraph", "Ollama", "AI Agent", "Kokoro TTS", "ChromaDB"],
+  "overview": [
+    "Cloud-based AI assistants are powerful but come with tradeoffs: latency, cost, privacy concerns, and internet dependency. I wanted to build a fully local AI agent that runs entirely on a MacBook — no API keys, no cloud services, no data leaving the device.",
+    "Casper is a 9-layer local AI agent built with LangGraph for orchestration, Ollama for local LLM inference, ChromaDB for long-term memory, and Kokoro for text-to-speech. It detects wake words, routes requests to specialist agents, maintains conversation memory, and speaks responses — all on-device.",
+    "The architecture is designed around the concept of 'layered intelligence' — each layer adds capability while remaining independently testable and replaceable."
+  ],
+  "metrics": [
+    { "value": "9", "label": "Architecture Layers" },
+    { "value": "100%", "label": "Local / On-Device" },
+    { "value": "$0", "label": "API Costs" },
+    { "value": "Privacy", "label": "First Design" }
+  ],
+  "challenge": [
+    "<strong>The Problem:</strong> Building a capable AI agent locally requires solving several hard problems simultaneously: natural language understanding, task routing, tool execution, memory persistence, and speech synthesis — all constrained by laptop hardware (16–32GB RAM, Apple Silicon GPU).",
+    "Each layer introduces latency. Wake-word detection → speech recognition → intent classification → agent routing → tool execution → response generation → text-to-speech. If each layer adds 200ms, the total round-trip is 1.4 seconds before the user hears anything. Optimization at every layer is critical.",
+    "Memory is another challenge. Local LLMs have limited context windows (typically 4K–8K tokens). To maintain coherent multi-session conversations, you need an external memory system that can retrieve relevant context without blowing the token budget."
+  ],
+  "solution": [
+    "I designed Casper as a 9-layer pipeline, each with a clear responsibility and interface: <strong>(1)</strong> Wake Word Detection (Porcupine), <strong>(2)</strong> Speech-to-Text (Whisper.cpp), <strong>(3)</strong> Intent Classification (lightweight classifier), <strong>(4)</strong> LangGraph Router (state machine), <strong>(5)</strong> Specialist Agents (code, research, creative, system), <strong>(6)</strong> Tool Execution (bash, web search, file system), <strong>(7)</strong> Response Generation (Ollama LLM), <strong>(8)</strong> Memory (ChromaDB + SQLite), <strong>(9)</strong> Text-to-Speech (Kokoro).",
+    "The LangGraph router is the brain: it receives the classified intent and routes to the appropriate specialist agent. Each specialist has its own system prompt, tool access, and response style. The router maintains conversation state and can hand off between specialists mid-conversation.",
+    "For memory, I implemented a two-tier system: <strong>short-term</strong> (conversation buffer, last 10 exchanges) and <strong>long-term</strong> (ChromaDB vector store with semantic search). Important facts, preferences, and decisions are automatically extracted and stored for retrieval in future sessions.",
+    "Kokoro TTS provides natural-sounding speech output with minimal latency (~100ms on Apple Silicon). The voice is configurable, and responses are streamed for perceived instantaneity."
+  ],
+  "architecture": [
+    {
+      "heading": "9-Layer Pipeline",
+      "content": [
+        "<strong>Layer 1 – Wake Word:</strong> Porcupine runs a lightweight model to detect 'Hey Casper' locally. CPU-only, ~10ms per frame. Always listening, zero battery impact on Apple Silicon.",
+        "<strong>Layer 2 – Speech-to-Text:</strong> Whisper.cpp (small model) runs on GPU via Apple's Metal framework. ~500ms for a 5-second utterance. Optimized with quantized INT8 weights.",
+        "<strong>Layer 3 – Intent Classification:</strong> A fine-tuned sentence-transformer classifies intent (code, research, creative, system, conversational) in ~20ms. Runs on CPU.",
+        "<strong>Layer 4 – LangGraph Router:</strong> A state machine built with LangGraph that manages conversation flow, context injection from memory, and specialist handoffs. Zero inference cost.",
+        "<strong>Layers 5-6 – Specialist Agents + Tools:</strong> Four specialists (code assistant, research agent, creative writer, system controller) each with tailored prompts and tool access. Tools include bash execution, web search, and file operations.",
+        "<strong>Layer 7 – Response Generation:</strong> Ollama runs a 7B parameter model (Llama 3 or Mistral) on GPU. ~2-3 seconds for a full response. Streamed for perceived instantaneity.",
+        "<strong>Layer 8 – Memory:</strong> ChromaDB for vector-based semantic retrieval + SQLite for structured facts. Auto-extraction pipeline identifies and stores key information from conversations.",
+        "<strong>Layer 9 – Text-to-Speech:</strong> Kokoro TTS generates natural speech from text. ~100ms latency on Apple Silicon. Streamed word-by-word for real-time playback."
+      ]
+    }
+  ],
+  "techStack": ["Python", "LangGraph", "Ollama", "ChromaDB", "SQLite", "Whisper.cpp", "Porcupine", "Kokoro TTS", "Apple Metal", "asyncio"],
+  "timeline": [
+    { "phase": "Week 1–2", "title": "Core Pipeline", "description": "Built the basic 3-layer pipeline: wake word → STT → LLM response → TTS. Got end-to-end voice interaction working with Ollama and Kokoro." },
+    { "phase": "Week 3–4", "title": "LangGraph Router", "description": "Implemented the LangGraph state machine for intent routing. Built the 4 specialist agents with distinct personalities and tool access. Added conversation state management." },
+    { "phase": "Week 5", "title": "Memory System", "description": "Built the ChromaDB integration for long-term semantic memory. Implemented auto-extraction pipeline for key facts. Added SQLite for structured data storage." },
+    { "phase": "Week 6", "title": "Optimization", "description": "Optimized each layer for latency: Whisper.cpp quantization, streaming TTS, intent pre-classification during STT. Achieved sub-2-second total round-trip." },
+    { "phase": "Week 7", "title": "Polish & Testing", "description": "Built the CLI interface for testing and debugging. Added voice configuration, memory inspection commands, and session export. Extensive real-world testing." }
+  ],
+  "learnings": [
+    "<strong>Latency is the product.</strong> An AI agent that takes 5 seconds to respond feels broken, even if the response is brilliant. I spent more time optimizing latency (quantization, streaming, pre-classification) than on intelligence. The user experience is defined by speed, not capability.",
+    "<strong>LangGraph simplifies agent architecture.</strong> Before LangGraph, agent routing was ad-hoc if/else logic that became unmaintainable. The graph-based state machine made routing explicit, testable, and easy to modify without breaking other paths.",
+    "<strong>Memory is what makes an agent feel alive.</strong> The difference between a chatbot and an agent is memory. When Casper remembers your preferences from last week and applies them to today's request, it feels like talking to someone who knows you — not a fresh instance every time.",
+    "<strong>Local AI is good enough for 90% of use cases.</strong> A 7B parameter model running locally handles code assistance, research queries, creative writing, and system control with quality comparable to cloud APIs for most tasks. The 10% gap is worth accepting for the privacy and latency benefits."
+  ]
+}

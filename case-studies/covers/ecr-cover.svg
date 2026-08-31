@@ -1,0 +1,277 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FAF9F7"/>
+      <stop offset="50%" stop-color="#F5F3F0"/>
+      <stop offset="100%" stop-color="#EDE9E3"/>
+    </linearGradient>
+
+    <!-- Terra gradient for primary elements -->
+    <linearGradient id="terraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B8956F"/>
+      <stop offset="100%" stop-color="#8B6E58"/>
+    </linearGradient>
+
+    <!-- Glass surface -->
+    <linearGradient id="glass" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#F5F3F0" stop-opacity="0.65"/>
+    </linearGradient>
+
+    <!-- Radial glow for primary -->
+    <radialGradient id="primaryGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#A0826D" stop-opacity="0.15"/>
+      <stop offset="70%" stop-color="#A0826D" stop-opacity="0.03"/>
+      <stop offset="100%" stop-color="#A0826D" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#1C1C1E" flood-opacity="0.06"/>
+    </filter>
+
+    <!-- Soft glow for nodes -->
+    <filter id="nodeGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Animated dash for data flow -->
+    <style>
+      @keyframes flowDash { from { stroke-dashoffset: 20; } to { stroke-dashoffset: 0; } }
+      @keyframes flowDashReverse { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 20; } }
+      @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+      .flow { animation: flowDash 1.5s linear infinite; }
+      .flow-reverse { animation: flowDashReverse 2s linear infinite; }
+      .pulse { animation: pulse 3s ease-in-out infinite; }
+      .flow-slow { animation: flowDash 2.5s linear infinite; }
+    </style>
+  </defs>
+
+  <!-- ===== BACKGROUND ===== -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Mesh gradient blobs -->
+  <ellipse cx="180" cy="120" rx="350" ry="280" fill="#A0826D" opacity="0.035"/>
+  <ellipse cx="1020" cy="520" rx="300" ry="250" fill="#D6D0C8" opacity="0.06"/>
+  <ellipse cx="600" cy="315" rx="500" ry="350" fill="#A0826D" opacity="0.02"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.03" stroke="#A0826D" stroke-width="0.5">
+    <line x1="0" y1="100" x2="1200" y2="100"/><line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="500" x2="1200" y2="500"/>
+    <line x1="200" y1="0" x2="200" y2="630"/><line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/><line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <!-- ===== SECTION LABEL ===== -->
+  <g transform="translate(80, 52)">
+    <rect x="0" y="0" width="3" height="16" rx="1.5" fill="#A0826D" opacity="0.6"/>
+    <text x="12" y="12" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#A0826D" letter-spacing="0.18em" opacity="0.8">ECR HYBRID DISTRIBUTION</text>
+  </g>
+
+  <!-- ===== PRIMARY GLOW ===== -->
+  <circle cx="520" cy="290" r="180" fill="url(#primaryGlow)"/>
+
+  <!-- ===== REPLICATION LINE: Primary → DR (thick, solid, prominent) ===== -->
+  <g>
+    <!-- Shadow line -->
+    <line x1="565" y1="265" x2="810" y2="195" stroke="#1C1C1E" stroke-width="3" opacity="0.03"/>
+    <!-- Main line -->
+    <line x1="565" y1="265" x2="810" y2="195" stroke="url(#terraGrad)" stroke-width="2" opacity="0.5"/>
+    <!-- Animated flow dots -->
+    <line x1="565" y1="265" x2="810" y2="195" stroke="#A0826D" stroke-width="2" stroke-dasharray="4,12" class="flow" opacity="0.7"/>
+    <!-- Arrow -->
+    <polygon points="808,197 818,190 805,186" fill="#A0826D" opacity="0.6"/>
+    <!-- Label -->
+    <text x="690" y="220" font-family="system-ui" font-size="8" fill="#A0826D" opacity="0.5" text-anchor="middle" letter-spacing="0.1em">CROSS-REGION REPLICATION</text>
+  </g>
+
+  <!-- ===== PTC CONNECTION LINES (thinner, dashed, animated) ===== -->
+  <g opacity="0.45">
+    <!-- → us-west-1 (top-left) -->
+    <line x1="475" y1="265" x2="340" y2="175" stroke="#D6D0C8" stroke-width="1.2" stroke-dasharray="3,5" class="flow-slow"/>
+    <line x1="475" y1="265" x2="340" y2="175" stroke="#A0826D" stroke-width="0.5" stroke-dasharray="1,8" class="flow" opacity="0.5"/>
+
+    <!-- → us-east-1 -->
+    <line x1="480" y1="290" x2="265" y2="275" stroke="#D6D0C8" stroke-width="1.2" stroke-dasharray="3,5" class="flow-slow"/>
+    <line x1="480" y1="290" x2="265" y2="275" stroke="#A0826D" stroke-width="0.5" stroke-dasharray="1,8" class="flow" opacity="0.5"/>
+
+    <!-- → us-east-2 -->
+    <line x1="485" y1="320" x2="310" y2="400" stroke="#D6D0C8" stroke-width="1.2" stroke-dasharray="3,5" class="flow-slow"/>
+    <line x1="485" y1="320" x2="310" y2="400" stroke="#A0826D" stroke-width="0.5" stroke-dasharray="1,8" class="flow" opacity="0.5"/>
+
+    <!-- → eu-west-1 -->
+    <line x1="560" y1="315" x2="790" y2="395" stroke="#D6D0C8" stroke-width="1.2" stroke-dasharray="3,5" class="flow-slow"/>
+    <line x1="560" y1="315" x2="790" y2="395" stroke="#A0826D" stroke-width="0.5" stroke-dasharray="1,8" class="flow" opacity="0.5"/>
+
+    <!-- → eu-west-2 -->
+    <line x1="545" y1="260" x2="730" y2="130" stroke="#D6D0C8" stroke-width="1.2" stroke-dasharray="3,5" class="flow-slow"/>
+    <line x1="545" y1="260" x2="730" y2="130" stroke="#A0826D" stroke-width="0.5" stroke-dasharray="1,8" class="flow" opacity="0.5"/>
+
+    <!-- → ap-southeast-1 -->
+    <line x1="470" y1="310" x2="380" y2="470" stroke="#D6D0C8" stroke-width="1.2" stroke-dasharray="3,5" class="flow-slow"/>
+    <line x1="470" y1="310" x2="380" y2="470" stroke="#A0826D" stroke-width="0.5" stroke-dasharray="1,8" class="flow" opacity="0.5"/>
+
+    <!-- → ap-south-1 -->
+    <line x1="468" y1="325" x2="195" y2="420" stroke="#D6D0C8" stroke-width="1.2" stroke-dasharray="3,5" class="flow-slow"/>
+    <line x1="468" y1="325" x2="195" y2="420" stroke="#A0826D" stroke-width="0.5" stroke-dasharray="1,8" class="flow" opacity="0.5"/>
+  </g>
+
+  <!-- ===== PRIMARY REGION NODE ===== -->
+  <g transform="translate(520, 290)" filter="url(#nodeGlow)">
+    <!-- Outer pulse rings -->
+    <circle r="85" fill="none" stroke="#A0826D" stroke-width="0.5" opacity="0.12" class="pulse"/>
+    <circle r="105" fill="none" stroke="#A0826D" stroke-width="0.3" opacity="0.06"/>
+
+    <!-- Outer ring -->
+    <circle r="58" fill="none" stroke="#A0826D" stroke-width="1.5" opacity="0.3"/>
+    <!-- Main ring -->
+    <circle r="48" fill="url(#glass)" stroke="#A0826D" stroke-width="2" opacity="0.95"/>
+    <!-- Inner fill -->
+    <circle r="38" fill="#A0826D" opacity="0.08"/>
+    <!-- Core dot -->
+    <circle r="5" fill="#A0826D"/>
+
+    <!-- Label -->
+    <text y="-8" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#A0826D" letter-spacing="0.08em">PRIMARY</text>
+    <text y="8" text-anchor="middle" font-family="system-ui" font-size="7" fill="#8B6E58" opacity="0.7">us-west-2</text>
+    <text y="20" text-anchor="middle" font-family="system-ui" font-size="6.5" fill="#6E6E73" opacity="0.5">Upstream Registry</text>
+  </g>
+
+  <!-- ===== DR REGION NODE ===== -->
+  <g transform="translate(830, 185)" filter="url(#shadow)">
+    <!-- Outer ring -->
+    <circle r="40" fill="none" stroke="#8B6E58" stroke-width="1" opacity="0.25"/>
+    <!-- Main ring -->
+    <circle r="32" fill="url(#glass)" stroke="#8B6E58" stroke-width="1.5" opacity="0.9"/>
+    <!-- Inner fill -->
+    <circle r="24" fill="#8B6E58" opacity="0.06"/>
+    <!-- Core dot -->
+    <circle r="4" fill="#8B6E58"/>
+
+    <!-- Label -->
+    <text y="-5" text-anchor="middle" font-family="system-ui" font-size="9" font-weight="600" fill="#8B6E58" letter-spacing="0.08em">DR</text>
+    <text y="8" text-anchor="middle" font-family="system-ui" font-size="6.5" fill="#6E6E73" opacity="0.6">eu-central-1</text>
+    <text y="18" text-anchor="middle" font-family="system-ui" font-size="5.5" fill="#6E6E73" opacity="0.4">Failover</text>
+  </g>
+
+  <!-- ===== PTC REGION NODES ===== -->
+  <!-- us-west-1 -->
+  <g transform="translate(320, 168)">
+    <circle r="22" fill="url(#glass)" stroke="#D6D0C8" stroke-width="1.2" opacity="0.85"/>
+    <circle r="16" fill="#A0826D" opacity="0.04"/>
+    <circle r="3" fill="#D6D0C8"/>
+    <text y="-2" text-anchor="middle" font-family="system-ui" font-size="6" font-weight="600" fill="#6E6E73" letter-spacing="0.05em">PTC</text>
+    <text y="8" text-anchor="middle" font-family="system-ui" font-size="5" fill="#C7C7CC">us-west-1</text>
+  </g>
+
+  <!-- us-east-1 -->
+  <g transform="translate(240, 272)">
+    <circle r="22" fill="url(#glass)" stroke="#D6D0C8" stroke-width="1.2" opacity="0.85"/>
+    <circle r="16" fill="#A0826D" opacity="0.04"/>
+    <circle r="3" fill="#D6D0C8"/>
+    <text y="-2" text-anchor="middle" font-family="system-ui" font-size="6" font-weight="600" fill="#6E6E73" letter-spacing="0.05em">PTC</text>
+    <text y="8" text-anchor="middle" font-family="system-ui" font-size="5" fill="#C7C7CC">us-east-1</text>
+  </g>
+
+  <!-- us-east-2 -->
+  <g transform="translate(295, 405)">
+    <circle r="22" fill="url(#glass)" stroke="#D6D0C8" stroke-width="1.2" opacity="0.85"/>
+    <circle r="16" fill="#A0826D" opacity="0.04"/>
+    <circle r="3" fill="#D6D0C8"/>
+    <text y="-2" text-anchor="middle" font-family="system-ui" font-size="6" font-weight="600" fill="#6E6E73" letter-spacing="0.05em">PTC</text>
+    <text y="8" text-anchor="middle" font-family="system-ui" font-size="5" fill="#C7C7CC">us-east-2</text>
+  </g>
+
+  <!-- eu-west-1 -->
+  <g transform="translate(810, 400)">
+    <circle r="22" fill="url(#glass)" stroke="#D6D0C8" stroke-width="1.2" opacity="0.85"/>
+    <circle r="16" fill="#A0826D" opacity="0.04"/>
+    <circle r="3" fill="#D6D0C8"/>
+    <text y="-2" text-anchor="middle" font-family="system-ui" font-size="6" font-weight="600" fill="#6E6E73" letter-spacing="0.05em">PTC</text>
+    <text y="8" text-anchor="middle" font-family="system-ui" font-size="5" fill="#C7C7CC">eu-west-1</text>
+  </g>
+
+  <!-- eu-west-2 -->
+  <g transform="translate(745, 125)">
+    <circle r="22" fill="url(#glass)" stroke="#D6D0C8" stroke-width="1.2" opacity="0.85"/>
+    <circle r="16" fill="#A0826D" opacity="0.04"/>
+    <circle r="3" fill="#D6D0C8"/>
+    <text y="-2" text-anchor="middle" font-family="system-ui" font-size="6" font-weight="600" fill="#6E6E73" letter-spacing="0.05em">PTC</text>
+    <text y="8" text-anchor="middle" font-family="system-ui" font-size="5" fill="#C7C7CC">eu-west-2</text>
+  </g>
+
+  <!-- ap-southeast-1 -->
+  <g transform="translate(365, 475)">
+    <circle r="22" fill="url(#glass)" stroke="#D6D0C8" stroke-width="1.2" opacity="0.85"/>
+    <circle r="16" fill="#A0826D" opacity="0.04"/>
+    <circle r="3" fill="#D6D0C8"/>
+    <text y="-2" text-anchor="middle" font-family="system-ui" font-size="6" font-weight="600" fill="#6E6E73" letter-spacing="0.05em">PTC</text>
+    <text y="8" text-anchor="middle" font-family="system-ui" font-size="5" fill="#C7C7CC">ap-se-1</text>
+  </g>
+
+  <!-- ap-south-1 -->
+  <g transform="translate(175, 425)">
+    <circle r="22" fill="url(#glass)" stroke="#D6D0C8" stroke-width="1.2" opacity="0.85"/>
+    <circle r="16" fill="#A0826D" opacity="0.04"/>
+    <circle r="3" fill="#D6D0C8"/>
+    <text y="-2" text-anchor="middle" font-family="system-ui" font-size="6" font-weight="600" fill="#6E6E73" letter-spacing="0.05em">PTC</text>
+    <text y="8" text-anchor="middle" font-family="system-ui" font-size="5" fill="#C7C7CC">ap-south-1</text>
+  </g>
+
+  <!-- ===== LEGEND ===== -->
+  <g transform="translate(80, 520)" opacity="0.7">
+    <!-- Replication -->
+    <line x1="0" y1="6" x2="24" y2="6" stroke="#A0826D" stroke-width="2"/>
+    <text x="32" y="10" font-family="system-ui" font-size="8" fill="#6E6E73">Cross-Region Replication (DR)</text>
+
+    <!-- PTC -->
+    <line x1="230" y1="6" x2="254" y2="6" stroke="#D6D0C8" stroke-width="1.2" stroke-dasharray="3,4"/>
+    <text x="262" y="10" font-family="system-ui" font-size="8" fill="#6E6E73">Pull-Through Cache (on-demand)</text>
+  </g>
+
+  <!-- ===== METRIC CARDS (glass morphism) ===== -->
+  <g transform="translate(820, 430)">
+    <!-- Card 1: Savings -->
+    <rect x="0" y="0" width="150" height="90" rx="14" fill="url(#glass)" stroke="white" stroke-width="1" filter="url(#shadow)"/>
+    <text x="18" y="26" font-family="system-ui" font-size="8" fill="#6E6E73" font-weight="500" letter-spacing="0.08em">ANNUAL SAVINGS</text>
+    <text x="18" y="58" font-family="'Playfair Display', Georgia, serif" font-size="30" font-weight="700" fill="#A0826D">$163K</text>
+    <text x="18" y="74" font-family="system-ui" font-size="8" fill="#C7C7CC">across 7 regions</text>
+
+    <!-- Card 2: Performance -->
+    <rect x="165" y="0" width="150" height="90" rx="14" fill="url(#glass)" stroke="white" stroke-width="1" filter="url(#shadow)"/>
+    <text x="183" y="26" font-family="system-ui" font-size="8" fill="#6E6E73" font-weight="500" letter-spacing="0.08em">PULL TIME</text>
+    <text x="183" y="58" font-family="'Playfair Display', Georgia, serif" font-size="30" font-weight="700" fill="#A0826D">2–3×</text>
+    <text x="183" y="74" font-family="system-ui" font-size="8" fill="#C7C7CC">faster cache hits</text>
+  </g>
+
+  <!-- ===== BOTTOM RIGHT: Before/After comparison ===== -->
+  <g transform="translate(820, 535)">
+    <g opacity="0.5">
+      <text x="0" y="0" font-family="system-ui" font-size="7" fill="#C7C7CC" letter-spacing="0.1em">BEFORE</text>
+      <text x="0" y="14" font-family="system-ui" font-size="10" fill="#6E6E73" text-decoration="line-through" opacity="0.5">~7m49s cross-region pull</text>
+    </g>
+    <g opacity="0.7" transform="translate(180, 0)">
+      <text x="0" y="0" font-family="system-ui" font-size="7" fill="#A0826D" letter-spacing="0.1em">AFTER</text>
+      <text x="0" y="14" font-family="system-ui" font-size="10" fill="#A0826D" font-weight="600">~2m57s from local cache</text>
+    </g>
+  </g>
+
+  <!-- ===== DECORATIVE: Corner accent lines ===== -->
+  <g opacity="0.08" stroke="#A0826D" stroke-width="0.5">
+    <line x1="1100" y1="30" x2="1170" y2="30"/>
+    <line x1="1170" y1="30" x2="1170" y2="100"/>
+    <line x1="30" y1="530" x2="30" y2="600"/>
+    <line x1="30" y1="600" x2="100" y2="600"/>
+  </g>
+
+  <!-- Decorative dots -->
+  <circle cx="1120" cy="80" r="2" fill="#A0826D" opacity="0.15"/>
+  <circle cx="1160" cy="560" r="1.5" fill="#D6D0C8" opacity="0.3"/>
+  <circle cx="60" cy="90" r="1.5" fill="#A0826D" opacity="0.12"/>
+</svg>

@@ -41,10 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
       heading: 'Selected Work',
       description: 'A selection of projects that showcase my work in platform engineering, infrastructure automation, and developer productivity.',
       items: [
-        { title: 'ECR Pull-Through Cache', description: 'Hybrid Amazon ECR distribution strategy combining Cross-Region Replication and Pull-Through Cache across 7 global AWS regions, reducing costs by 90%+ and generating $163K in annual savings.', tags: ['AWS', 'Terraform', 'ECR', 'Kubernetes'], icon: 'server' },
-        { title: 'Internal Automation CLI', description: 'Bash-based developer CLI adopted by 2,000+ engineers across 50+ teams, slashing onboarding from 1 week to under 20 minutes \u2014 a 98% reduction.', tags: ['Bash', 'GitHub API', 'Automation'], icon: 'terminal' },
-        { title: 'Self-Hosted Runner Platform', description: 'EC2-based GitHub Actions runner infrastructure with Auto Scaling Groups, Launch Templates, Packer-built AMIs, and Terraform \u2014 supporting 500+ concurrent runners and 10K+ pipeline executions per month.', tags: ['GitHub Actions', 'Packer', 'EC2', 'Terraform'], icon: 'git-branch' },
-        { title: 'CI/CD Observability Stack', description: 'Datadog dashboards, monitors, SLOs, and alerting for CI/CD and AWS infrastructure health \u2014 reducing MTTR by 40% and achieving 99.9% platform uptime.', tags: ['Datadog', 'APM', 'Monitoring'], icon: 'bar-chart-3' }
+        { title: 'ECR Hybrid Image Distribution', description: 'Architecting a hybrid ECR distribution strategy combining Cross-Region Replication and Pull-Through Cache across 7 global AWS regions \u2014 reducing 5GB image pull times from ~7m49s to ~2m57s and generating $163K in annualized savings.', tags: ['AWS ECR', 'Terraform', 'Kubernetes', 'Python', 'Pull-Through Cache'], icon: 'server', caseStudyLink: 'case-studies/case-study.html?project=ecr-pull-through-cache' },
+        { title: 'GitHub Enterprise Governance', description: 'Building automation for GitHub Enterprise Cloud at scale \u2014 org-level secrets management, third-party Action allowlisting, repository governance via identity platform, and a Python CLI toolkit.', tags: ['Python', 'Click', 'GitHub API', 'GitHub Enterprise', 'Supply Chain Security'], icon: 'terminal', caseStudyLink: 'case-studies/case-study.html?project=internal-automation-cli' },
+        { title: 'Self-Hosted Runner Platform', description: 'An autoscaled, ephemeral runner fleet on AWS \u2014 a Python autoscaler consuming GitHub webhooks, instance orchestrators managing runner lifecycle, resource monitors, Packer-built AMIs, and Terraform infrastructure.', tags: ['Python', 'FastAPI', 'boto3', 'GitHub Actions', 'EC2', 'Auto Scaling', 'Packer', 'Redis'], icon: 'git-branch', caseStudyLink: 'case-studies/case-study.html?project=self-hosted-runner-platform' },
+        { title: 'CI/CD Observability Stack', description: 'A Python webhook ingestion service that turns GitHub Actions events into Datadog metrics, plus Terraform-managed monitors, dashboards, and SLOs for platform health.', tags: ['Python', 'FastAPI', 'Datadog', 'GitHub Webhooks', 'Terraform', 'SLO'], icon: 'bar-chart-3', caseStudyLink: 'case-studies/case-study.html?project=cicd-observability-stack' }
       ]
     },
     awards: {
@@ -60,11 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
       heading: 'Personal Projects',
       description: 'Side projects and experiments I work on outside of my day job.',
       items: [
-        { title: 'Matcha', description: 'AI-powered multi-source job aggregator that searches LinkedIn, Indeed, Naukri, and RemoteOK in parallel, then ranks listings against your profile using heuristic + LLM scoring.', tags: ['Python', 'AI/LLM', 'Scraping'], icon: 'search', link: 'https://github.com/rishikesh-sonawane/matcha' },
-        { title: 'ImageFlow', description: 'Production-inspired DevOps OS \u2014 event-driven image pipeline with Terraform IaC, real k3s + Helm, dual-loop CI/CD, observability, and security hardening. Built end-to-end on Floci for $0.', tags: ['Terraform', 'Kubernetes', 'AWS', 'CI/CD'], icon: 'rocket', link: 'https://github.com/rishikesh-sonawane/e2e-devops-project' },
-        { title: 'Articulate', description: 'Chrome extension that converts voice into polished, professional text using AI \u2014 removes filler words, fixes grammar, and inserts directly into any text field. In progress.', tags: ['TypeScript', 'Chrome API', 'AI', 'WebSocket'], icon: 'mic', link: 'https://github.com/rishikesh-sonawane/articulate' },
-        { title: 'Casper', description: '9-layer local AI agent for macOS with wake-word detection, LangGraph routing, specialist agents, ChromaDB memory, and Kokoro TTS \u2014 all running on-device. In progress.', tags: ['Python', 'LangGraph', 'Ollama', 'AI Agent'], icon: 'bot', link: 'https://github.com/rishikesh-sonawane/Casper' },
-        { title: 'Portfolio Website', description: 'Premium Scandinavian-minimal portfolio built with Tailwind CSS, dynamic photo upload, floating dock nav, and Formspree contact form. This site.', tags: ['Tailwind CSS', 'JavaScript', 'Design'], icon: 'globe', link: 'https://github.com/rishikesh-sonawane/portfolio' }
+        { title: 'Matcha', description: 'AI-powered multi-source job aggregator that searches LinkedIn, Indeed, Naukri, and RemoteOK in parallel, then ranks listings against your profile using heuristic + LLM scoring.', tags: ['Python', 'AI/LLM', 'Scraping'], icon: 'search', link: 'https://github.com/rishikesh-sonawane/matcha', caseStudyLink: 'case-studies/case-study.html?project=matcha' },
+        { title: 'End-to-End DevOps Project', description: 'Production-inspired DevOps OS \u2014 event-driven image pipeline with Terraform IaC, real k3s + Helm, dual-loop CI/CD, observability, and security hardening. Built end-to-end on Floci for $0.', tags: ['Terraform', 'Kubernetes', 'AWS', 'CI/CD'], icon: 'rocket', link: 'https://github.com/rishikesh-sonawane/e2e-devops-project', caseStudyLink: 'case-studies/case-study.html?project=imageflow' },
+        { title: 'Articulate', description: 'Chrome extension that converts voice into polished, professional text using AI \u2014 removes filler words, fixes grammar, and inserts directly into any text field. In progress.', tags: ['TypeScript', 'Chrome API', 'AI', 'WebSocket'], icon: 'mic', link: 'https://github.com/rishikesh-sonawane/articulate', caseStudyLink: 'case-studies/case-study.html?project=articulate' },
+        { title: 'Casper', description: '9-layer local AI agent for macOS with wake-word detection, LangGraph routing, specialist agents, ChromaDB memory, and Kokoro TTS \u2014 all running on-device. In progress.', tags: ['Python', 'LangGraph', 'Ollama', 'AI Agent'], icon: 'bot', link: 'https://github.com/rishikesh-sonawane/Casper', caseStudyLink: 'case-studies/case-study.html?project=casper' },
+        { title: 'Portfolio Website', description: 'Premium Scandinavian-minimal portfolio built with Tailwind CSS, dynamic photo upload, floating dock nav, and Formspree contact form. This site.', tags: ['Tailwind CSS', 'JavaScript', 'Design'], icon: 'globe', link: 'https://github.com/rishikesh-sonawane/portfolio', caseStudyLink: 'case-studies/case-study.html?project=portfolio-website' }
       ]
     },
     contact: {
@@ -81,12 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
       { icon: 'linkedin', url: 'https://linkedin.com/in/rishikeshsonawane1465', label: 'LinkedIn' },
       { icon: 'mail', url: 'mailto:rishikesh.s7711@gmail.com', label: 'Email' }
     ],
-    audio: { label: 'Listening to', song: 'Midnight City', artist: 'M83' },
+    audio: { label: 'Listening to', song: 'The Nights', artist: 'Avicii' },
     footer: { copyright: '© 2025 Rishikesh Sonawane', tagline: 'Built with ✦ for platform engineering' },
     dock: [
       { label: 'Home', section: 'home', icon: 'home' },
       { label: 'About', section: 'about', icon: 'user' },
-      { label: 'Projects', section: 'projects', icon: 'briefcase' },
+      { label: 'Work', section: 'projects', icon: 'briefcase' },
+      { label: 'Personal', section: 'personal', icon: 'rocket' },
       { label: 'Awards', section: 'awards', icon: 'trophy' },
       { label: 'Contact', section: 'contact', icon: 'mail' }
     ]
@@ -158,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="flex gap-2 flex-wrap">
               ${(p.tags || []).map(t => `<span class="px-2.5 py-1 bg-warm/40 rounded-md text-[11px] font-medium text-slate">${t}</span>`).join('')}
             </div>
+            ${p.caseStudyLink ? `<a href="${p.caseStudyLink}" class="case-study-btn mt-5 inline-flex items-center gap-2 text-sm font-semibold text-terra hover:text-terraDark transition-colors duration-300 group">View Case Study <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></a>` : ''}
           </div>
         </div>
       `).join('');
@@ -209,6 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="flex gap-2 flex-wrap">
               ${(p.tags || []).map(t => `<span class="px-2.5 py-1 bg-warm/40 rounded-md text-[11px] font-medium text-slate">${t}</span>`).join('')}
             </div>
+            ${p.caseStudyLink ? `<a href="${p.caseStudyLink}" class="case-study-btn mt-5 inline-flex items-center gap-2 text-sm font-semibold text-terra hover:text-terraDark transition-colors duration-300 group">View Case Study <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></a>` : ''}
           </div>
         </div>
       `).join('');

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study — Rishikesh Sonawane</title>
+  <meta name="description" content="Detailed case study of a platform engineering project by Rishikesh Sonawane." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#FBFBFA',
+            charcoal: '#1C1C1E',
+            slate: '#6E6E73',
+            silver: '#C7C7CC',
+            warm: '#E8E6E3',
+            sand: '#D6D0C8',
+            terra: '#A0826D',
+            terraDark: '#8B6E58',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
+</head>
+<body class="bg-cream text-charcoal font-sans antialiased">
+
+  <!-- ===== GRADIENT MESH BACKGROUND ===== -->
+  <div class="mesh-bg" aria-hidden="true"></div>
+
+  <!-- ===== BACK NAV ===== -->
+  <nav class="fixed top-0 left-0 right-0 z-50 glass-surface">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="../index.html" class="inline-flex items-center gap-2.5 text-sm font-medium text-slate hover:text-charcoal transition-colors duration-300 group">
+        <i data-lucide="arrow-left" class="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1"></i>
+        <span>Back to Portfolio</span>
+      </a>
+      <span id="cs-section-label" class="text-[10px] font-mono font-medium text-terra uppercase tracking-[0.2em]"></span>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="relative min-h-[70vh] flex items-end overflow-hidden pt-24">
+    <div class="hero-deco hero-deco-1" aria-hidden="true"></div>
+    <div class="hero-deco hero-deco-2" aria-hidden="true"></div>
+
+    <div class="relative w-full max-w-6xl mx-auto px-6 pb-20">
+      <div class="hero-reveal">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="inline-block w-12 h-px bg-terra"></span>
+          <span id="cs-category" class="text-xs font-mono font-medium text-terra uppercase tracking-[0.2em]"></span>
+        </div>
+      </div>
+
+      <h1 id="cs-title" class="hero-reveal text-[clamp(2.4rem,5.5vw,4.5rem)] font-display font-bold leading-[0.95] tracking-tight max-w-4xl" style="transition-delay: 0.1s"></h1>
+
+      <p id="cs-subtitle" class="hero-reveal text-[clamp(1.1rem,2vw,1.35rem)] text-slate leading-relaxed max-w-2xl mt-6" style="transition-delay: 0.2s"></p>
+
+      <div id="cs-hero-tags" class="hero-reveal flex flex-wrap gap-2.5 mt-8" style="transition-delay: 0.3s"></div>
+    </div>
+  </section>
+
+  <!-- ===== COVER IMAGE ===== -->
+  <div id="cs-cover" class="hidden relative px-6 pb-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="rounded-2xl overflow-hidden border border-sand/40" style="aspect-ratio: 1200/630;">
+        <img id="cs-cover-img" src="" alt="" class="w-full h-full object-cover" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== OVERVIEW ===== -->
+  <section id="cs-overview-section" class="relative py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <div class="lg:col-span-4">
+          <div class="scroll-reveal">
+            <span class="text-xs font-mono font-medium text-terra uppercase tracking-[0.2em]">Overview</span>
+            <div class="w-16 h-px bg-terra/40 mt-4"></div>
+          </div>
+        </div>
+        <div class="lg:col-span-8">
+          <div id="cs-overview" class="scroll-reveal space-y-5"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== METRICS ===== -->
+  <section id="cs-metrics-section" class="relative py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="scroll-reveal">
+        <div id="cs-metrics" class="grid grid-cols-2 md:grid-cols-4 gap-6"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CHALLENGE & SOLUTION ===== -->
+  <section id="cs-challenge-section" class="relative py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <div class="lg:col-span-4">
+          <div class="scroll-reveal">
+            <span class="text-xs font-mono font-medium text-terra uppercase tracking-[0.2em]">Challenge</span>
+            <h2 class="text-[clamp(1.8rem,3.5vw,2.8rem)] font-display font-semibold mt-3 tracking-tight">& <span class="italic text-terra">Solution</span></h2>
+            <div class="w-16 h-px bg-terra/40 mt-6"></div>
+          </div>
+        </div>
+        <div class="lg:col-span-8">
+          <div id="cs-challenge" class="scroll-reveal space-y-5"></div>
+          <div id="cs-solution" class="scroll-reveal mt-12 space-y-5"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ARCHITECTURE / HOW IT WORKS ===== -->
+  <section id="cs-architecture-section" class="relative py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <div class="lg:col-span-4">
+          <div class="scroll-reveal">
+            <span class="text-xs font-mono font-medium text-terra uppercase tracking-[0.2em]">Architecture</span>
+            <h2 class="text-[clamp(1.8rem,3.5vw,2.8rem)] font-display font-semibold mt-3 tracking-tight">How It <span class="italic text-terra">Works</span></h2>
+            <div class="w-16 h-px bg-terra/40 mt-6"></div>
+          </div>
+        </div>
+        <div class="lg:col-span-8">
+          <div id="cs-architecture" class="scroll-reveal space-y-5"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TECH STACK ===== -->
+  <section id="cs-tech-section" class="relative py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="scroll-reveal">
+        <span class="text-xs font-mono font-medium text-terra uppercase tracking-[0.2em]">Tech Stack</span>
+        <div class="w-16 h-px bg-terra/40 mt-4 mb-8"></div>
+        <div id="cs-tech" class="flex flex-wrap gap-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TIMELINE ===== -->
+  <section id="cs-timeline-section" class="relative py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <div class="lg:col-span-4">
+          <div class="scroll-reveal">
+            <span class="text-xs font-mono font-medium text-terra uppercase tracking-[0.2em]">Timeline</span>
+            <div class="w-16 h-px bg-terra/40 mt-4"></div>
+          </div>
+        </div>
+        <div class="lg:col-span-8">
+          <div id="cs-timeline" class="scroll-reveal"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KEY LEARNINGS ===== -->
+  <section id="cs-learnings-section" class="relative py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <div class="lg:col-span-4">
+          <div class="scroll-reveal">
+            <span class="text-xs font-mono font-medium text-terra uppercase tracking-[0.2em]">Reflections</span>
+            <div class="w-16 h-px bg-terra/40 mt-4"></div>
+          </div>
+        </div>
+        <div class="lg:col-span-8">
+          <div id="cs-learnings" class="scroll-reveal space-y-5"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA BACK ===== -->
+  <section class="relative py-24 px-6">
+    <div class="max-w-6xl mx-auto text-center scroll-reveal">
+      <div class="w-px h-12 bg-gradient-to-b from-transparent via-terra/30 to-transparent mx-auto mb-10"></div>
+      <p class="text-sm text-slate mb-6">Want to see more projects?</p>
+      <a href="../index.html" class="glass-btn inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-semibold transition-all duration-300">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span>Back to Portfolio</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="py-12 px-6 border-t border-sand/40">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-silver font-mono">&copy; 2026 Rishikesh Sonawane</p>
+      <div class="flex items-center gap-1 text-[10px] text-silver/60 font-mono">
+        <span>Built with</span>
+        <span class="text-terra">✦</span>
+        <span>for platform engineering</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="case-study.js"></script>
+</body>
+</html>

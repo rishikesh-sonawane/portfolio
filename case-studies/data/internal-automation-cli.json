@@ -1,0 +1,66 @@
+{
+  "title": "GitHub Enterprise Governance Automation",
+  "coverImage": "covers/governance-cover.svg",
+  "subtitle": "Building automation for GitHub Enterprise Cloud at scale — org-level secrets management, third-party Action allowlisting, repository governance via identity platform, and a Python CLI toolkit for member/hooks/SSO/identity operations.",
+  "category": "Developer Productivity · GitHub Enterprise · Automation",
+  "tags": ["Python", "Click", "GitHub API", "GitHub Enterprise", "Terraform", "Bash", "Supply Chain Security", "Identity Governance"],
+  "overview": [
+    "At a Fortune 500 company, the CI Platform team owned GitHub Enterprise Cloud organization administration for 2,000+ engineers. This meant managing org-level secrets, allowlisting third-party Actions, controlling repository access through the identity governance platform, and building automation to make all of this self-service.",
+    "I worked on building and maintaining the automation layer: a declarative secrets catalog with validation, an action allowlist with dual-team approval, and a Python CLI toolkit (Click-based) for member management, webhook operations, SSO/identity sync, and GitHub App lifecycle management.",
+    "The result: engineers could request and get org-level resources through PR-based workflows instead of manual tickets, supply chain security was enforced through automated validation, and GitHub governance became auditable and reversible through Git history."
+  ],
+  "metrics": [
+    { "value": "2,000+", "label": "Engineers Governed" },
+    { "value": "3", "label": "Core Automation Repos" },
+    { "value": "Dual-Team", "label": "Approval Process" },
+    { "value": "GitOps", "label": "Policy Management" }
+  ],
+  "challenge": [
+    "<strong>The Problem:</strong> GitHub Enterprise Cloud governance at scale requires managing hundreds of repositories, thousands of team memberships, org-level secrets, third-party Action policies, and service accounts — all while maintaining security compliance and audit trails.",
+    "Before automation, these were manual processes: engineers filed tickets to request org secrets, security reviews happened in Slack threads, and repository access was managed through ad-hoc group memberships. There was no single source of truth, no automated validation, and no easy way to audit who had access to what.",
+    "The supply chain risk was particularly acute: without an allowlist, any engineer could reference any third-party Action in their workflows — including potentially malicious ones. Security needed visibility and control without blocking developer velocity."
+  ],
+  "solution": [
+    "<strong>The secrets catalog</strong> is a configuration-as-code system where each org-level secret is a JSON file with name, assigned_repos, visibility (selected/all/private), and metadata. The validation workflow enforces strict rules: alphanumeric + underscore only, no reserved prefixes, no leading digit, assigned_repos required, visibility-consistent repo lists. Auto-sorting of assigned_repos keeps diffs clean for PR reviews.",
+    "<strong>The action allowlist</strong> is the supply chain security control plane. A policy file defines which third-party Actions and reusable workflows are permitted in the org. On merge to main, the policy syncs to GitHub org settings via API. Dual-team approval (CI Platform + Security) ensures proper review. Validation includes license compliance checks and overlap detection for redundant patterns.",
+    "<strong>The admin CLI toolkit</strong> is a Python CLI (Click-based) for GitHub organization operations: member management, repository webhook operations, SAML SSO/identity sync integration, and GitHub App lifecycle management. It wraps the GitHub REST and GraphQL APIs into repeatable commands using PyGithub instead of one-off UI changes.",
+    "All three systems follow the same pattern: <strong>Git as the source of truth, PR as the review mechanism, CI as the enforcement layer, and merge-to-main as the deployment event.</strong> This makes every policy change auditable, reversible, and traceable."
+  ],
+  "architecture": [
+    {
+      "heading": "Secrets Catalog",
+      "content": [
+        "Each secret is a JSON file under a Secrets/ directory with name, assigned_repos (sorted list), visibility, and flags. The validation workflow runs on every PR: JSON syntax check, duplicate name detection, business rule validation, and auto-commit of sorted assigned_repos.",
+        "Business rules encode GitHub's naming constraints plus org-specific policies: reserved prefixes, visibility 'selected' cannot use wildcard patterns, non-selected visibilities must not list specific repos. A cleanup script handles housekeeping when repos leave the org."
+      ]
+    },
+    {
+      "heading": "Supply Chain Security",
+      "content": [
+        "The allowlist contains flags (github_owned_allowed, verified_allowed) and patterns_allowed (owner/repo@ref patterns). Validation includes: format linting via jq (sort|unique), overlap detection (finding redundant or conflicting globs), and license compliance (checking for problematic licenses).",
+        "On merge to main, the sync workflow pushes the policy to GitHub org settings via CLI. A backup workflow preserves policy snapshots. The entire flow — PR review → CI validation → merge → API push — is auditable through Git history."
+      ]
+    },
+    {
+      "heading": "Repository Governance via Identity Platform",
+      "content": [
+        "The identity governance platform manages repository ownership and access through YAML files. Each repo has a type, owner (team), additional_admins (teams), outside_collaborators (with username, reason, role, expiration), and optionally archived status.",
+        "A base permission decision established 'write' as the default for all org members (aligning with innersource culture), reducing repository roles to read/write/admin. This eliminated unnecessary composite groups and custom roles that existed only to provision basic access."
+      ]
+    }
+  ],
+  "techStack": ["Python", "Click", "PyGithub", "GitHub REST API", "GitHub GraphQL API", "jq", "Bash", "GitHub Actions", "JSON Schema", "Terraform", "requests"],
+  "timeline": [
+    { "phase": "Phase 1", "title": "Secrets Catalog", "description": "Built the declarative secrets catalog with JSON-per-secret model, validation workflow, auto-sorting, and business rule enforcement. Set up PR-based governance for org secrets." },
+    { "phase": "Phase 2", "title": "Allowlist System", "description": "Built the action allowlist with dual-team approval, license compliance checks, overlap detection, and automated policy sync to GitHub org settings." },
+    { "phase": "Phase 3", "title": "Toolkit CLI", "description": "Built the Python CLI (Click) for member management, webhook operations, SSO/identity sync. Integrated with GitHub App authentication and GraphQL API via PyGithub." },
+    { "phase": "Phase 4", "title": "Access Model Simplification", "description": "Implemented base permission ADR: default write for all members, reduced roles to read/write/admin, deprecated unnecessary composite groups and custom roles." },
+    { "phase": "Phase 5", "title": "Integration & Documentation", "description": "Cross-linked all repos to internal documentation. Published guides for onboarding, service account requests, and notification management." }
+  ],
+  "learnings": [
+    "<strong>Configuration-as-code makes governance reviewable.</strong> When org secrets and Action allowlists are JSON files in Git, every change gets PR-reviewed, CI-validated, and merge-deployed. A bad policy change is a git revert, not a manual console cleanup with uncertain blast radius.",
+    "<strong>Dual-team approval is the right pattern for supply chain security.</strong> CI Platform understands the operational impact; Security understands the risk implications. Neither alone has the full picture. The allowlist's dual-approval requirement prevents both security blind spots and operational surprises.",
+    "<strong>Automated sorting prevents merge conflicts in collaborative files.</strong> Both secrets and allowlist auto-commit sorted JSON on PRs. This eliminates an entire category of merge conflicts and keeps diffs reviewable — reviewers see actual policy changes, not reordering noise.",
+    "<strong>Self-service through PRs scales better than tickets.</strong> Every governance operation — requesting a secret, adding an Action, changing repo access — goes through a PR. Engineers get what they need in hours (PR review time), not days (ticket SLA), and every change is traceable."
+  ]
+}

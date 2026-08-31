@@ -325,6 +325,26 @@
   }
 }
 
+/* --- Case Study Button --- */
+.case-study-btn {
+  position: relative;
+}
+
+.case-study-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: #A0826D;
+  transition: width 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.case-study-btn:hover::after {
+  width: 100%;
+}
+
 /* --- Custom Scrollbar --- */
 ::-webkit-scrollbar {
   width: 6px;

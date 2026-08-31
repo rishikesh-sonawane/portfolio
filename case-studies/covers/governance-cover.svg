@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FBFBFA"/>
+      <stop offset="100%" style="stop-color:#E8E6E3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg4)"/>
+
+  <!-- Mesh -->
+  <circle cx="150" cy="500" r="350" fill="#A0826D" opacity="0.03"/>
+  <circle cx="1050" cy="130" r="280" fill="#D6D0C8" opacity="0.05"/>
+
+  <!-- Title -->
+  <text x="80" y="70" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#A0826D" letter-spacing="0.15em">SUPPLY CHAIN SECURITY</text>
+
+  <!-- Shield icon (abstract) -->
+  <g transform="translate(540, 120)">
+    <path d="M60,0 L120,30 L120,90 Q120,140 60,160 Q0,140 0,90 L0,30 Z" fill="none" stroke="#A0826D" stroke-width="2" opacity="0.6"/>
+    <path d="M60,15 L105,40 L105,85 Q105,125 60,142 Q15,125 15,85 L15,40 Z" fill="#A0826D" opacity="0.06"/>
+    <!-- Lock -->
+    <rect x="42" y="70" width="36" height="28" rx="4" fill="#A0826D" opacity="0.3"/>
+    <path d="M50,70 L50,58 Q50,48 60,48 Q70,48 70,58 L70,70" fill="none" stroke="#A0826D" stroke-width="2.5" opacity="0.5"/>
+    <circle cx="60" cy="82" r="3" fill="#FBFBFA" opacity="0.8"/>
+  </g>
+
+  <!-- Policy pipeline (left side) -->
+  <g transform="translate(80, 110)">
+    <text x="0" y="0" font-family="system-ui" font-size="10" font-weight="600" fill="#6E6E73" letter-spacing="0.1em">POLICY PIPELINE</text>
+
+    <!-- Steps -->
+    <g transform="translate(0, 20)">
+      <!-- Step 1 -->
+      <rect x="0" y="0" width="180" height="44" rx="8" fill="white" opacity="0.8" stroke="#E8E6E3"/>
+      <circle cx="20" cy="22" r="8" fill="#A0826D" opacity="0.15"/>
+      <text x="20" y="26" text-anchor="middle" font-family="system-ui" font-size="9" font-weight="600" fill="#A0826D">1</text>
+      <text x="36" y="18" font-family="system-ui" font-size="9" fill="#1C1C1E" font-weight="500">PR Review</text>
+      <text x="36" y="32" font-family="system-ui" font-size="8" fill="#6E6E73">Dual-team approval</text>
+
+      <!-- Arrow -->
+      <line x1="90" y1="44" x2="90" y2="60" stroke="#D6D0C8" stroke-width="1"/>
+      <polygon points="86,58 90,64 94,58" fill="#D6D0C8"/>
+
+      <!-- Step 2 -->
+      <rect x="0" y="64" width="180" height="44" rx="8" fill="white" opacity="0.8" stroke="#E8E6E3"/>
+      <circle cx="20" cy="86" r="8" fill="#A0826D" opacity="0.15"/>
+      <text x="20" y="90" text-anchor="middle" font-family="system-ui" font-size="9" font-weight="600" fill="#A0826D">2</text>
+      <text x="36" y="82" font-family="system-ui" font-size="9" fill="#1C1C1E" font-weight="500">CI Validation</text>
+      <text x="36" y="96" font-family="system-ui" font-size="8" fill="#6E6E73">License + overlap checks</text>
+
+      <!-- Arrow -->
+      <line x1="90" y1="108" x2="90" y2="124" stroke="#D6D0C8" stroke-width="1"/>
+      <polygon points="86,122 90,128 94,122" fill="#D6D0C8"/>
+
+      <!-- Step 3 -->
+      <rect x="0" y="128" width="180" height="44" rx="8" fill="white" opacity="0.8" stroke="#E8E6E3"/>
+      <circle cx="20" cy="150" r="8" fill="#A0826D" opacity="0.15"/>
+      <text x="20" y="154" text-anchor="middle" font-family="system-ui" font-size="9" font-weight="600" fill="#A0826D">3</text>
+      <text x="36" y="146" font-family="system-ui" font-size="9" fill="#1C1C1E" font-weight="500">Merge to Main</text>
+      <text x="36" y="160" font-family="system-ui" font-size="8" fill="#6E6E73">Auto-sync to GitHub</text>
+
+      <!-- Arrow -->
+      <line x1="90" y1="172" x2="90" y2="188" stroke="#D6D0C8" stroke-width="1"/>
+      <polygon points="86,186 90,192 94,186" fill="#D6D0C8"/>
+
+      <!-- Step 4 -->
+      <rect x="0" y="192" width="180" height="44" rx="8" fill="#A0826D" opacity="0.08" stroke="#A0826D" stroke-width="1" stroke-opacity="0.3"/>
+      <circle cx="20" cy="214" r="8" fill="#A0826D" opacity="0.25"/>
+      <text x="20" y="218" text-anchor="middle" font-family="system-ui" font-size="9" font-weight="600" fill="#A0826D">4</text>
+      <text x="36" y="210" font-family="system-ui" font-size="9" fill="#1C1C1E" font-weight="500">Org Policy Active</text>
+      <text x="36" y="224" font-family="system-ui" font-size="8" fill="#6E6E73">Auditable &amp; reversible</text>
+    </g>
+  </g>
+
+  <!-- Right side: Allowlist visualization -->
+  <g transform="translate(840, 110)">
+    <text x="0" y="0" font-family="system-ui" font-size="10" font-weight="600" fill="#6E6E73" letter-spacing="0.1em">ALLOWED ACTIONS</text>
+
+    <!-- Allowed items -->
+    <g transform="translate(0, 20)">
+      <rect x="0" y="0" width="280" height="36" rx="6" fill="#A0826D" opacity="0.06" stroke="#A0826D" stroke-width="0.5" stroke-opacity="0.2"/>
+      <circle cx="18" cy="18" r="4" fill="#A0826D" opacity="0.4"/>
+      <text x="30" y="22" font-family="monospace" font-size="10" fill="#1C1C1E">actions/checkout@v4</text>
+
+      <rect x="0" y="44" width="280" height="36" rx="6" fill="#A0826D" opacity="0.06" stroke="#A0826D" stroke-width="0.5" stroke-opacity="0.2"/>
+      <circle cx="18" cy="62" r="4" fill="#A0826D" opacity="0.4"/>
+      <text x="30" y="66" font-family="monospace" font-size="10" fill="#1C1C1E">actions/setup-node@v4</text>
+
+      <rect x="0" y="88" width="280" height="36" rx="6" fill="#A0826D" opacity="0.06" stroke="#A0826D" stroke-width="0.5" stroke-opacity="0.2"/>
+      <circle cx="18" cy="106" r="4" fill="#A0826D" opacity="0.4"/>
+      <text x="30" y="110" font-family="monospace" font-size="10" fill="#1C1C1E">docker/build-push-action@v5</text>
+
+      <rect x="0" y="132" width="280" height="36" rx="6" fill="#A0826D" opacity="0.06" stroke="#A0826D" stroke-width="0.5" stroke-opacity="0.2"/>
+      <circle cx="18" cy="150" r="4" fill="#A0826D" opacity="0.4"/>
+      <text x="30" y="154" font-family="monospace" font-size="10" fill="#1C1C1E">hashicorp/setup-terraform@v3</text>
+
+      <rect x="0" y="176" width="280" height="36" rx="6" fill="#A0826D" opacity="0.06" stroke="#A0826D" stroke-width="0.5" stroke-opacity="0.2"/>
+      <circle cx="18" cy="194" r="4" fill="#A0826D" opacity="0.4"/>
+      <text x="30" y="198" font-family="monospace" font-size="10" fill="#1C1C1E">aws-actions/configure-aws@v4</text>
+    </g>
+  </g>
+
+  <!-- Bottom: Metrics -->
+  <g transform="translate(80, 420)">
+    <rect x="0" y="0" width="260" height="80" rx="12" fill="white" opacity="0.7" stroke="#E8E6E3"/>
+    <text x="20" y="26" font-family="system-ui" font-size="10" fill="#6E6E73" font-weight="500">ENGINEERS GOVERNED</text>
+    <text x="20" y="58" font-family="'Playfair Display', Georgia, serif" font-size="34" font-weight="700" fill="#A0826D">2,000+</text>
+
+    <rect x="280" y="0" width="260" height="80" rx="12" fill="white" opacity="0.7" stroke="#E8E6E3"/>
+    <text x="300" y="26" font-family="system-ui" font-size="10" fill="#6E6E73" font-weight="500">CORE REPOS</text>
+    <text x="300" y="58" font-family="'Playfair Display', Georgia, serif" font-size="34" font-weight="700" fill="#A0826D">3</text>
+
+    <rect x="560" y="0" width="260" height="80" rx="12" fill="white" opacity="0.7" stroke="#E8E6E3"/>
+    <text x="580" y="26" font-family="system-ui" font-size="10" fill="#6E6E73" font-weight="500">APPROVAL</text>
+    <text x="580" y="58" font-family="'Playfair Display', Georgia, serif" font-size="28" font-weight="700" fill="#A0826D">Dual-Team</text>
+
+    <rect x="840" y="0" width="260" height="80" rx="12" fill="white" opacity="0.7" stroke="#E8E6E3"/>
+    <text x="860" y="26" font-family="system-ui" font-size="10" fill="#6E6E73" font-weight="500">MANAGEMENT</text>
+    <text x="860" y="58" font-family="'Playfair Display', Georgia, serif" font-size="28" font-weight="700" fill="#A0826D">GitOps</text>
+  </g>
+
+  <!-- Decorative -->
+  <circle cx="1100" cy="560" r="2" fill="#A0826D" opacity="0.3"/>
+  <circle cx="1150" cy="80" r="1.5" fill="#D6D0C8" opacity="0.5"/>
+</svg>
